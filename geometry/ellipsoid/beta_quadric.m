@@ -14,7 +14,7 @@ function [bi, Dbi, D2bi] = beta_quadric(x, xc, R, A)
 %
 % output
 %   bi = scalar obstacle function
-%      = [1 x 1]
+%      = [1 x #points]
 %   Dbi = obstacle function gradient at calculation points
 %      = [#dimensions x #points]
 %   D2bi = obstacle function Hessian matrices at calculation points

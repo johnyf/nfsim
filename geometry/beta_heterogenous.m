@@ -3,25 +3,33 @@ function [bi, Dbi, D2bi] = beta_heterogenous(q, obstacles)
 %
 % input
 %   q = calculation point(s)
-%   XCQUADRIC = centers of Quadric
+%   obstacles = obstacle definitions by type
+%             = [1 x #types] (structure array with fields .type, .data)
+%
+%   qc = quadric centers
 %           = cell(1, #Quadric_obstacles)
 %           = {[#dim x 1], ...}
-%   AQ = definition matrices of Quadrics
+%   A = quadric definition matrix
 %           = cell(1, #Quadric_obstacles)
 %           = {[#dim x #dim], ...}
-%   RQ = rotation matrices for ellipse reference frames
+%   rot = reference frame rotation matrix
 %           = cell(1, #Quadric_obstacles)
 %           = {[#dim x #dim], ...}
-% XCINWARDQUADRIC, AIQ, RIQ = similar definitions as for Quadric obstacles
 %
-% quadrics:         qc, R, A
-% inward_quadrics:  qc, R, A
+% quadrics:         qc, rot, A
+% inward_quadrics:  qc, rot, A
 % tori:             qc, r, R, rot
 % superellipsoids:  qc, a, e, R
 % supertoroids:     qc, a, e, r, rot
 %
 % output
-%   bi, Dbi, D2bi for sets of different obstacle types
+%   bi = obstacle function values
+%      = [#obstacles x #points]
+%   Dbi = obstacle function gradients
+%       = {#obstacles x 1} = {[#dim x #points]; ... }
+%   D2bi = obstacle function Hessian matrices
+%        = {#obstacles x #points}
+%        = {[#dim x #dim], ...; ... }
 % 
 % See also BETA_QUADRICS, BETA_QUADRICS_INWARD, BETA_TORI,
 %          BETA_SUPERELLIPSOIDS, BETA_SUPERTOROIDS.
@@ -35,51 +43,75 @@ function [bi, Dbi, D2bi] = beta_heterogenous(q, obstacles)
 % Copyright: Ioannis Filippidis, 2011-
 
 nobstacle_types = size(obstacles, 2);
-
-bi = nan(0);
-Dbi = cell(0);
-D2bi = cell(1, 0);
+nobstacles = 0;
 for i=1:nobstacle_types
-    switch obstacles(1, i).type
+    data = obstacles(1, i).data;
+    
+    n_this_obs_type = size(data, 1);
+    nobstacles = nobstacles +n_this_obs_type;
+end
+npnt = size(q, 2);
+
+bi = nan(nobstacles, npnt);
+Dbi = cell(nobstacles, 1);
+D2bi = cell(nobstacles, npnt);
+n = 0;
+for i=1:nobstacle_types
+    type = obstacles(1, i).type;
+    data = obstacles(1, i).data;
+    
+    switch type
         case 'quadrics'
-            quadrics = obstacles(1, i).data;
+            quadrics = data;
             [bi1, Dbi1, D2bi1] = beta_quadrics(q, quadrics);
             
-            bi = [bi; bi1];
-            Dbi = [Dbi; Dbi1];
-            D2bi = [D2bi; D2bi1];
+            [bi, Dbi, D2bi, n] = add_biDbiD2bi(bi1, Dbi1, D2bi1, bi, Dbi, D2bi, n);
         case 'inward_quadrics'
-            inward_quadrics = obstacles(1, i).data;
+            inward_quadrics = data;
             [bi2, Dbi2, D2bi2] = beta_quadrics_inward(q, inward_quadrics);
             
-            bi = [bi; bi2];
-            Dbi = [Dbi; Dbi2];
-            D2bi = [D2bi; D2bi2];
+            [bi, Dbi, D2bi, n] = add_biDbiD2bi(bi2, Dbi2, D2bi2, bi, Dbi, D2bi, n);
         case 'tori'
-            tori = obstacles(1, i).data;
+            tori = data;
             [bi3, Dbi3] = beta_tori(q, tori);
             
-            bi = [bi; bi3];
-            Dbi = [Dbi; Dbi3];
+            [bi, Dbi, ~, n] = add_biDbiD2bi(bi3, Dbi3, [], bi, Dbi, D2bi, n);
         case 'superellipsoids'
-            superellipsoids = obstacles(1, i).data;
+            superellipsoids = data;
             [bi4, Dbi4] = beta_superellipsoids(q, superellipsoids);
             
-            bi = [bi; bi4];
-            Dbi = [Dbi; Dbi4];
+            [bi, Dbi, ~, n] = add_biDbiD2bi(bi4, Dbi4, [], bi, Dbi, D2bi, n);
         case 'supertoroids'
-            supertoroids = obstacles(1, i).data;
+            supertoroids = data;
             [bi5, Dbi5] = beta_supertoroids(q, supertoroids);
             
-            bi = [bi; bi5];
-            Dbi = [Dbi; Dbi5];
+            [bi, Dbi, ~, n] = add_biDbiD2bi(bi5, Dbi5, [], bi, Dbi, D2bi, n);
         case 'halfspaces'
-            halfspaces = obstacles(1, i).data;
+            halfspaces = data;
             [bi6, Dbi6] = beta_halfspaces(q, halfspaces);
             
-            bi = [bi; bi6];
-            Dbi = [Dbi; Dbi6];
+            [bi, Dbi, ~, n] = add_biDbiD2bi(bi6, Dbi6, [], bi, Dbi, D2bi, n);
         otherwise
             error('Unknown obstacle type.')
     end
 end
+
+function [bi, Dbi, D2bi, n] = add_biDbiD2bi(curbi, curDbi, curD2bi, bi, Dbi, D2bi, n)
+m = size(curbi, 1);
+
+n1 = n +1;
+n2 = n +m;
+
+rows = n1:n2;
+
+bi(rows, :) = curbi;
+
+% single obstacle gradients ?
+if ~iscell(curDbi)
+    curDbi = {curDbi};
+end
+Dbi(rows, 1) = curDbi;
+
+D2bi(rows, :) = curD2bi;
+
+n = n2;

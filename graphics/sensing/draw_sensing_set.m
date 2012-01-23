@@ -1,24 +1,38 @@
+function [] = draw_sensing_set(ax, x, Rs)
+%DRAW_SENSING_SET   plot sensing circle with its radii
+%
+% usage
+%   DRAW_SENSING_SET(AX, X, RS)
+%
+% input
+%   ax = axes handle
+%   x = center point = agent position
+%     = [#dim x 1]
+%   Rs = sensing radius
+%
+% See also DRAW_RAYS.
+%
 % File:      draw_sensing_set.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
-% Date:      2010.09.15
-% Language:  MATLAB, program version: 7.11 (2010b)
-% Purpose:   take sensing set definition
-%               plot sensing set & sensing rays
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
+% Date:      2010.09.15 - 2012.01.22
+% Language:  MATLAB R2011b
+% Purpose:   take sensing set definition plot sensing set & sensing rays
 % Copyright: Ioannis Filippidis, 2010-
 
-function draw_sensing_set(agent)
-hold on
+held = applyhold(ax);
 
 % sensing disk boundary points
-t = 2*pi *linspace(0,1,1000);
-xsens = agent.Rs * [sin(t); cos(t)];
-xsens = xsens + agent.xcur * ones(1, size(xsens,2));
+n = 1000;
+t = 2 *pi *linspace(0, 1, n);
+xsens = Rs *[sin(t); cos(t)];
+xsens = bsxfun(@plus, x, xsens);
 
 % sensing disk boundary
-plot(xsens(1,:), xsens(2,:), 'r-')
+plotmd(ax, xsens, 'r-')
 
 % sensing radii
-plot([agent.xcur(1,1)*ones(1,1000); xsens(1,:)], [agent.xcur(2,1)*ones(1,1000); xsens(2,:)], 'r-')
+X = [x(1, 1)*ones(1, n); xsens(1, :) ];
+Y = [x(2, 1)*ones(1, n); xsens(2, :) ];
+plot(ax, X, Y, 'r-')
 
-axis equal
-hold off
+holdback(ax, held)

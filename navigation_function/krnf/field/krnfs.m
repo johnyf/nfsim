@@ -55,7 +55,7 @@ if k < 100
     % w/o squashing diffeomorphism, as in internals of original proof
     %phis = bsxfun(@rdivide, gammad.^k, beta);
 else
-    nfs = ones(size(gd)); % too large a power to compute, so plot is approximately ok
+    nfs = ones(size(gd) ); % too large a power to compute, so plot is approximately ok
     nfs(1, gd < 0.1) = gd(1, gd < 0.1); % avoid 3D singleton aspect ratio
 end
 

@@ -1,0 +1,46 @@
+<productinfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:noNamespaceSchemaLocation="optional">
+    <?xml-stylesheet type="text/xsl"href="optional"?>
+    <!-- info.xml file for the Navigation Function toolbox -->
+    <!-- Version 0.1 -->
+    <!-- Copyright 2010 Ioannis Filippidis.-->
+
+    <matlabrelease>2010b</matlabrelease>
+    <name>Navigation Function</name>
+    <type>toolbox</type>
+    <icon>$toolbox/matlab/icons/matlabicon.gif</icon>
+    <help_location>./htmldoc</help_location>
+    <help_contents_icon>$toolbox/matlab/icons/bookicon.gif</help_contents_icon>
+    
+    <!-- - - - - - - - - - - - -  Start menu - - - - - - - - - - - - - - - -->
+    <list>
+        
+        <listitem>
+            <label>Navigation Function Design GUI</label>
+            <callback>nfsim;</callback>
+            <icon>$toolbox/matlab/icons/figureicon.gif</icon>
+        </listitem>
+        
+        <listitem>
+            <label>Help</label>
+            <callback>web(fullfile(fileparts(which('installnfsim')),'htmldoc','nfsim_intro.html'),'-helpbrowser')</callback>
+            <icon>$toolbox/matlab/icons/book_mat.gif</icon>
+        </listitem>
+        
+        <!--
+        <listitem>
+            <label>Demos</label>
+            <callback>rtbstartup</callback>
+            <icon>$toolbox/matlab/icons/demoicon.gif</icon>
+        </listitem>
+        -->
+        
+        <listitem>
+            <label>Product Page (Web)</label>
+            <callback>web http://www.controlsystemslab.gr/jfilippidis -browser;</callback>
+            <icon>$toolbox/matlab/icons/webicon.gif</icon>
+        </listitem>
+        
+    </list>
+    
+</productinfo>

@@ -1,37 +1,37 @@
+function [] = draw_rays(ax, x, xb)
+%DRAW_RAYS  plot rays from X to endpoints of XB
+%
+% usage
+%   [] = DRAW_RAYS(AX, X, XB)
+%
+% input
+%   ax = axes handle
+%   x = current point from which to draw rays
+%     = [#dim x 1]
+%   xb = sensed points
+%      = [#dim x #(sensed pnts) ]
+%
+% See also DRAW_SENSING_SET.
+%
 % File:      draw_rays.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
-% Date:      2010.09.15
-% Language:  MATLAB, program version: 7.11 (2010b)
-% Purpose:   draw sensing rays at endpoints of sensed obstacle boundary
-%            segment
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
+% Date:      2010.09.15 - 2012.01.22
+% Language:  MATLAB R2011b
+% Purpose:   plot sensing rays to endpoints of visible obstacle boundary
 % Copyright: Ioannis Filippidis, 2010-
 
-function [] = draw_rays(varargin)
+% vectors from x to endpoints
+ray1(:, 1) = xb(:, 1) -x;
+ray2(:, 1) = xb(:, end) -x;
 
-% [] = draw_rays(xb, agent)
-% [] = draw_rays(ax, xb, agent)
+ray1 = Rs *normvec(ray1);
+ray2 = Rs *normvec(ray2);
 
-if (nargin < 2) || (3 < nargin)
-    error('This function takes 2 or 3 arguments.')
-end
+% draw stationed ray vectors
+draw_ray(ax, x, ray1)
+draw_ray(ax, x, ray2)
 
-xb = varargin{nargin -1};
-agent = varargin{nargin};
-
-if nargin == 3
-    ax = varargin{1};
-else
-    ax = gca;
-end
-
-% vectors from xcur to endpoints
-ray1(:,1) = xb(:,1) - agent.xcur;
-ray2(:,1) = xb(:,end) - agent.xcur;
-
-% corresponding rays' directions
-ray1 = ray1 ./ norm(ray1,2);
-ray2 = ray2 ./ norm(ray2,2);
-
-% draw corresponding rays
-plot(ax, [agent.xcur(1,1), agent.Rs * ray1(1,1) + agent.xcur(1,1)], [agent.xcur(2,1), agent.Rs * ray1(2,1) + agent.xcur(2,1)], 'Color', 'r')
-plot(ax, [agent.xcur(1,1), agent.Rs * ray2(1,1) + agent.xcur(1,1)], [agent.xcur(2,1), agent.Rs * ray2(2,1) + agent.xcur(2,1)], 'Color', 'r')
+function [] = draw_ray(ax, x, ray)
+x2 = x +ray;
+v = [x, x2];
+plotmd(ax, v, 'Color', 'r')

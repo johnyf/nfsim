@@ -27,6 +27,12 @@ q_qd = bsxfun(@minus, q, qd);
 [ndim, npnt] = size(q_qd);
 
 gd = vnorm(q_qd, 1, 2).^2;
-Dgd = 2 *q_qd;
-D2gd = {2 *eye(ndim) };
-D2gd = repmat(D2gd, 1, npnt);
+
+if nargout >= 2
+    Dgd = 2 *q_qd;
+end
+
+if nargout >= 3
+    D2gd = {2 *eye(ndim) };
+    D2gd = repmat(D2gd, 1, npnt);
+end

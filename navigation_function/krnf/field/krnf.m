@@ -1,4 +1,6 @@
 function [nf] = krnf(gd, bi, k)
+%KRNF   Koditschek-Rimon Navigation Function
+%
 % Parameter k selected either:
 %   1) manually,
 %   2) CALCULATED INDEPENDENTLY according to extension of original proof,

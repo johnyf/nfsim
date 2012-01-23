@@ -1,19 +1,30 @@
 function [bi, Dbi, D2bi] = beta_quadrics(q, quadrics)
-% q = calculation points
-%   = [#dimensions x #points]
-% quadrics_inward = [#obstacles x 1]
-%   quadrics_inward(i, 1).qc = {#obstacles, 1}
-%                            = ellipsoid centers
-%   quadrics_inward(i, 1).A = {#obstacles, 1}
-%                           = ellipsoid definition matrices
-%   quadrics_inward(i, 1).rot = {#obstacles, 1}
-%                           = ellipsoid axes rotation matrices
+% input
+%   q = calculation points
+%     = [#dimensions x #points]
+%   quadrics = structure array
+%            = [#obstacles x 1]
+%       quadrics(i, 1).qc = ellipsoid center
+%                         = [#dim x 1]
+%       quadrics(i, 1).A = ellipsoid definition matrix
+%                        = [#dim x #dim]
+%       quadrics(i, 1).rot = ellipsoid reference frame rotation matrix
+%                          = [#dim x #dim]
 %
-% See also BETA_QUADRIC, BI2B, DBI2DB, D2BI2D2B.
+% output
+%   bi = obstacle function values
+%      = [#obstacles x #points]
+%   Dbi = obstacle function gradients
+%       = [#dim x #points] (if single obstacle), or
+%       = {#obstacles x 1} = {[#dim x #points]; ... }
+%   D2bi = obstacle Hessian matrices
+%        = {#obstacles x #points} = {[#dim x #dim], ...; ... }
+%
+% See also BETA_QUADRIC, BIDBID2BI2BDBD2B.
 %
 % File:      beta_quadrics.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.09.10 - 2011.11.29
+% Date:      2011.09.10 - 2012.01.22
 % Language:  MATLAB R2011b
 % Purpose:   beta for multiple quadrics
 % Copyright: Ioannis Filippidis, 2011-
