@@ -22,7 +22,7 @@ function [] = plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr, varargin)
 %            desired destination
 % Copyright: Ioannis Filippidis, 2012-
 
-held = applyhold(ax);
+held = takehold(ax);
 
 %% trajectory
 plotmd(ax, xtraj, varargin{:} )
@@ -38,4 +38,4 @@ plotmd(ax, xtraj(:, end), 'Color', 'r', 'Marker', 'o', 'HandleVisibility','off')
 plotmd(ax, xd, 'Color', 'g', 'Marker', 'o')
 textmd(1.1 *xd, xdstr, 'Interpreter', 'Latex', 'FontSize', 15, 'Parent', ax)
 
-holdback(ax, held)
+givehold(ax, held)

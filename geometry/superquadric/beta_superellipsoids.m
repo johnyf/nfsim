@@ -1,6 +1,6 @@
 function [bi, Dbi] = beta_superellipsoids(q, superellipsoids)
 %
-% See also BETA_SUPERQUADRIC.
+% See also BETA_SUPERELLIPSOID, BETA_HETEROGENOUS, BIDBID2BI2BDBD2B.
 
 npnt = size(q, 2);
 no = size(superellipsoids, 1);

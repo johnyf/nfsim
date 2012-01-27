@@ -1,4 +1,11 @@
-function [x, grad_krnfx] = domain2grad_krnf(domain, resolution, qd, obstacles, k)
+function [q, grad_krnfq, X, Y, Gx, Gy] = domain2grad_krnf(domain,...
+                                            resolution, qd, obstacles, k)
+%DOMAIN2GRAD_KRNF   KRNF gradient over 2D domain
+%
+% usage
+%   [q, grad_krnfq, X, Y, gx, gy] = ...
+%                   DOMAIN2GRAD_KRNF(domain, resolution, qd, obstacles, k)
+%
 % input
 %   domain = [xmin, xmax, ymin, ymax]
 %   resolution = [nx, ny]
@@ -8,22 +15,38 @@ function [x, grad_krnfx] = domain2grad_krnf(domain, resolution, qd, obstacles, k
 %               CREATE_HETEROGENOUS_OBSTACLES
 %   k = tuning parameter
 %
-% usage
-%   [x, grad_krnfx] = domain2grad_krnf(domain, resolution, qd, obstacles, k)
+% output
+%   q = meshgrid point coordinates as matrix of column vectors
+%     = [#dim x #points]
+%      Note: #points = nx *ny
+%   grad_krnfq = KRNF gradient as matrix of column vectors
+%             = [#dim x #points]
+%   X = meshgrid point abscissas
+%     = [ny x nx]
+%   Y = meshgrid point ordinates
+%     = [ny x nx]
+%   Gx = gradient x components
+%      = [ny x nx]
+%   Gy = gradient y components
+%      = [ny x nx]
+%
+% See also DOMAIN2KRNF, GRAD_KRNF.
 %
 % File:      domain2grad_krnf.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2012.01.22 - 
+% Date:      2012.01.22 - 2012.01.27
 % Language:  MATLAB R2011b
 % Purpose:   calculate NF gradient field over rectangular domain
 % Copyright: Ioannis Filippidis, 2012-
 
-res = resolution;
-[X, Y] = domain2meshgrid(domain, res);
-x = meshgrid2vec(X, Y);
+[q, X, Y] = domain2vec(domain, resolution);
 
-[bi, Dbi] = beta_heterogenous(x, obstacles);
+[bi, Dbi] = beta_heterogenous(q, obstacles);
 [b, Db] = biDbiD2bi2bDbD2b(bi, Dbi);
 
-[gd, Dgd] = gamma_d(x, qd);
-grad_krnfx = grad_krnf(gd, Dgd, b, Db, k);
+[gd, Dgd] = gamma_d(q, qd);
+grad_krnfq = grad_krnf(gd, Dgd, b, Db, k);
+
+if nargout >= 5
+    [Gx, Gy] = vec2meshgrid(grad_krnfq, X);
+end

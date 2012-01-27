@@ -1,5 +1,7 @@
 function [bi, Dbi] = beta_supertoroids(q, supertoroids)
 
+% BETA_SUPERTOROID, BETA_HETEROGENOUS, BIDBID2BI2BDBD2B.
+
 npnt = size(q, 2);
 no = size(supertoroids, 1);
 

@@ -10,7 +10,7 @@ function [bi, Dbi] = beta_supertoroid(q, qc, a, e, r, rot)
 %   R = rotation matrix
 %     = [3 x 3]
 %
-% See also BETA_SUPERTOROIDS.
+% See also BETA_SUPERTOROIDS, BETA_SUPERELLIPSOIDS, BETA_HETEROGENOUS.
 
 qi = rot.' *bsxfun(@minus, q, qc);
 
@@ -30,6 +30,7 @@ a4 = r /sqrt(a1^2 +a2^2);
 
 bi = (((x ./a1).^(2 /e2) +(y ./a2).^(2 /e2) ).^(e2 /2) -a4).^(2 /e1) ...
      +(z ./a3).^(2 /e1) -1;
+
 Dbi = [e2 /e1 *(((x /a1).^(2 /e2) +(y /a2).^(2 /e2) ).^(e2 /2) -a4).^(2 /e1 -1)...
       .*((x /a1).^(2 /e2) +(y ./a2).^(2 /e2) ).^(e2 /2 -1)...
       .*(1 /a1)^(2 /e2) .*x.^(2 /e2 -1);
@@ -37,3 +38,4 @@ Dbi = [e2 /e1 *(((x /a1).^(2 /e2) +(y /a2).^(2 /e2) ).^(e2 /2) -a4).^(2 /e1 -1).
       .*((x /a1).^(2 /e2) +(y ./a2).^(2 /e2) ).^(e2 /2 -1)...
       .*(1 /a2)^(2 /e2) .*y.^(2 /e2 -1);
       (1 /a3)^(2 /e1) .*z.^(2 /e1 -1) ];
+Dbi = rot *Dbi;

@@ -20,7 +20,7 @@ function [bi, Dbi, D2bi] = beta_quadrics(q, quadrics)
 %   D2bi = obstacle Hessian matrices
 %        = {#obstacles x #points} = {[#dim x #dim], ...; ... }
 %
-% See also BETA_QUADRIC, BIDBID2BI2BDBD2B.
+% See also BETA_QUADRIC, BETA_HETEROGENOUS, BIDBID2BI2BDBD2B.
 %
 % File:      beta_quadrics.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

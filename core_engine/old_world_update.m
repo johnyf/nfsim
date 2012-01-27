@@ -1,13 +1,13 @@
+function [new_known_world] = old_world_update(old_known_world, sensed_world)
 % File:      old_world_update.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.09.15
-% Language:  MATLAB, program version: 7.11 (2010b)
+% Language:  MATLAB R2010b
 % Purpose:   take sensed world & current world knowledge
 %               return updated knowledge (used for old sphere world and
 %            Bezier world implementation)
 % Copyright: Ioannis Filippidis, 2010-
 
-function [new_known_world] = old_world_update(old_known_world, sensed_world)
 % disp('old_known_world.parts')
 % disp(old_known_world.parts)
 

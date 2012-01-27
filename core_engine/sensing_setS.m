@@ -1,11 +1,11 @@
+function [sensed] = sensing_setS(agent, world)
 % File:         sensing_setS.m
-% Author:       Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:       Ioannis Filippidis, jfilippidis@gmail.com
 % Date:         2010.09.12 - 
-% Language:     MATLAB, program version: 7.11 (2010b)
+% Language:     MATLAB R2010b
 % Purpose:      sense, assuming all obstacles are spheres
 % Copyright:    Ioannis Filippidis, 2010-
 
-function [sensed] = sensing_setS(agent, world)
 x = agent.xcur;
 Rs = agent.Rs;
 obstacles = world.obstacles;

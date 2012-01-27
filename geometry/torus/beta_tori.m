@@ -1,7 +1,7 @@
 function [bi, Dbi] = beta_tori(q, tori)
 %BETA_TORI  multiple tori implicit functions and gradients.
 %
-% See also BETA_TORUS.
+% See also BETA_TORUS, BETA_HETEROGENOUS, BIDBID2BI2BDBD2B.
 %
 % File:      beta_tori.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

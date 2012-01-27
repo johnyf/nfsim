@@ -1,12 +1,12 @@
-function [bi, Dbi, D2bi] = beta_quadric(x, xc, R, A)
-% [bi, Dbi, D2bi] = beta_quadric(x, xc, R, A)
+function [bi, Dbi, D2bi] = beta_quadric(x, xc, rot, A)
+% [bi, Dbi, D2bi] = beta_quadric(x, xc, rot, A)
 %
 % input
 %   x = calculation points
 %     = [#dimensions x #points]
 %   xc = quadric reference frame center
 %     = [#dimensions x 1]
-%   R = rotation matrix
+%   rot = rotation matrix
 %     = [#dimensions x #dimensions]
 %   A = quadric definition matrix, representing:
 %       ellipsoid, one-sheet hyperboloid, cylinder
@@ -30,12 +30,16 @@ function [bi, Dbi, D2bi] = beta_quadric(x, xc, R, A)
 %            ellipsoid, one-sheet hyperboloid, cylinder
 % Copyright: Ioannis Filippidis, 2011-
 
-x = R.' *bsxfun(@minus, x, xc);
+x = rot.' *bsxfun(@minus, x, xc);
 
-bi = diag(x.' *A *x -1).';
+bi = dot(x, A *x, 1) -1;
+
 Dbi = 2 *A *x;
+Dbi = rot *Dbi;
 
 npnt = size(x, 2);
 
-D2bi = {2 *A};
+D2bi = 2 *A *rot;
+D2bi = rot *D2bi *rot.';
+D2bi = {D2bi};
 D2bi = repmat(D2bi, 1, npnt);

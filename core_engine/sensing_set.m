@@ -1,14 +1,14 @@
+function [new_t_limits] = sensing_set(agent, world)
 % File:      sensing_set.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.09.12 - 
-% Language:  MATLAB, program version: 7.11 (2010b)
+% Language:  MATLAB R2010b
 % Purpose:   finds the new_t_limits = 
 %               [id_1, t_min(id_1), t_max(id_1), intersection;
 %               ...;
 %               id_n, t_min(id_n), t_max(id_n), intersection]
 % Copyright: Ioannis Filippidis, 2010-
 
-function [new_t_limits] = sensing_set(agent, world)
 % Note: sensing set implemented is a disk (2-ball), but may be any open
 % subset S\in C-space
 

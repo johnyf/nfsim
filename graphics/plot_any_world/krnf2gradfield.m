@@ -1,4 +1,7 @@
-function [varargout] = krnf2gradfield(ax, X, Y, nfZ)
+function [h] = krnf2gradfield(ax, X, Y, nfZ)
+%
+% See also QUIVER_KRNF, DOMAIN2GRAD_KRNF.
+%
 % File:      krnf2gradfield.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.09.30 - 2012.01.22
@@ -15,7 +18,3 @@ dy = abs(dy);
 [px, py] = gradient(nfZ, dx, dy);
 
 h = quiver(ax, X, Y, -px, -py);
-
-if nargout == 1
-    varargout{1, 1} = h;
-end

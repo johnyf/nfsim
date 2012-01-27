@@ -1,11 +1,11 @@
+function [new] = world_update(old, sensed)
 % File:      world_update.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.09.15
-% Language:  MATLAB, program version: 7.11 (2010b)
+% Language:  MATLAB R2010b
 % Purpose:   current + sensed world = updated world
 % Copyright: Ioannis Filippidis, 2010-
 
-function [new] = world_update(old, sensed)
 %% nothing sensed
 if isempty(sensed)
     new = old;

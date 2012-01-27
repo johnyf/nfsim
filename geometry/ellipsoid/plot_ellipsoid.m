@@ -1,16 +1,20 @@
-function [varargout] = plot_ellipsoid(ax, xc, R, A, npnt)
+function [q, x, y, z] = plot_ellipsoid(ax, xc, rot, A, npnt)
 %PLOT_ELLIPSOID     ellipsoid or ellipse plot
-%   AX = axis handle for plot
-%   XC = ellipsoid center = [#dim x 1]
-%   R = rotation matrix = [#dim x #dim]
+%
+% usage
+%   [q, x, y, z] = PLOT_ELLIPSOID(ax, xc, rot, A, npnt)
+%
+%   ax = axis handle for plot
+%   xc = ellipsoid center = [#dim x 1]
+%   rot = rotation matrix = [#dim x #dim]
 %   A = ellipsoid definition matrix (positive semi-definite)
 %     = [#dim x #dim]
-%   NPNT = number of points around ellipse (resolution) >0
+%   npnt = number of points around ellipse (resolution) >0
 %
-% File:      draw_ellipsoid.m
+% File:      plot_ellipsoid.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.02.10 - 2011.09.10
-% Language:  MATLAB R2011a
+% Date:      2011.02.10 - 2012.01.24
+% Language:  MATLAB R2011b
 % Purpose:   plot an ellipsoid
 % Copyright: Ioannis Filippidis, 2011-
 
@@ -19,7 +23,7 @@ if isempty(ax)
     ax = gca;
 end
 
-if nargin == 4
+if nargin < 5
     npnt = 100;
 end
 
@@ -34,10 +38,10 @@ D = (1./D).^0.5;
 
 % 2D case
 if ndim == 2
-    [x, y] = drawEllipse(0, 0, D(1,1), D(2,2) ); % David Legland's
+    [x, y] = drawEllipse(0, 0, D(1,1), D(2,2), 0, npnt); % David Legland's
     
-    XY = R *V *[x; y];
-    XY = bsxfun(@plus, XY, xc);
+    q = rot *V *[x; y];
+    q = bsxfun(@plus, q, xc);
 end
 
 % 3D case
@@ -45,28 +49,22 @@ if ndim == 3
     [x, y, z] = ellipsoid(0, 0, 0, D(1,1), D(2,2), D(3,3), npnt);
     
     for i=1:numel(x)
-        XYZ = R *V *[x(i), y(i), z(i) ]' +xc;
+        q = rot *V *[x(i), y(i), z(i) ]' +xc;
         
-        x(i) = XYZ(1,1);
-        y(i) = XYZ(2,1);
-        z(i) = XYZ(3,1);
+        x(i) = q(1,1);
+        y(i) = q(2,1);
+        z(i) = q(3,1);
     end
 end
 
 %% only output wanted?
 if nargout > 0
-    % 2D case
-    varargout{1} = XY;
-
-    if ndim == 3
-        varargout{1} = XYZ;
-    end
     return
 end
 
 %% plot
 if ndim == 2
-    plot(ax, XY(1,:), XY(2,:) )
+    plotmd(ax, q)
 elseif ndim == 3
     surf(ax, x, y, z)
 else

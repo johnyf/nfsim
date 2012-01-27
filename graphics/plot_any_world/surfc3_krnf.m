@@ -2,7 +2,7 @@ function [varargout] = surfc3_krnf(ax, domain, resolution, qd, obstacles, k)
 %SURFC3_KRNF    plot KRNF surface over 2D domain
 %
 % usage
-%   H = SURFC3_KRNF(DOMAIN, RESOLUTION, QD, OBSTACLES, K)
+%   H = SURFC3_KRNF(domain, resolution, qd, obstacles, k)
 %
 % input
 %   domain = [xmin, xmax, ymin, ymax]
@@ -16,7 +16,7 @@ function [varargout] = surfc3_krnf(ax, domain, resolution, qd, obstacles, k)
 % output
 %   h = handle to quiver object
 %
-% See also QUIVER_KRNF, DOMAIN2KRNF, KRNF2SURFC, SURFC3.
+% See also QUIVER_KRNF, DOMAIN2KRNF, KRNF2SURFC3, SURFC3.
 %
 % File:      surfc3_krnf.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -26,7 +26,7 @@ function [varargout] = surfc3_krnf(ax, domain, resolution, qd, obstacles, k)
 % Copyright: Ioannis Filippidis, 2010-
 
 [X, Y, nfZ] = domain2krnf(domain, resolution, qd, obstacles, k);
-h = krnf2surfc(ax, X, Y, nfZ, [] );
+h = krnf2surfc3(ax, X, Y, nfZ, [] );
 
 if nargout == 1
     varargout{1, 1} = h;

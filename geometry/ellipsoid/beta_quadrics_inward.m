@@ -9,7 +9,7 @@ function [bi, Dbi, D2bi] = beta_quadrics_inward(q, quadrics_inward)
 %   quadrics_inward(i, 1).R = {#obstacles, 1}
 %                           = ellipsoid axes rotation matrices
 %
-% See also BETA_QUADRIC_INWARD, BI@B, DBI2DB, D2BI2D2B.
+% See also BETA_QUADRIC_INWARD, BETA_HETEROGENOUS, BIDBID2BI2BDBD2B.
 %
 % File:      beta_quadrics_inward.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

@@ -1,12 +1,11 @@
+function [world] = init_sphere_world
 % File:      init_sphere_world.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.10.15
-% Language:  MATLAB, program version: 7.11 (2010b)
+% Language:  MATLAB R2011b
 % Purpose:   initialize structure of sphere world
 % Copyright: Ioannis Filippidis, 2010-
 
-function [world] = init_sphere_world
-    
 candidates = sphere_world_candidates; % options
 workspace = candidates{3}; % select
 
@@ -19,6 +18,7 @@ c_space.r0 = workspace.r0 - workspace.ra;
 M = size(c_space.robs, 2);
 
 %% World
+obstacles = cell(M, 1);
 for i=1:M
     obstacles{i,1}.type = 2; % 2=disk
     obstacles{i,1}.xobs = c_space.xobs(:,i);

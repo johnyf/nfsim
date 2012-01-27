@@ -1,18 +1,17 @@
-% File:      init_agent.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
-% Date:      2010.09.15
-% Language:  MATLAB, program version: 7.11 (2010b)
-% Purpose:   initialize structure of agent
-% Copyright: Ioannis Filippidis, 2010-
-
-% CAUTION: multiple agents not yet supported, although directly extensible
-
 function [varargout] = init_agent(varargin)
-
 % [agent] = init_agent() % default agent
 % [agent] = init_agent(agent) % reset given agent xcur=x0 and empty x
 % [agent] = init_agent(Parameter1, Value1,...) % default agent, given param
 % [agent] = init_agent(agent, Parameter1, Value1,...) % change given param
+%
+% File:      init_agent.m
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
+% Date:      2010.09.15
+% Language:  MATLAB R2011b
+% Purpose:   initialize structure of agent
+% Copyright: Ioannis Filippidis, 2010-
+
+% CAUTION: multiple agents not yet supported, although directly extensible
 
 %% default agent
 if nargin == 0

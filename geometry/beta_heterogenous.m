@@ -31,12 +31,13 @@ function [bi, Dbi, D2bi] = beta_heterogenous(q, obstacles)
 %        = {#obstacles x #points}
 %        = {[#dim x #dim], ...; ... }
 % 
-% See also BETA_QUADRICS, BETA_QUADRICS_INWARD, BETA_TORI,
+% See also BETA_SPHERES, BETA_QUADRICS, BETA_QUADRICS_INWARD, BETA_TORI,
+%          BETA_CYLINDERS, BETA_HALFSPACES, BETA_HYPERBOLOIDS,
 %          BETA_SUPERELLIPSOIDS, BETA_SUPERTOROIDS.
 %
 % File:      beta_heterogenous.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.09.10 - 2011.12.23
+% Date:      2011.09.10 - 2012.01.24
 % Language:  MATLAB R2011b
 % Purpose:   implicit function value & gradient for
 %            heterogenous obstacles

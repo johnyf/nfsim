@@ -1,4 +1,9 @@
-function [X, Y, Z] = domain2krnf(domain, resolution, qd, obstacles, k)
+function [X, Y, krnfZ] = domain2krnf(domain, resolution, qd, obstacles, k)
+%DOMAIN2KRNF    calculate KRNF within domain
+%
+% usage
+%   [X, Y, Z] = domain2krnf(domain, resolution, qd, obstacles, k)
+%
 % input
 %   domain = [xmin, xmax, ymin, ymax]
 %   resolution = [nx, ny]
@@ -8,8 +13,15 @@ function [X, Y, Z] = domain2krnf(domain, resolution, qd, obstacles, k)
 %               CREATE_HETEROGENOUS_OBSTACLES
 %   k = tuning parameter
 %
-% usage
-%   [X, Y, Z] = domain2krnf(domain, resolution, qd, obstacles, k)
+% output
+%   X = meshgrid point abscissas
+%     = [ny x nx]
+%   Y = meshgrid point ordinates
+%     = [ny x nx]
+%   krnfZ = KRNF values at meshgrid points
+%         = [ny x nx]
+%
+% See also DOMAIN2GRAD_KRNF, SURFC3_KRNF, KRNF2SURFC3.
 %
 % File:      domain2krnf.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -18,9 +30,7 @@ function [X, Y, Z] = domain2krnf(domain, resolution, qd, obstacles, k)
 % Purpose:   calculate navigation function field in rectangular domain
 % Copyright: Ioannis Filippidis, 2010-
 
-res = resolution;
-[X, Y] = domain2meshgrid(domain, res);
-q = meshgrid2vec(X, Y);
+[q, X, Y] = domain2vec(domain, resolution);
 
 bi = beta_heterogenous(q, obstacles);
 b = biDbiD2bi2bDbD2b(bi);
@@ -28,5 +38,5 @@ b = biDbiD2bi2bDbD2b(bi);
 gd = gamma_d(q, qd);
 f = krnf(gd, b, k);
 
-Z = vec2meshgrid(f, X);
+krnfZ = scalar2meshgrid(f, X);
     

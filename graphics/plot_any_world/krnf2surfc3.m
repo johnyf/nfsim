@@ -1,16 +1,20 @@
-function [h] = krnf2surfc(ax, X, Y, nfZ, contourV)
-%KRNF2SURFC(AX, X, Y, NFZ, CONTOURV)
+function [h] = krnf2surfc3(ax, X, Y, krnfZ, contourV)
+%KRNF2SURFC3    KRNF surface and contours over 2D domain
+%   KRNF2SURFC3(ax, X, Y, krnfZ, contourV)
 %
 % ax = (optional) axis handle
 % X = vector OR matrix XData
 % Y = vector OR matrix YData
 % Z = function surface matrix ZData
 %
-% File:      plot_nf_surf.m
+% See also DOMAIN2KRNF, SURFC3_KRNF.
+%
+% File:      krnf2surfc3.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.09.20 - 2012.01.22
 % Language:  MATLAB R2011b
-% Purpose:   plot 3D potential field surface with 2D level sets
+% Purpose:   plot Koditschek-Rimon Navigation Function potential field
+%            surface and level sets over 2D domain
 % Copyright: Ioannis Filippidis, 2010-
 
 %% input
@@ -19,7 +23,7 @@ if nargin < 5
 end
 
 %% plot
-h = surfc3(ax, X, Y, nfZ, contourV, [] );
+h = surfc3(ax, X, Y, krnfZ, contourV, [] );
 
 grid(ax, 'on')
 plot_scalings(ax, 0)

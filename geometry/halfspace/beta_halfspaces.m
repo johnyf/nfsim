@@ -10,7 +10,7 @@ function [bi, Dbi, D2bi] = beta_halfspaces(q, halfspaces)
 %       halfspaces(i, 1).n = {#obstacles, 1}
 %                           = half-space normal vectors to dividing planes
 %
-% See also BETA_HALFSPACE, BI2B, DBI2DB, D2BI2D2B.
+% See also BETA_HALFSPACE, BETA_HETEROGENOUS, BIDBID2BI2BDBD2B.
 %
 % File:      beta_halfspaces.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

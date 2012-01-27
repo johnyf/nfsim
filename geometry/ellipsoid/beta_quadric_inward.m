@@ -1,4 +1,4 @@
-function [bi, Dbi, D2bi] = beta_quadric_inward(x, xc, R, A)
+function [bi, Dbi, D2bi] = beta_quadric_inward(x, xc, rot, A)
 % [bi, Dbi, D2bi] = beta_quadric_inward(x, xc, R, A)
 %   Inwardly oriented quadric, i.e., for 0th obstacle
 %
@@ -30,12 +30,16 @@ function [bi, Dbi, D2bi] = beta_quadric_inward(x, xc, R, A)
 % Purpose:   implicit \beta_i and \nabla\beta_i for 0th obstacle
 % Copyright: Ioannis Filippidis, 2011-
 
-x = R.' *bsxfun(@minus, x, xc);
+x = rot.' *bsxfun(@minus, x, xc);
 
-bi = diag(1 -x.' *A *x).';
+bi = 1 -dot(x, A *x, 1);
+
 Dbi = -2 *A *x;
+Dbi = rot *Dbi;
 
 npnt = size(x, 2);
 
-D2bi = {-2 *A};
+D2bi = -2 *A;
+D2bi = rot *D2bi *rot.';
+D2bi = {D2bi};
 D2bi = repmat(D2bi, 1, npnt);

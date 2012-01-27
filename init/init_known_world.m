@@ -1,13 +1,13 @@
+function [known_world] = init_known_world(known, M)
 % File:      init_known_world.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.12.23
-% Language:  MATLAB, program version: 7.11 (2010b)
+% Language:  MATLAB R2011b
 % Purpose:   initialize structure of known world
 % Copyright: Ioannis Filippidis, 2010-
 
 % known = 1; % 1=known | 0=unknown
 
-function [known_world] = init_known_world(known, M)
 known_world = [];
 
 known_world = set_known(known, known_world, M);

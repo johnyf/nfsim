@@ -2,7 +2,7 @@ function [varargout] = quiver_krnf(ax, domain, resolution, qd, obstacles, k)
 %QUIVER_KRNF    plot KRNF negated gradient field over 2D domain
 %
 % usage
-%    H = QUIVER_KRNF(DOMAIN, RESOLUTION, QD, OBSTACLES, K)
+%    H = QUIVER_KRNF(domain, resolution, qd, obstacles, k)
 %
 % input
 %   domain = [xmin, xmax, ymin, ymax]
@@ -16,7 +16,7 @@ function [varargout] = quiver_krnf(ax, domain, resolution, qd, obstacles, k)
 % output
 %   h = handle to quiver object
 %
-% See also SURFC3_KRNF, DOMAIN2GRAD_KRNF, QUIVERMD.
+% See also STREAKARROW_KRNF, SURFC3_KRNF, DOMAIN2GRAD_KRNF, QUIVERMD.
 %
 % File:      quiver_krnf.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -26,7 +26,12 @@ function [varargout] = quiver_krnf(ax, domain, resolution, qd, obstacles, k)
 % Copyright: Ioannis Filippidis, 2012-
 
 [x, grad_krnfx] = domain2grad_krnf(domain, resolution, qd, obstacles, k);
-h = quivermd(ax, x, -grad_krnfx);
+g = -normvec(grad_krnfx, 'p', 2);
+h = quivermd(ax, x, g, 0.75);
+
+grid(ax, 'on')
+plot_scalings(ax, 0)
+tex_plot_annot(ax, [], '$x$', '$y$', [], [] );
 
 if nargout == 1
     varargout{1, 1} = h;

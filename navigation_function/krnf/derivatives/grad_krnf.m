@@ -30,3 +30,4 @@ c = (gd.^k +b).^(-1/k -1);
 v = bsxfun(@times, Dgd, b) -bsxfun(@times, Db, gd /k);
 
 grad = bsxfun(@times, v, c);
+grad(:, b <= 0) = nan;

@@ -1,9 +1,9 @@
 function [agent, world, known_world, sensed_world] =...
     navigate(agent, world, known_world, nfgui, type, usegraphics)
 % File:      navigate.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2011.05.02 - 
-% Language:  MATLAB, program version: 7.11 (2010b)
+% Language:  MATLAB R2010b
 % Purpose:   navigation main loop
 % Copyright: Ioannis Filippidis, 2010-
 
