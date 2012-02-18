@@ -1,13 +1,17 @@
 function [R] = recursive_rvachev(operation, x, type, a)
+%
+% usage
+%   [R] = RECURSIVE_RVACHEV(operation, x, type, a)
+%
 % input
-%   OPERATION = string defining Boolean operation
+%   operation = string defining Boolean operation
 %             = 'equivalence' |
 %               'not', 'complement' |
 %               'or', 'union', 'disjunction' |
 %               'and', 'intersection', 'conjunction'
-%   X = predicate values
+%   x = predicate values
 %     = [1 x #predicates]
-%   TYPE = 'a' | 'm' | 'p'
+%   type = 'a' | 'm' | 'p'
 %   A = a \in (-1,1] |
 %       [a, m] (a\in(-1,1] and m = even positive integer) | 
 %       p = even positive integer
@@ -18,12 +22,12 @@ function [R] = recursive_rvachev(operation, x, type, a)
 %
 % Remark: practically for large numbers only 'p' works
 %
-% See also RVACHEV.
+% See also RECURSIVE_GRAD_RVACHEV, RVACHEV.
 %
 % File:      recursive_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2011.09.10
-% Language:  MATLAB R2011a
+% Language:  MATLAB R2011b
 % Purpose:   Recursive Rvachev function
 % Copyright: Ioannis Filippidis, 2011-
 

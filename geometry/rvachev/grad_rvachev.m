@@ -14,7 +14,7 @@ function [R, DR] = grad_rvachev(operation, R1, DR1, R2, DR2, type, a)
 % output
 %   R = Specified Rvachev operation acted on R1 and R2.
 %
-% See also RECURSIVE_GRAD_RVACHEV, RVACHEV.
+% See also RVACHEV, RECURSIVE_GRAD_RVACHEV.
 %
 % File:      grad_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

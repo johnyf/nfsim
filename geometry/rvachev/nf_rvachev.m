@@ -1,3 +1,4 @@
+function [phiS] = nf_rvachev(agent, world, known_world)
 % File:      nf_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.11.11 - 
@@ -8,7 +9,6 @@
 % CAUTION: it is now limited to sphere worlds, but it may be applied to any
 % implicit representation of space
 
-function [phiS] = nf_rvachev(agent, world, known_world)
 [xc, r] = convex2sphere_world(world, known_world);
 x = agent.xcur;
 xd = agent.xd;

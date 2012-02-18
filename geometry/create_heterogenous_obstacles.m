@@ -3,11 +3,21 @@ function [obstacles] = ...
                                   tori, supertoroids, halfspaces)
 % CREATE_HETEROGENOUS_OBSTACLES     asseble heterogenous obstacles struct
 %
+% usage
+%   [obstacles] = ...
+%   create_heterogenous_obstacles(quadrics, inward_quadrics,...
+%                                 tori, supertoroids, halfspaces)
+%
 % input
-%   quadrics, inward_quadrics, tori, supertoroids
+%   quadrics, inward_quadrics, tori, supertoroids = data structure arrays
+%                       For definitions see 
 %
 % output
-%   obstacles
+%   obstacles = structure array, with fields:
+%       obstacles(1, i).type
+%       obstacles(1, i).data
+%
+% See also BETA_HETEROGENOUS, PLOT_HETEROGENOUS_OBSTACLES.
 %
 % File:      create_heterogenous_obstacles.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

@@ -12,9 +12,9 @@ function [K, R, V] = implicit_principal_normal_curvatures(grad, Hessian)
 g = grad;
 H = Hessian;
 
-ng = size(g, 2);
-K = nan(1, ng);
-R = nan(1, ng);
+[ndim, ng] = size(g);
+K = nan(ndim -1, ng);
+R = nan(ndim -1, ng);
 V = cell(1, ng);
 if iscell(H)
     nH = size(H, 2);

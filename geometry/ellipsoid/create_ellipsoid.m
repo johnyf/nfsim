@@ -1,6 +1,9 @@
 function [quadric] = create_ellipsoid(qc, rot, r)
 %CREATE_ELLIPSOID   initialize ellipsoid structure
 %
+% usage
+%   quadric = CREATE_ELLIPSOID(qc, rot, r)
+%
 % inputs
 %   qc = ellipsoid center
 %      = [#dim x 1]
@@ -10,9 +13,12 @@ function [quadric] = create_ellipsoid(qc, rot, r)
 %     = [1 x #dim]
 %
 % output
-%   quadric = structure of quadric parameters
+%   quadric = structure of quadric parameters, with fields:
+%       quadric.qc = center
+%       quadric.rot = rotation matrix
+%       quadric.A = ellipsoid definition matrix
 %
-% See also create_quadrics, create_torus, create_quadric_inward.
+% See also CREATE_QUADRICS, CREATE_TORUS, CREATE_QUADRIC_INWARD.
 %
 % File:      create_ellipsoid.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -22,5 +28,5 @@ function [quadric] = create_ellipsoid(qc, rot, r)
 % Copyright: Ioannis Filippidis, 2011-
 
 quadric.qc = qc;
-quadric.A = radii2ellipsoid(r);
 quadric.rot = rot;
+quadric.A = radii2ellipsoid(r);

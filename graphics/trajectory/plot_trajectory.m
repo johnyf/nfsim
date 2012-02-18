@@ -1,4 +1,5 @@
-function [] = plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr, varargin)
+function [] = plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr,...
+                              xtraj_style, x0_style, xd_style)
 %PLOT_TRAJECTORY    plot initial, intermediate, destination points
 %
 % [] = plot_trajectory(ax, x0, xtraj, xd, '$q_0$', '$q_d$', 'r-')
@@ -22,20 +23,33 @@ function [] = plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr, varargin)
 %            desired destination
 % Copyright: Ioannis Filippidis, 2012-
 
+%% arguments
+if nargin < 9
+    xd_style = {'Color', 'g', 'Marker', 'o'};
+end
+
+if nargin < 8
+    x0_style = {'Color', 'r', 'Marker', 's'};
+end
+
+if nargin < 7
+    xtraj_style = {'Color', 'm', 'LineWidth', 2};
+end
+
 held = takehold(ax);
 
 %% trajectory
-plotmd(ax, xtraj, varargin{:} )
+plotmd(ax, xtraj, xtraj_style{:} )
 
 %% initial condition
-plotmd(ax, x0, 'Color', 'r', 'Marker', 's')
+plotmd(ax, x0, x0_style{:} )
 textmd(1.1 *x0, x0str, 'Interpreter', 'Latex', 'FontSize', 15, 'Parent', ax)
 
 %% actual final trajectory point
 plotmd(ax, xtraj(:, end), 'Color', 'r', 'Marker', 'o', 'HandleVisibility','off') % maybe separate it
 
 %% desired destination
-plotmd(ax, xd, 'Color', 'g', 'Marker', 'o')
+plotmd(ax, xd, xd_style{:} )
 textmd(1.1 *xd, xdstr, 'Interpreter', 'Latex', 'FontSize', 15, 'Parent', ax)
 
 givehold(ax, held)

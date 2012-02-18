@@ -1,9 +1,14 @@
 function [] = plot_heterogenous_obstacles(ax, obstacles, npnt)
 %
+% usage
+%   PLOT_HETEROGENOUS_OBSTACLES(ax, obstacles, npnt)
+%
 % input
 %   ax = axes handle
 %   obstacles = array of obstacle definitions
 %   npnt = number of points on obstacles
+%
+% See also CREATE_HETEROGENOUS_OBSTACLES, BETA_HETEROGENOUS.
 %
 % File:      plot_heterogenous_obstacles.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

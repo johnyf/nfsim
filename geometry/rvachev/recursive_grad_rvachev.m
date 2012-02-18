@@ -1,29 +1,34 @@
 function [R, DR] = recursive_grad_rvachev(operation, x, Dx, type, a)
 % RVACHEV   Gradient of Boolean operation on two predicates.
-%   RVACHEV(OPERATION, X, DX, TYPE, A) is the gradient of OPERATION
-%   Boolean Rvachev function specified by TYPE, acting on array X of
-%   continuous predicate function values and matrix DX of their gradients.
+%   [R, DR] = RVACHEV(operation, x, Dx, type, a) is the gradient of
+%   operation Boolean Rvachev function specified by type, acting on
+%   array x of continuous predicate function values and matrix Dx of
+%   their gradients.
+%
+% usage
+%   [R, DR] = RVACHEV(operation, x, Dx, type, a)
 %
 % input
-%   OPERATION = string defining Boolean operation
+%   operation = string defining Boolean operation
 %             = 'equivalence' |
 %               'not', 'complement' |
 %               'or', 'union', 'disjunction' |
 %               'and', 'intersection', 'conjunction'
-%   X = predicate values
+%   x = predicate values
 %     = [1 x #predicates]
-%   DX = predicate derivatives (in gradient form)
+%   Dx = predicate derivatives (in gradient form)
 %      = [#dim x #predicates]
-%   TYPE = 'a' | 'm' | 'p'
-%   A = a \in (-1,1] |
+%   type = 'a' | 'm' | 'p'
+%   a \in (-1,1] |
 %       [a, m] (a\in(-1,1] and m = even positive integer) | 
 %       p = even positive integer
 %
 % output
+%   R = selected Rvachev operation recursively applied on elements of x.
 %   DR = Gradient of selected Rvachev operation recursively
-%        applied on elements of X.
+%        applied on elements of x.
 %
-% See also GRAD_RVACHEV, RVACHEV.
+% See also RECURSIVE_RVACHEV, GRAD_RVACHEV.
 %
 % File:      recursive_grad_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

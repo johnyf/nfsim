@@ -22,7 +22,7 @@ for i=1:npnts
     curg = g(:, i);
     curx = x(:, i);
     
-    quivermd(ax, curx, curg)
+    quivermd(ax, curx, min(curR) *normvec(curg) )
     plotmd(ax, curx, 'r*')
     plot_subspace_circles(ax, curqc, curR, curV, curg);
 end

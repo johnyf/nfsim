@@ -1,4 +1,8 @@
 function [R, k] = assign_rvachev_operation(operation, R1, R2, a)
+%ASSIGN_RVACHEV_OPERATION   process Rvachev options
+%
+% See also RVACHEV, GRAD_RVACHEV.
+%
 % File:      assign_rvachev_operation.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2011.09.11

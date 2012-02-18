@@ -1,11 +1,16 @@
 function [b] = bi2b(bi)
+%BI2B   multiply multiple obstacle functions
+%
+% usage
+%   [b] = BI2B(bi)
+%
 % input
 %   bi = [#obstacles x #points]
 %
 % output
 %   b = [1 x #points]
 %
-% See also Dbi2Db, D2bi2D2b, biDbiD2bi2bDbD2b.
+% See also DBI2DB, D2BI2D2B, BIDBID2BI2BDBD2B.
 %
 % File:      bi2b.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

@@ -1,4 +1,8 @@
 function [D2b] = D2bi2D2b(D2bi, Db, Dbi, b, bi)
+%D2BI2D2B   Hessian matrix for product of obstacle functions
+%
+% usage
+%   [D2b] = D2BI2D2B(D2bi, Db, Dbi, b, bi)
 %
 % input
 %   b = product obstacle function at calculation points
@@ -22,7 +26,7 @@ function [D2b] = D2bi2D2b(D2bi, Db, Dbi, b, bi)
 %       = {1 x #points}
 %       = {[#dimensions x #dimensions], ...}
 %
-% See also Dbi2Db, bi2b, biDbiD2bi2bDbD2b.
+% See also DBI2DB, BI2B, BIDBID2BI2BDBD2B.
 %
 % File:      D2bi2D2b.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

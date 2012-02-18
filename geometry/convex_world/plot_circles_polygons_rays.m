@@ -1,5 +1,5 @@
 % File:      plot_circles_polygons_rays.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.09.25
 % Language:  MATLAB, program version: 7.11 (2010b)
 % Purpose:   plot equivalent sphere world circles and rays to their centers

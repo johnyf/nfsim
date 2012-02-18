@@ -45,7 +45,7 @@ function [R] = rvachev(operation, R1, R2, type, a)
 % File:      rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.11.11 - 2011.09.11
-% Language:  MATLAB R2011a
+% Language:  MATLAB R2011b
 % Purpose:   Binary Rvachev function operations
 % Copyright: Ioannis Filippidis, 2010-
 

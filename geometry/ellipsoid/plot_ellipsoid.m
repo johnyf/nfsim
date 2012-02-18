@@ -42,6 +42,9 @@ if ndim == 2
     
     q = rot *V *[x; y];
     q = bsxfun(@plus, q, xc);
+    
+    x = q(1, :);
+    y = q(2, :);
 end
 
 % 3D case
@@ -70,3 +73,4 @@ elseif ndim == 3
 else
     error('ndim ~= 2, 3.')
 end
+clear('q')

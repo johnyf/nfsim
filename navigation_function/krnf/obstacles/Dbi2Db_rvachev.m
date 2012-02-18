@@ -1,8 +1,5 @@
-function [Db] = Dbi2Db(Dbi, b, bi)
-%DBI2DB    gradient Db of product b of obstacle functions bi
-%
-% usage
-%   [Db] = DBI2DB(Dbi, b, bi)
+function [Db] = Dbi2Db_rvachev(Dbi, bi, operation, type, a)
+%DBI2DB_RVACHEV    gradient Db of Rvachev function of obstacles bi
 %
 % input
 %   Dbi = obstacle function gradients at calculation points
@@ -11,22 +8,20 @@ function [Db] = Dbi2Db(Dbi, b, bi)
 %       OR
 %       = [#dimensions x #points] (if #obstacles == 1)
 %   bi  = [#obstacles x #points]
-%   b = [1 x #points]
-%     = bi2b(bi)
 %
 % output
 %   Db = [#dimensions x #points]
 %
-% See also BI2B, D2BI2D2B, BIDBID2BI2BDBD2B.
+% See also BI2B_RVACHEV, D2BI2D2B_RVACHEV, BIDBID2BI2BDBD2B_RVACHEV.
 %
-% File:      Dbi2Db.m
+% File:      Dbi2Db_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.07.31
+% Date:      2012.01.27
 % Language:  MATLAB R2011b
-% Purpose:   calculate Db from individual obstacles' Dbi, bi and b
+% Purpose:   calculate Db from individual obstacles' Dbi, bi
 % Copyright: Ioannis Filippidis, 2011-
 
-% derivatives Dbi of individual obstacle implicit functions provided
+% derivatives Dbi of individual obstacle implicit functions provided ?
 if ~iscell(Dbi)
     Db = Dbi;
     return
@@ -41,11 +36,12 @@ nobst = size(Dbi, 1);
 Db = nan(ndim, npnt);
 
 for j=1:npnt
-    curDb = Dbi{1, 1}(:, j) .*b(1, j) ./bi(1, j);
-
-    for i=2:nobst
-        curDb = curDb +Dbi{i, 1}(:, j) .*b(1, j) ./bi(i, j);
+    curbi = bi(:, j).';
+    
+    curDbi = nan(ndim, npnt);
+    for i=1:nobst
+        curDbi(:, i) = Dbi{i, 1}(:, j);
     end
-
-    Db(:, j) = curDb;
+    
+    Db(:, j) = recursive_grad_rvachev(operation, curbi, curDbi, type, a);
 end

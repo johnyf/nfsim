@@ -33,7 +33,8 @@ function [bi, Dbi, D2bi] = beta_heterogenous(q, obstacles)
 % 
 % See also BETA_SPHERES, BETA_QUADRICS, BETA_QUADRICS_INWARD, BETA_TORI,
 %          BETA_CYLINDERS, BETA_HALFSPACES, BETA_HYPERBOLOIDS,
-%          BETA_SUPERELLIPSOIDS, BETA_SUPERTOROIDS.
+%          BETA_SUPERELLIPSOIDS, BETA_SUPERTOROIDS,
+%          PLOT_HETEROGENOUS_OBSTACLES.
 %
 % File:      beta_heterogenous.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -74,9 +75,9 @@ for i=1:nobstacle_types
             [bi, Dbi, D2bi, n] = add_biDbiD2bi(bi2, Dbi2, D2bi2, bi, Dbi, D2bi, n);
         case 'tori'
             tori = data;
-            [bi3, Dbi3] = beta_tori(q, tori);
+            [bi3, Dbi3, D2bi3] = beta_tori(q, tori);
             
-            [bi, Dbi, ~, n] = add_biDbiD2bi(bi3, Dbi3, [], bi, Dbi, D2bi, n);
+            [bi, Dbi, D2bi, n] = add_biDbiD2bi(bi3, Dbi3, D2bi3, bi, Dbi, D2bi, n);
         case 'superellipsoids'
             superellipsoids = data;
             [bi4, Dbi4] = beta_superellipsoids(q, superellipsoids);
