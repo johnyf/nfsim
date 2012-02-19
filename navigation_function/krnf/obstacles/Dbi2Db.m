@@ -41,10 +41,24 @@ nobst = size(Dbi, 1);
 Db = nan(ndim, npnt);
 
 for j=1:npnt
-    curDb = Dbi{1, 1}(:, j) .*b(1, j) ./bi(1, j);
+    curbi = bi(:, j);
+    
+    if curbi(1, 1) ~= 0
+        curDb = Dbi{1, 1}(:, j) .*b(1, j) ./curbi(1, 1);
+    else
+        idx = 2:nobst;
+        curbarbi = curbi(idx, 1);
+        curDb = Dbi{1, 1}(:, j) .*prod(curbarbi);
+    end
 
     for i=2:nobst
-        curDb = curDb +Dbi{i, 1}(:, j) .*b(1, j) ./bi(i, j);
+        if curbi(i, 1) ~= 0
+            curDb = curDb +Dbi{i, 1}(:, j) .*b(1, j) ./curbi(i, 1);
+        else
+            idx = [1:(i-1), (i+1):nobst];
+            curbarbi = curbi(idx, 1);
+            curDb = curDb +Dbi{i, 1}(:, j) .*prod(curbarbi);
+        end
     end
 
     Db(:, j) = curDb;

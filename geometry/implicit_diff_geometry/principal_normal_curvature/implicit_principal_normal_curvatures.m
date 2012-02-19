@@ -1,6 +1,8 @@
 function [K, R, V] = implicit_principal_normal_curvatures(grad, Hessian)
 % K = normal curvature of implicitly defined surface
 %
+% See also IMPLICIT_PRINCIPAL_CURVATURE_SPHERES.
+%
 % File:      implicit_principal_normal_curvatures.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2012.01.24
@@ -55,7 +57,14 @@ Hg = Pg.' *H *Pg;
 
 e = diag(D);
 
-K = e /norm(g, 2);
-R = 1 ./K;
+K = e /norm(g, 2); % principal normal curvatures
+R = 1 ./K; % principal radii of normal curvature
 
-V = {Pg *V}; % surface tangent space to ambient space
+V = Pg *V; % surface tangent space in ambient space coordinates
+
+%% sort output
+[K, I] = sort(K, 1);
+R = R(I);
+V = V(:, I);
+
+V = {V};

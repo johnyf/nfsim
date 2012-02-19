@@ -1,5 +1,9 @@
 function [qc, R, V] = implicit_principal_curvature_spheres(x, grad, Hessian)
 %
+% See also PLOT_IMPLICIT_PRINCIPAL_CURVATURE_SPHERES,
+%          PLOT_IMPLICIT_PRINCIPAL_CURVATURE_CIRCLES,
+%               IMPLICIT_PRINCIPAL_NORMAL_CURVATURES.
+%
 % File:      implicit_principal_curvature_spheres.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2012.01.24

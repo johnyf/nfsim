@@ -7,7 +7,9 @@ function [X, Y, Z] = domain2b_normal_curvature(domain, resolution, obstacles)
 % Here a function that plots a scalar function as colors on a surface
 % (e.g. on a sphere, like the function in fex) will come handy
 %
-% File:      plot_implicit_curvature_spheres.m
+% See also IMPLICIT_PRINCIPAL_NORMAL_CURVATURES.
+%
+% File:      domain2b_normal_curvature.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2012.01.24
 % Language:  MATLAB R2011b

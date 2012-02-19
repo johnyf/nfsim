@@ -1,16 +1,15 @@
-function [bi, Dbi, D2bi] = beta_torus(q, qc, r, R, rot)
-%BETA_TORUS     single torus implicit function and gradient.
+function [bi, Dbi, D2bi] = beta_dupin_cyclide(q, qc, a, c, m, rot)
 %
-% See also BETA_TORI, PLOT_TORUS.
+% There are two definition/computation alternatives
+% 1) directly using a center, rotation and parameters
+%    this is easier because it is direct
+%    Moreover, this involves fewer numerical operations
+%    (reduced computational complexity), hence contains less numerical
+%    error.
 %
-% File:      beta_torus.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2010.11.24 - 2011.09.11
-% Language:  MATLAB R2011a
-% Purpose:   torus \beta_i implicit function
-% Copyright: Ioannis Filippidis, 2010-
-
-%todo: D2bi
+% 2) indirectly using the inversion of a torus
+%    this requires definition of both the torus and the inversion
+%    which is more complicated and demanding
 
 npnt = size(q, 2);
 
@@ -20,17 +19,20 @@ bi = nan(1, npnt);
 
 x = qi(1, :);
 y = qi(2, :);
-z = qi(3, :);
+%z = qi(3, :); % not needed yet
 
 nqi2 = vnorm(qi, 1, 2).^2;
 
-bi(1, :) = (nqi2 +R^2 -r^2).^2 -4 *R^2 *(x.^2 +y.^2);
-%bi(bi <= 0) = 0;
+b = sqrt(a^2 -c^2);
+bi(1, :) = (nqi2 +b^2 -m^2).^2 -4 *(a *x -c *m).^2 -4 *b^2 *y.^2;
+%bi(bi <= 0) = 0; % create an independent function for this
 
+Dbi = 'not yet implemented';
+D2bi = 'not yet implemented';
+%{
 Dbi(:, 1:npnt) = 4 .*[x .*(nqi2 -R^2 -r^2);
                       y .*(nqi2 -R^2 -r^2);
                       z .*(nqi2 +R^2 -r^2) ];
-                  
 Dbi = rot *Dbi;
 
 a1 = 4 .*(3 .*x.^2 +y.^2 +z.^2 -R^2 -r^2);
@@ -52,7 +54,4 @@ for i=1:npnt
     curD2bi = rot *curD2bi *rot.';
     D2bi{1, i} = curD2bi;
 end
-
-%bi(i, 1) = norm(q-qc, 2).^2 -r^2 ...
-%          +R^2 -2 .*R .*sqrt(norm(q-qc, 2).^2 -dot(q-qc, n1).^2) ...
-%          +dot(q1./norm(q1,2), n2).^2; % symmetry breaking term
+%}

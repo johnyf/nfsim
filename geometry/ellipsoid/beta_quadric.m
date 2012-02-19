@@ -39,7 +39,7 @@ Dbi = rot *Dbi;
 
 npnt = size(x, 2);
 
-D2bi = 2 *A *rot;
+D2bi = 2 *A;
 D2bi = rot *D2bi *rot.';
 D2bi = {D2bi};
 D2bi = repmat(D2bi, 1, npnt);

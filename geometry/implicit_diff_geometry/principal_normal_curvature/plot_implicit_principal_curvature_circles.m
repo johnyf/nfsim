@@ -1,5 +1,9 @@
 function  [] = plot_implicit_principal_curvature_circles(ax, x, grad, Hessian)
 %
+% See also PLOT_BETA_PRINCIPAL_CURVATURE_CIRCLES,
+%      PLOT_IMPLICIT_PRINCIPAL_CURVATURE_SPHERES,
+%           IMPLICIT_PRINCIPAL_CURVATURE_SPHERES.
+%
 % File:      plot_implicit_curvature_spheres.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2012.01.24

@@ -1,4 +1,4 @@
-function [q, x, y, z] = plot_ellipsoid(ax, xc, rot, A, npnt)
+function [q, X, Y, Z] = plot_ellipsoid(ax, xc, rot, A, npnt)
 %PLOT_ELLIPSOID     ellipsoid or ellipse plot
 %
 % usage
@@ -38,39 +38,35 @@ D = (1./D).^0.5;
 
 % 2D case
 if ndim == 2
-    [x, y] = drawEllipse(0, 0, D(1,1), D(2,2), 0, npnt); % David Legland's
+    [X, Y] = drawEllipse(0, 0, D(1,1), D(2,2), 0, npnt); % David Legland's
     
-    q = rot *V *[x; y];
+    q = rot *V *[X; Y];
     q = bsxfun(@plus, q, xc);
     
-    x = q(1, :);
-    y = q(2, :);
+    X = q(1, :);
+    Y = q(2, :);
 end
 
 % 3D case
 if ndim == 3
-    [x, y, z] = ellipsoid(0, 0, 0, D(1,1), D(2,2), D(3,3), npnt);
+    [X, Y, Z] = ellipsoid(0, 0, 0, D(1,1), D(2,2), D(3,3), npnt);
     
-    for i=1:numel(x)
-        q = rot *V *[x(i), y(i), z(i) ]' +xc;
-        
-        x(i) = q(1,1);
-        y(i) = q(2,1);
-        z(i) = q(3,1);
-    end
-end
-
-%% only output wanted?
-if nargout > 0
-    return
+    q = meshgrid2vec(X, Y, Z);
+    q = rot *V *q;
+    q = bsxfun(@plus, q, xc);
+    [X, Y, Z] = vec2meshgrid(q, X);
 end
 
 %% plot
 if ndim == 2
     plotmd(ax, q)
 elseif ndim == 3
-    surf(ax, x, y, z)
+    surf(ax, X, Y, Z)
 else
     error('ndim ~= 2, 3.')
 end
-clear('q')
+
+%% output wanted?
+if nargout == 0
+    clear('q')
+end

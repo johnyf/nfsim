@@ -1,4 +1,4 @@
-function [X, Y, Z] = plot_torus(ax, qc, r, R, rot, npnt)
+function [q, X, Y, Z] = plot_torus(ax, qc, r, R, rot, npnt)
 %TORUS Generate a torus.
 %   PLOT_TORUS(ax, qc, r, R, rot, npnt) plots a torus with central radius
 %   R and lateral radius r. npnt controls the number of facets on the
