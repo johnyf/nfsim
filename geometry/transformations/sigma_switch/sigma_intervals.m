@@ -1,4 +1,7 @@
 function [lt0, gt1, in01] = sigma_intervals(x)
+%
+% See also SIGMA_FADING.
+%
 % File:      sigma_intervals.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2012.01.17

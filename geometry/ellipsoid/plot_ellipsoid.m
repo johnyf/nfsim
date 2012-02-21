@@ -45,6 +45,7 @@ if ndim == 2
     
     X = q(1, :);
     Y = q(2, :);
+    Z = zeros(1, size(q, 2) );
 end
 
 % 3D case

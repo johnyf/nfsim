@@ -1,16 +1,19 @@
-function plot_S
-% File:      plot_S.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+function plot_sigma_switch
+%
+% See also SIGMA_SWITCH, DSIGMA_SWITCH, D2SIGMA_SWITCH.
+%
+% File:      plot_sigma_switch.m
+% Author:    Ioannis Filippidis jfilippidis@gmail.com
 % Date:      2010.09.19
-% Language:  MATLAB, program version: 7.11 (2010b)
+% Language:  MATLAB R2010b
 % Purpose:   plot C^2 switch function S(x) and its derivatives dS(x)/dx,
 %            d^2S(x)/dx^2
 % Copyright: Ioannis Filippidis, 2010-
 
 x = linspace(0,1);
-s = S(x);
-ds = dS(x);
-d2s = d2S(x);
+s = sigma_switch(x);
+ds = dsigma_switch(x);
+d2s = d2sigma_switch(x);
 
 figure
 subplot(3,1,1)

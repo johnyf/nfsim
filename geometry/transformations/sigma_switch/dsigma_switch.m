@@ -1,4 +1,7 @@
 function [ds] = dsigma_switch(x)
+%
+% See also SIGMA_SWITCH, D2SIGMA_SWITCH, PLOT_SIGMA_SWITCH.
+%
 % File:      dsigma_switch.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.09.15 - 2012.01.17
