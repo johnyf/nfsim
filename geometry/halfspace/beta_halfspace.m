@@ -16,7 +16,7 @@ function [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
 %   D2bi = obstacle function Hessian matrices at calculation points
 %      = {1 x #points}
 %
-% See also BETA_HALFSPACES.
+% See also BETA_HALFSPACES, PLOT_HALFSPACE.
 %
 % File:      beta_halfspace.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -25,8 +25,11 @@ function [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
 % Purpose:   implicit \beta_i, \nabla\beta_i, D^2\beta_i for half-space
 % Copyright: Ioannis Filippidis, 2011-
 
-bi = ((x -xp)' *n)^2;
-Dbi = 2 *((x -xp)' *n) *n;
+x_xp = bsxfun(@minus, x, xp);
+
+normal_projection = n.' *x_xp;
+bi = sign(normal_projection) .*normal_projection.^2;
+Dbi = 2 *bsxfun(@times, abs(normal_projection), n);
 
 npnt = size(x, 2);
 

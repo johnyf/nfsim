@@ -10,7 +10,7 @@ function [halfspace] = create_halfspace(qp, n)
 % output
 %   halfspace = structure of half-space parameters
 %
-% See also create_halfspaces, create_quadric, create_torus.
+% See also CREATE_HALFSPACES, CREATE_QUADRIC, CREATE_TORUS.
 %
 % File:      create_halfspace.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

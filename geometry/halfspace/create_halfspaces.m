@@ -1,4 +1,7 @@
 function [hafspaces] = create_halfspaces(qp, n)
+%
+%
+% See also CREATE_HALFSPACE, ADD_HALFSPACE.
 
 nobs = size(qp, 2);
 

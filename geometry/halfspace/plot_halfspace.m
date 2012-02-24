@@ -2,6 +2,8 @@ function [varargout] = plot_halfspace(ax, xp, n, npnt, domain)
 %PLOT_HALFSPACE     ellipsoid or ellipse plot
 %   NPNT = number of points around ellipse (resolution) >0
 %
+% See also PLOT_HALFSPACES, BETA_HALFSPACE.
+%
 % File:      plot_halfspace.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2011.12.25 - 
@@ -18,8 +20,8 @@ if isempty(ax)
     ax = gca;
 end
 
-if nargin == 3
-    npnt = 100;
+if nargin < 4
+    npnt = [10, 10];
 end
 
 if nargin < 5

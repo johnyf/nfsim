@@ -1,4 +1,7 @@
 function [halfspaces] = add_halfspace(halfspace, halfspaces)
+%
+% See also ADD_HALFSPACES, CREATE_HALFSPACES.
+
 n = size(halfspaces, 1);
 n = n +1;
 

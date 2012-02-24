@@ -38,10 +38,10 @@ Db = nan(ndim, npnt);
 for j=1:npnt
     curbi = bi(:, j).';
     
-    curDbi = nan(ndim, npnt);
+    curDbi = nan(ndim, nobst);
     for i=1:nobst
         curDbi(:, i) = Dbi{i, 1}(:, j);
     end
     
-    Db(:, j) = recursive_grad_rvachev(operation, curbi, curDbi, type, a);
+    [~, Db(:, j) ] = recursive_grad_rvachev(operation, curbi, curDbi, type, a);
 end

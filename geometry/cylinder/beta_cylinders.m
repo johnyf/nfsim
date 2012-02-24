@@ -1,2 +1,2 @@
-function [bi, Dbi, D2bi] = beta_cylinders(q, qc, n)
+function [bi, Dbi, D2bi] = beta_cylinders(q, cylinders)
 

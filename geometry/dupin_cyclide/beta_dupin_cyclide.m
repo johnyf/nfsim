@@ -1,4 +1,5 @@
 function [bi, Dbi, D2bi] = beta_dupin_cyclide(q, qc, a, c, m, rot)
+%BETA_DUPIN_CYCLIDE     implicit obstacle function for Dupin cyclide.
 %
 % There are two definition/computation alternatives
 % 1) directly using a center, rotation and parameters
@@ -10,6 +11,8 @@ function [bi, Dbi, D2bi] = beta_dupin_cyclide(q, qc, a, c, m, rot)
 % 2) indirectly using the inversion of a torus
 %    this requires definition of both the torus and the inversion
 %    which is more complicated and demanding
+%
+% See also PLOT_DUPIN_CYCLIDE, EXAMPLE_DUPIN_CYCLIDE.
 
 npnt = size(q, 2);
 

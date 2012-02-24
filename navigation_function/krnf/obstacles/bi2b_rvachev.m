@@ -18,4 +18,10 @@ function [b] = bi2b_rvachev(bi, operation, type, a)
 % Purpose:   calculate b from individual obstacles' bi
 % Copyright: Ioannis Filippidis, 2011-
 
-b = recursive_rvachev(operation, bi, type, a);
+npnt = size(bi, 2);
+b = nan(1, npnt);
+for i=1:npnt
+    curbi = bi(:, i);
+    
+    b(1, i) = recursive_rvachev(operation, curbi.', type, a);
+end

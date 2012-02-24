@@ -1,7 +1,18 @@
 function [] = plot_dupin_cyclide(ax, qc, r, q0, r0)
+%PLOT_DUPIN_CYCLIDE     plot Dupin cyclide.
+%
+% input
+%   ax = axes object handle
+%   qc = center of torus
+%   r = major torus radius
+%   q0 = geometric inversion sphere center
+%   r0 = geometric inversion sphere radius
+%
 % like the obstacle function (beta_dupin_cyclide), this function also
 % has two alternative definitions, either via the inversion of a torus
 % or the direct parameterization using the parameters a, c, \mu.
+%
+% See also BETA_DUPIN_CYCLIDE, EXAMPLE_DUPIN_CYCLIDE.
 
 domain = [-pi, pi, -pi, pi];
 resolution = [35, 100];

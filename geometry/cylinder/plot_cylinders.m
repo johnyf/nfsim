@@ -1,2 +1,2 @@
-function [] = plot_cylinders(qc, n)
+function [] = plot_cylinders(qc, n, r)
 
