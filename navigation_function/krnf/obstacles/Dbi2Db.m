@@ -1,4 +1,4 @@
-function [Db] = Dbi2Db(Dbi, b, bi)
+function [Db] = Dbi2Db(b, bi, Dbi)
 %DBI2DB    gradient Db of product b of obstacle functions bi
 %
 % usage

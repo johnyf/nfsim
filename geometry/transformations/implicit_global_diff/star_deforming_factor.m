@@ -23,14 +23,7 @@ function [ni] = star_deforming_factor(q, bi, qi, ri, inward)
 %
 % See also STAR_WORLD_TRANSFORMATION.
 
-if nargin < 5
-    inward = 1;
-end
-
-% 0th obstacle ?
-if inward
-    bi = -bi;
-end
+bi(inward == 1, :) = -bi(inward == 1, :);
 
 q_qi = bsxfun(@minus, q, qi);
 r = vnorm(q_qi, 1, 2);

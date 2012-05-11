@@ -2,8 +2,8 @@
              xsi:noNamespaceSchemaLocation="optional">
     <?xml-stylesheet type="text/xsl"href="optional"?>
     <!-- info.xml file for the Navigation Function toolbox -->
-    <!-- Version 0.1 -->
-    <!-- Copyright 2010 Ioannis Filippidis.-->
+    <!-- Version 0.2 -->
+    <!-- Copyright 2010-2012 Ioannis Filippidis.-->
 
     <matlabrelease>2010b</matlabrelease>
     <name>Navigation Function</name>
@@ -23,7 +23,7 @@
         
         <listitem>
             <label>Help</label>
-            <callback>web(fullfile(fileparts(which('installnfsim')),'htmldoc','nfsim_intro.html'),'-helpbrowser')</callback>
+            <callback>web(fullfile(fileparts(which('installnfsim')),'doc/htmldoc','nfsim_intro.html'),'-helpbrowser')</callback>
             <icon>$toolbox/matlab/icons/book_mat.gif</icon>
         </listitem>
         

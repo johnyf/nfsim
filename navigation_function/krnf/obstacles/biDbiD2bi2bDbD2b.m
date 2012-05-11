@@ -19,9 +19,9 @@ function [b, Db, D2b] = biDbiD2bi2bDbD2b(bi, Dbi, D2bi)
 b = bi2b(bi);
 
 if nargout >= 2
-    Db = Dbi2Db(Dbi, b, bi);
+    Db = Dbi2Db(b, bi, Dbi);
 end
 
 if nargout == 3
-    D2b = D2bi2D2b(D2bi, Dbi, b, bi);
+    D2b = D2bi2D2b(b, bi, Db, Dbi, D2bi);
 end

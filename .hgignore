@@ -82,8 +82,6 @@ syntax: glob
 *.map
 *.css
 *.php
-*htmldoc/*
+*doc/*
 *factory/*
-*auxiliary/*
-*fex/*
 *examples/*

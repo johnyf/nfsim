@@ -1,4 +1,4 @@
-function [D2b] = D2bi2D2b(D2bi, Db, Dbi, b, bi)
+function [D2b] = D2bi2D2b(b, bi, Db, Dbi, D2bi)
 %D2BI2D2B   Hessian matrix for product of obstacle functions
 %
 % usage
