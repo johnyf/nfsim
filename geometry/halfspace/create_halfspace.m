@@ -1,4 +1,4 @@
-function [halfspace] = create_halfspace(qp, n)
+function [halfspace] = create_halfspace(qp, n, domain)
 %CREATE_HALFSPACE   initialize halfspace structure
 %
 % inputs
@@ -6,6 +6,7 @@ function [halfspace] = create_halfspace(qp, n)
 %      = [#dim x 1]
 %   n = vector normal to defining (hyper)plane,
 %       oriented towards the interior of the half-space
+%     = [#dim x 1]
 %
 % output
 %   halfspace = structure of half-space parameters
@@ -21,3 +22,4 @@ function [halfspace] = create_halfspace(qp, n)
 
 halfspace.qp = qp;
 halfspace.n = n;
+halfspace.domain = domain;

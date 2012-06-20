@@ -1,14 +1,27 @@
 function [] = plot_path(ax, x0, xtraj, xd, x0str, xdstr, zoff, zonsurf, Rs)
+%PLOT_PATH  Plot trajectory on function surface.
+%
+% usage
+%   PLOT_PATH(ax, x0, xtraj, xd)
+%   PLOT_PATH(ax, x0, xtraj, xd, x0str, xdstr, zoff, zonsurf, Rs)
+%
 % input
-%   ax = axes handle
+%   ax = axes object handle
 %   x0 = initial condition
-%   x = path subsequent points
+%   xtraj = path subsequent points
 %   xd = agent destination
-%   zoff = the contour plot level z offset
-%   zonsurf = navigation function values at corresponding points
 %   x0str = initial condition text annotation
+%         = string
 %   xdstr = destination text annotation
+%         = string
+%   zoff = the contour plot level z offset
+%        = real | []
+%   zonsurf = navigation function values at corresponding points
+%           = [1 x size(xtraj, 2) ] | []
 %   Rs = sensing radius
+%      > 0 | []
+%
+% See also PLOT_TRAJECTORY.
 %
 % File:      plot_path.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -17,11 +30,34 @@ function [] = plot_path(ax, x0, xtraj, xd, x0str, xdstr, zoff, zonsurf, Rs)
 % Purpose:   plot 2/3D path (in 2D can also be shown on surface)
 % Copyright: Ioannis Filippidis, 2010-
 
+% depends
+%   plotmd, zoffset, plot_trajectory, plot_circle, plotSphere
+
 %% input
+if nargin < 9
+    Rs = [];
+end
+
+if nargin < 8
+    zonsurf = [];
+end
+
+if nargin < 7
+    zoff = [];
+end
+
+if nargin < 6
+    xdstr = '';
+end
+
+if nargin < 5
+    x0str = '';
+end
+
 ndim = size(x0, 1);
 
 %% plot
-held = applyhold(ax);
+held = takehold(ax);
 
 if ndim == 2
     % vertical offset ?
@@ -39,7 +75,7 @@ if ndim == 2
 end
 
 plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr,...
-                'Linewidth', 2, 'Color', 'r', 'Linestyle', '-')
+                {'Linewidth', 2, 'Color', 'r', 'Linestyle', '-'} )
 
 %% sensing on ?
 if ~isempty(Rs)
@@ -53,4 +89,4 @@ if ~isempty(Rs)
     end
 end
 
-holdback(ax, held)
+restorehold(ax, held)

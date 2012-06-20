@@ -1,4 +1,4 @@
-function [bi, Dbi, D2bi] = beta_quadrics_inward(q, quadrics_inward)
+function [bi, Dbi, D2bi] = beta_inward_ellipsoids(q, quadrics_inward)
 % q = calculation points
 %   = [#dimensions x #points]
 % quadrics_inward = [#obstacles x 1]
@@ -11,7 +11,7 @@ function [bi, Dbi, D2bi] = beta_quadrics_inward(q, quadrics_inward)
 %
 % See also BETA_QUADRIC_INWARD, BETA_HETEROGENOUS, BIDBID2BI2BDBD2B.
 %
-% File:      beta_quadrics_inward.m
+% File:      beta_inward_ellipsoids.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2011.09.10 - 2011.11.29
 % Language:  MATLAB R2011b

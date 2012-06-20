@@ -20,7 +20,7 @@ function [bi, Dbi, D2bi] = beta_quadric(x, xc, rot, A)
 %   D2bi = obstacle function Hessian matrices at calculation points
 %      = {1 x #points}
 %
-% See also BETA_QUADRICS.
+% See also BETA_ELLIPSOIDS.
 %
 % File:      beta_quadric_inward.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

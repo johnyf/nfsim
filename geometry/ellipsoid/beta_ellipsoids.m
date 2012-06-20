@@ -1,4 +1,4 @@
-function [bi, Dbi, D2bi] = beta_quadrics(q, quadrics)
+function [bi, Dbi, D2bi] = beta_ellipsoids(q, quadrics)
 % input
 %   q = calculation points
 %     = [#dimensions x #points]
@@ -22,7 +22,7 @@ function [bi, Dbi, D2bi] = beta_quadrics(q, quadrics)
 %
 % See also BETA_QUADRIC, BETA_HETEROGENOUS, BIDBID2BI2BDBD2B.
 %
-% File:      beta_quadrics.m
+% File:      beta_ellipsoids.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2011.09.10 - 2012.01.22
 % Language:  MATLAB R2011b
@@ -31,7 +31,7 @@ function [bi, Dbi, D2bi] = beta_quadrics(q, quadrics)
 
 % todo: add second derivative (Hessian matrix)
 
-[ndim, npnt] = size(q);
+[~, npnt] = size(q);
 no = size(quadrics, 1);
 
 bi = nan(no, npnt);
@@ -39,7 +39,7 @@ D2bi = cell(no, npnt);
 
 %% single quadric
 if no == 1
-    Dbi = nan(ndim, npnt);
+    %Dbi = nan(ndim, npnt);
     
     curquadric = quadrics(1, 1);
     
@@ -48,6 +48,7 @@ if no == 1
     rot = curquadric.rot;
     
     [b1, Db1, D2b1] = beta_quadric(q, qc, rot, A);
+    %[b1, Db1, D2b1] = beta_quadric_normalized(q, qc, rot, A);
     bi(1, :) = b1;
     Dbi = Db1;
     D2bi = D2b1;
@@ -66,6 +67,7 @@ for i=1:no
     rot = curquadric.rot;
     
     [b1, Db1, D2b1] = beta_quadric(q, qc, rot, A);
+    %[b1, Db1, D2b1] = beta_quadric_normalized(q, qc, rot, A);
     bi(i, :) = b1;
     Dbi{i, 1} = Db1;
     D2bi(i, :) = D2b1;

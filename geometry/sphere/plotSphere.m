@@ -9,7 +9,7 @@ x = r .*x +xc(1,1);
 y = r .*y +xc(2,1);
 z = r .*z +xc(3,1);
 
-hold(ax, 'on')
+held = takehold(ax, 'local');
 
 n = size(varargin, 2);
 if n == 0
@@ -47,11 +47,11 @@ if opacity == 0
 %     set(ch, 'EdgeColor', col);
 
     for i=1:np
-        plot3(x(:,i), y(:,i), z(:, i), 'Color', col, 'HandleVisibility','off');
+        plot3(ax, x(:,i), y(:,i), z(:, i), 'Color', col, 'HandleVisibility','off');
     end
     
     for i=1:np
-        plot3(x(i,:), y(i,:), z(i, :), 'Color', col, 'HandleVisibility','off');
+        plot3(ax, x(i,:), y(i,:), z(i, :), 'Color', col, 'HandleVisibility','off');
     end
 end
 
@@ -63,5 +63,4 @@ if (0 < opacity) && (opacity < 1)
                         'EdgeColor', col);
 end
 
-axis(ax, 'equal')
-hold(ax, 'on')
+restorehold(held)

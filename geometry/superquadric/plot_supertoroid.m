@@ -1,4 +1,4 @@
-function [] = plot_supertoroid(ax, qc, a, e, r, rot, npnt)
+function [] = plot_supertoroid(ax, qc, a, e, r, rot, npnt, varargin)
 % ax = axes handle
 % qc = aligned frame origin
 % a = radii
@@ -123,11 +123,11 @@ for i=1:nsupertoroids
     end
     
     calculate_plot_single_superquadric(ax, cure, cura, curr, curxc, curR,...
-                                       ce, se, cw, sw)
+                                       ce, se, cw, sw, varargin{:} )
 end
 
 function [] = calculate_plot_single_superquadric(ax, e, a, r,...
-                                            xc, R, ce, se, cw, sw)
+                                            xc, R, ce, se, cw, sw, varargin)
 a(4) = r /sqrt(a(1)^2 +a(2)^2);
 
 
@@ -156,4 +156,4 @@ x = reshape(x, m, n);
 y = reshape(y, m, n);
 z = reshape(z, m, n);
 
-surf(ax, x, y, z);
+surf(ax, x, y, z, varargin{:} );

@@ -10,12 +10,16 @@ ax = gca;
 
 axis(ax, 'on')
 
-npnt = 100;
+npnt = 50;
 [q, X, ~, ~] = plot_ellipsoids(ax, ellipsoid, npnt);
 
 obstacles = [];
-obstacles.type = 'quadrics';
+obstacles.type = 'ellipsoids';
 obstacles.data = ellipsoid;
+
+% caution
+%   focal surfaces for one obstacle on its surface are ok
+%   focal surfaces 
 
 hold(ax, 'on')
 plot_beta_focal_surfaces(ax, q, X, obstacles)

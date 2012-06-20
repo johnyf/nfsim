@@ -1,6 +1,8 @@
-function [] = plot_heterogenous_obstacles(ax, obstacles, npnt)
+function [] = plot_heterogenous_obstacles(ax, obstacles, npnt, varargin)
+%PLOT_HETEROGENOUS_OBSTACLES    Plot mixed obstacle types.
 %
 % usage
+%   PLOT_HETEROGENOUS_OBSTACLES(ax, obstacles)
 %   PLOT_HETEROGENOUS_OBSTACLES(ax, obstacles, npnt)
 %
 % input
@@ -8,65 +10,75 @@ function [] = plot_heterogenous_obstacles(ax, obstacles, npnt)
 %   obstacles = array of obstacle definitions
 %   npnt = number of points on obstacles
 %
-% See also CREATE_HETEROGENOUS_OBSTACLES, BETA_HETEROGENOUS.
+% note
+%   To add new obstacle types, update function define_obstacle_types.
+%   The function should be of the form:
+%       plot_names(ax, data, npnt)
+%   where:
+%       'names' = plural of obstacle type, e.g. 'ellipsoids', 'tori', etc.
+%       ax = axes handle
+%       data = structure with parameter arrays as fields
+%       npnt = number of points on obstacles
+%
+% See also CREATE_HETEROGENOUS_OBSTACLES, BETA_HETEROGENOUS,
+%          DEFINE_OBSTACLE_TYPES.
 %
 % File:      plot_heterogenous_obstacles.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2010.09.13 - 2012.01.22
-% Language:  MATLAB R2011b
-% Purpose:   plot world
+% Date:      2010.09.13 - 2012.05.25
+% Language:  MATLAB R2012a
+% Purpose:   Plot mized types of obstacles
 % Copyright: Ioannis Filippidis, 2010-
 
-%todo: implement opacity for inward obstacles which form the world boundary
+% depends
+%   define_obstacle_types, takehold, restorehold
 
-if isempty(obstacles)
-    warning('nfsim:empty', 'Empty OBSTACLES array.')
+%todo: implement opacity for inward obstacles
+
+%% input
+
+% obstacles ?
+if nargin < 2
+    warning('nfsim:plot:NoObstacles', 'No obstacles provided.')
     return
 end
 
-nobstacle_types = size(obstacles, 2);
+if isempty(obstacles)
+    warning('nfsim:plot:NoObstacles', 'Empty OBSTACLES array.')
+    return
+end
 
+if isempty(ax)
+    ax = gca;
+end
+
+if nargin < 3
+    npnt = 35;
+end
+
+%% prep
+nobstacle_types = size(obstacles, 2);
+types = define_obstacle_types;
+
+%% plot
+held = takehold(ax, 'local');
 for i=1:nobstacle_types
     type = obstacles(1, i).type;
     data = obstacles(1, i).data;
+    fname = ['plot_', type];
     
     switch type
-        case 'quadrics'
-            quadrics = data;
-            plot_ellipsoids(ax, quadrics, npnt);
-        case 'inward_quadrics'
-            inward_quadrics = data;
-            plot_quadrics_inward(ax, inward_quadrics, npnt);
-        case 'tori'
-            tori = data;
-            plot_tori(ax, tori, npnt);
-        case 'superellipsoids'
-            superellipsoids = data;
-            plot_superellipsoids(ax, superellipsoids, npnt);
-        case 'supertoroids'
-            supertoroids = data;
-            plot_supertoroids(ax, supertoroids, npnt);
-        case 'halfspaces'
-            halfspaces = data;
-            plot_halfspaces(ax, halfspaces, npnt);
+        case types
+            feval(fname, ax, data, npnt, varargin{:} );
         case 'spheres'
-            spheres = data;
-            %{
-            center_style = []; %'r+'
-            xc = obs.xobs;
-            r = obs.robs;
-            plot_circle(ax, xc, r, col, center_style, '-');
-            if r < 0
-             opacity = 0;
-            else
-             opacity = 0;
-            end
-            plotSphere(ax, xc, r, 'Color', col, 'Opacity', opacity);
-            %}
+            %plot_circle(ax, xc, r, col, center_style, '-');
+            %plotSphere(ax, xc, r, 'Color', col, 'Opacity', opacity);
         case 'bezier2d'
-            bezier2d = data;
             %plot_visible_bezier_obstacle(ax, part_shown)
         otherwise
-            error('Unknown obstacle type.')
+            feval(fname, ax, data, npnt, varargin{:} );
+            warning('nfsim:ObstaclePlot:UnknownType',...
+                    ['Unknown obstacle type: ', type] )
     end
 end
+restorehold(ax, held)

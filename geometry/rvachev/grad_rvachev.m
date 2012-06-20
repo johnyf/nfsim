@@ -1,4 +1,20 @@
-function [R, DR] = grad_rvachev(operation, R1, DR1, R2, DR2, type, a)
+function [DR] = grad_rvachev(operation, R1, DR1, R2, DR2, type, a)
+%GRAD_RVACHEV   Gradient of Rvachev function.
+%   DR = GRAD_RVACHEV(operation, R1, DR1, R2, DR2, type, a) returns
+%   the gradient of the Rvachev function selected by: operation.
+%
+%   Let q = [#dim x 1] be a vector of variables.
+%   It is assumed that R1(q), R2(q) are both real functions of multiple
+%   variables q(i), the components of vector q.
+%   DR1, DR2 are the gradient of functions R1(q), R2(q), with respect to q.
+%   In more detail:
+%       DR1 = \nabla_q R_1(q)
+%       DR2 = \nabla_q R_2(q)
+%   For the operation, type, a arguments please refer to function rvachev.
+%
+% usage
+%   DR = GRAD_RVACHEV(operation, R1, DR1, R2, DR2, type, a)
+%
 % input
 %   OPERATION = 'or', 'union', 'disjunction' |
 %               'and', 'intersection', 'conjunction' |
@@ -12,9 +28,9 @@ function [R, DR] = grad_rvachev(operation, R1, DR1, R2, DR2, type, a)
 %       p = even positive integer
 %
 % output
-%   R = Specified Rvachev operation acted on R1 and R2.
+%   DR = Gradient of selected Rvachev operation applied to R1 and R2.
 %
-% See also RVACHEV, RECURSIVE_GRAD_RVACHEV.
+% See also RVACHEV, HESSIAN_RVACHEV, RECURSIVE_GRAD_RVACHEV.
 %
 % File:      grad_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -22,6 +38,9 @@ function [R, DR] = grad_rvachev(operation, R1, DR1, R2, DR2, type, a)
 % Language:  MATLAB R2011a
 % Purpose:   Gradient of Rvachev function
 % Copyright: Ioannis Filippidis, 2011-
+
+% dependency
+%   assign_rvachev_operation
 
 %% check args
 n1 = size(R1, 1);
@@ -51,7 +70,6 @@ if ~ismember(operation, {'or', 'union', 'disjunction', '||',...
 end
 
 %% calculate
-R = rvachev(operation, R1, R2, type, a);
 [~, k] = assign_rvachev_operation(operation, R1, R2, a);
 
 % Note: arg error checking implemented in RVACHEV called above

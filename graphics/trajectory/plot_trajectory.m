@@ -1,19 +1,37 @@
 function [] = plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr,...
                               xtraj_style, x0_style, xd_style)
-%PLOT_TRAJECTORY    plot initial, intermediate, destination points
+%PLOT_TRAJECTORY    Plot trajectory in space.
 %
-% [] = plot_trajectory(ax, x0, xtraj, xd, '$q_0$', '$q_d$', 'r-')
+% usage
+%   PLOT_TRAJECTORY(ax, x0, xtraj, xd, '$q_0$', '$q_d$')
+%   PLOT_TRAJECTORY(ax, x0, xtraj, xd, {'$q_0$'}, {'$q_d$'}, {'b-'},...
+%                                  {'rs'}, {'Color', 'g', 'Marker', 'o'} )
 %
 % input
-%   ax = axes handle
+%   ax = axes object handle
 %   x0 = initial point
 %      = [#dim x 1]
 %   xtraj = intermediate trajectory points
 %         = [#dim x #pnts]
 %   xd = destination point
 %      = [#dim x 1]
-%   varargin = plot formatting arguments for intermediate points
-%       e.g. = 'r-o'
+%   x0str = initial condition text annotation
+%         = string
+%   xdstr = destination text annotation
+%         = string
+%
+% optional input
+%   xtraj_style = trajectory style for plotmd function, for example:
+%               = {'g-o'}
+%               = {'Color', 'g', 'Marker', 'o', 'LineStyle', '-'}
+%   x0_style = initial point style for plotmd function, for example:
+%            = {'rs'}
+%            = {'Color', 'r', 'Marker', 's'}
+%   xd_style = destination point style for plotmd function, for example:
+%            = {'go'}
+%            = {'Color', 'g', 'Marker', 'o'}
+%
+% See also PLOT_PATH.
 %
 % File:      plot_trajectory.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -22,6 +40,9 @@ function [] = plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr,...
 % Purpose:   plot trajectory followed by the system, initial condition and
 %            desired destination
 % Copyright: Ioannis Filippidis, 2012-
+
+% depends
+%   plotmd, textmd, takehold, restorehold
 
 %% arguments
 if nargin < 9
@@ -33,7 +54,7 @@ if nargin < 8
 end
 
 if nargin < 7
-    xtraj_style = {'Color', 'm', 'LineWidth', 2};
+    xtraj_style = {'Color', 'b', 'LineWidth', 2};
 end
 
 held = takehold(ax);
@@ -52,4 +73,4 @@ plotmd(ax, xtraj(:, end), 'Color', 'r', 'Marker', 'o', 'HandleVisibility','off')
 plotmd(ax, xd, xd_style{:} )
 textmd(1.1 *xd, xdstr, 'Interpreter', 'Latex', 'FontSize', 15, 'Parent', ax)
 
-givehold(ax, held)
+restorehold(ax, held)

@@ -1,12 +1,12 @@
 function [R, DR] = recursive_grad_rvachev(operation, x, Dx, type, a)
-% RVACHEV   Gradient of Boolean operation on two predicates.
-%   [R, DR] = RVACHEV(operation, x, Dx, type, a) is the gradient of
-%   operation Boolean Rvachev function specified by type, acting on
-%   array x of continuous predicate function values and matrix Dx of
-%   their gradients.
+%RECURSIVE_GRAD_RVACHEV   Gradient of Boolean operation on two predicates.
+%   [R, DR] = RECURSIVE_GRAD_RVACHEV(operation, x, Dx, type, a) is the
+%   gradient of operation Boolean Rvachev function specified by type,
+%   acting on array x of continuous predicate function values and matrix
+%   Dx of their gradients.
 %
 % usage
-%   [R, DR] = RVACHEV(operation, x, Dx, type, a)
+%   [R, DR] = RECURSIVE_GRAD_RVACHEV(operation, x, Dx, type, a)
 %
 % input
 %   operation = string defining Boolean operation
@@ -28,7 +28,7 @@ function [R, DR] = recursive_grad_rvachev(operation, x, Dx, type, a)
 %   DR = Gradient of selected Rvachev operation recursively
 %        applied on elements of x.
 %
-% See also RECURSIVE_RVACHEV, GRAD_RVACHEV.
+% See also RECURSIVE_RVACHEV, RECURSIVE_HESSIAN_RVACHEV, GRAD_RVACHEV.
 %
 % File:      recursive_grad_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -36,6 +36,9 @@ function [R, DR] = recursive_grad_rvachev(operation, x, Dx, type, a)
 % Language:  MATLAB R2011a
 % Purpose:   Recursive gradient of Rvachev function
 % Copyright: Ioannis Filippidis, 2011-
+
+% dependency
+%   grad_rvachev
 
 %% check args
 if size(x, 1) ~= 1
@@ -56,7 +59,8 @@ for i=2:n
     DR1 = Dx(:, i-1);
     DR2 = Dx(:, i);
     
-    [R, DR] = grad_rvachev(operation, R1, DR1, R2, DR2, type, a);
+    R = rvachev(operation, R1, R2, type, a);
+    DR = grad_rvachev(operation, R1, DR1, R2, DR2, type, a);
     
     x(1, i) = R;
     Dx(:, i) = DR;

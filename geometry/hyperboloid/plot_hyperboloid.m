@@ -1,5 +1,7 @@
-function [] = plot_hyperboloid(ax, xc, A, zlimits)
-%PLOT_HYPERBOLOID   plot one-sheet hyperboloid
+function [] = plot_hyperboloid(ax, xc, A, zlimits, varargin)
+%PLOT_HYPERBOLOID   Plot one-sheet hyperboloid.
+%
+% See also BETA_HYPERBOLOID, BETA_HYPERBOLOIDS, PLOT_HYPERBOLOIDS.
 
 %% transform to aligned coordinates
 
@@ -25,4 +27,4 @@ if exist('zlimits')
     Z(zlimits(2) < Z) = nan;
 end
 
-surf(ax, X, Y, Z, 'LineStyle', 'none')
+surf(ax, X, Y, Z, varargin{:} )

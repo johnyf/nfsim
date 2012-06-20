@@ -7,3 +7,4 @@ n = n +1;
 
 halfspaces(n, 1).qp = halfspace.qp;
 halfspaces(n, 1).n = halfspace.n;
+halfspaces(n, 1).domain = halfspace.domain;

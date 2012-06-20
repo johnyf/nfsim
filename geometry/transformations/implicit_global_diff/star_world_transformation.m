@@ -1,4 +1,8 @@
 function [qmodel] = star_world_transformation(q, b, bi, qi, ri, inward, lambda)
+%STAR_WORLD_TRANSFORMATION  Map star world to sphere world.
+%
+% usage
+%   qmodel = STAR_WORLD_TRANSFORMATION(q, b, bi, qi, ri, inward, lambda)
 %
 % input
 %   q = point to transform
@@ -16,15 +20,26 @@ function [qmodel] = star_world_transformation(q, b, bi, qi, ri, inward, lambda)
 %
 % output
 %   qmodel = transformed points
+%          = [#dim x #points]
 %
-% Note
+% note
 %   b independently provided from bi, to allow any combination (product,
 %   Rvachev, fading composed with these, etc.) to be used
 %
-% Reference
+% reference
 %   Rimon-Koditschek Star Deforming Factor, p.79, TAMS
 %
-% See also STAR_DEFORMING_FACTOR, ANALYTIC_SWITCH.
+% See also STAR_DEFORMING_FACTOR, ANALYTIC_SWITCH, LOCAL_STAR_WORLD_DIFFEO.
+%
+% File:      star_world_transformation.m
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
+% Date:      2012.02.21 - 2012.05.24
+% Language:  MATLAB R2012a
+% Purpose:   Star world to sphere world transformation
+% Copyright: Ioannis Filippidis, 2012-
+
+% depends
+%   star_deforming_factor, analytic_switch
 
 gd = 1; % for now
 
@@ -44,8 +59,8 @@ for i=1:M
     si = analytic_switch(b, curbi, gd, lambda);
     
     v = bsxfun(@times, q_qi, ni);
-    v = bsxfun(@plus, v, curqi);
     v = bsxfun(@times, v, si);
+    v = bsxfun(@plus, v, curqi);
     
     qmodel = qmodel +v;
 end

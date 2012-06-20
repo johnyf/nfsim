@@ -1,5 +1,5 @@
 function [Db] = Dbi2Db(b, bi, Dbi)
-%DBI2DB    gradient Db of product b of obstacle functions bi
+%DBI2DB    Gradient Db of product b of obstacle functions bi.
 %
 % usage
 %   [Db] = DBI2DB(Dbi, b, bi)
@@ -40,21 +40,29 @@ nobst = size(Dbi, 1);
 
 Db = nan(ndim, npnt);
 
+% at each calculation point
 for j=1:npnt
     curbi = bi(:, j);
     
+    %% 1st obstacle
+    
+    % point not on current obstacle's boundary ?
     if curbi(1, 1) ~= 0
         curDb = Dbi{1, 1}(:, j) .*b(1, j) ./curbi(1, 1);
     else
+        % avoid dividing by curbi(1, 1) = 0
         idx = 2:nobst;
         curbarbi = curbi(idx, 1);
         curDb = Dbi{1, 1}(:, j) .*prod(curbarbi);
     end
 
+    %% 2nd:end obstacles
     for i=2:nobst
+        % point not on current obstacle's boundary ?
         if curbi(i, 1) ~= 0
             curDb = curDb +Dbi{i, 1}(:, j) .*b(1, j) ./curbi(i, 1);
         else
+            % avoid dividing by curbi(i, 1) = 0
             idx = [1:(i-1), (i+1):nobst];
             curbarbi = curbi(idx, 1);
             curDb = curDb +Dbi{i, 1}(:, j) .*prod(curbarbi);

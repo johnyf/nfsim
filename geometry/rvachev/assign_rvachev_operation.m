@@ -1,5 +1,5 @@
 function [R, k] = assign_rvachev_operation(operation, R1, R2, a)
-%ASSIGN_RVACHEV_OPERATION   process Rvachev options
+%ASSIGN_RVACHEV_OPERATION   Process Rvachev options.
 %
 % See also RVACHEV, GRAD_RVACHEV.
 %

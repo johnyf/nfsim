@@ -1,9 +1,9 @@
-function [] = plot_square_transform
-% File:      plot_square_transform.m
+function [] = plot_mapping_square2square
+% File:      plot_mapping_square2square.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2010.09.15
 % Language:  MATLAB R2010b
-% Purpose:   plot diffeomorphism
+% Purpose:   plot diffeomorphism square-> square, from wiki
 % Copyright: public domain, retrieved from:
 % http://en.wikipedia.org/wiki/File:Diffeomorphism_of_a_square.svg
 

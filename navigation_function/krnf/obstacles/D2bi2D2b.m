@@ -50,6 +50,7 @@ nobst = size(Dbi, 1);
 
 D2b = cell(1, npnt);
 
+% at each calculation point
 for j=1:npnt
     s = zeros(ndim);
     for i=1:nobst

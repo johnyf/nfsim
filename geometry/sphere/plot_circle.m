@@ -51,7 +51,7 @@ end
 N = size(r, 2);
 
 %% plot
-held = takehold(ax);
+held = takehold(ax, 'local');
 
 % unit circle
 npnt = 30;
@@ -81,5 +81,5 @@ if nargout > 0
     varargout{2} = h2;
 end
 
-givehold(ax, held);
+restorehold(ax, held);
     

@@ -1,6 +1,11 @@
 function [R] = rvachevn(operation, x, m)
+%RVACHEVN   N-ary Rvachev operation.
+%
+% usage
+%   R = RVACHEVN(operation, x, m)
+%
 % input
-%   OPERATION = string
+%   operation = string
 %             = 'not', 'complement' |
 %             = 'or', 'union', 'disjunction', '||' |
 %             = 'and', 'intersection', 'conjunction', '&&'

@@ -1,5 +1,8 @@
 function [ni] = star_deforming_factor(q, bi, qi, ri, inward)
-% for star world to sphere world transformation
+%STAR_DEFORMING_FACTOR  Deformation scaling factor along ray.
+%
+% usage
+%   ni = star_deforming_factor(q, bi, qi, ri, inward)
 %
 % input
 %   q = points to transform
@@ -16,12 +19,22 @@ function [ni] = star_deforming_factor(q, bi, qi, ri, inward)
 %
 % output
 %   ni = star deforming factors
-%      = \nu_i(q) > 0
+%      = [1 x #points]
 %
-% Reference:
+% reference
 %   Rimon-Koditschek Star Deforming Factor, p.78, TAMS
 %
 % See also STAR_WORLD_TRANSFORMATION.
+%
+% File:      star_deforming_factor.m
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
+% Date:      2012.02.21 - 2012.05.24
+% Language:  MATLAB R2012a
+% Purpose:   Star deformation ratio along radius
+% Copyright: Ioannis Filippidis, 2012-
+
+% depends
+%   vnorm
 
 bi(inward == 1, :) = -bi(inward == 1, :);
 

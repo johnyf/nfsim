@@ -1,7 +1,8 @@
 function [R] = recursive_rvachev(operation, x, type, a)
+%RECURSIVE_RVACHEV  Apply Rvachev operation recursively over array.
 %
 % usage
-%   [R] = RECURSIVE_RVACHEV(operation, x, type, a)
+%   R = RECURSIVE_RVACHEV(operation, x, type, a)
 %
 % input
 %   operation = string defining Boolean operation
@@ -10,7 +11,7 @@ function [R] = recursive_rvachev(operation, x, type, a)
 %               'or', 'union', 'disjunction' |
 %               'and', 'intersection', 'conjunction'
 %   x = predicate values
-%     = [1 x #predicates]
+%     = [#rows x #predicates]
 %   type = 'a' | 'm' | 'p'
 %   A = a \in (-1,1] |
 %       [a, m] (a\in(-1,1] and m = even positive integer) | 
@@ -18,32 +19,37 @@ function [R] = recursive_rvachev(operation, x, type, a)
 %
 % output
 %   R = Selected Rvachev function of predicates X
-%     = [1 x 1]
+%     = [#rows x 1]
 %
-% Remark: practically for large numbers only 'p' works
+% Remark: For large numbers only 'p' works in practice.
 %
-% See also RECURSIVE_GRAD_RVACHEV, RVACHEV.
+% See also RECURSIVE_GRAD_RVACHEV, RECURSIVE_HESSIAN_RVACHEV, RVACHEV.
 %
 % File:      recursive_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.09.10
-% Language:  MATLAB R2011b
+% Date:      2011.09.10 - 2012.05.17
+% Language:  MATLAB R2012a
 % Purpose:   Recursive Rvachev function
 % Copyright: Ioannis Filippidis, 2011-
 
-if size(x, 1) ~= 1
-    error('Operating only on row vectors.')
+% dependency
+%   rvachev
+
+[n, m] = size(x);
+
+if n ~= 1
+    warning('rvachev:rows', ['Multiple rows. Operating along columns ',...
+            'to return a column vector. The Rvachev operator acts ',...
+            'among predicates on the same row.'] )
 end
 
-n = size(x, 2);
-
-for i=2:n
-    R1 = x(1, i-1);
-    R2 = x(1, i);
+for i=2:m
+    R1 = x(:, i-1);
+    R2 = x(:, i);
     
     R = rvachev(operation, R1, R2, type, a);
     
-    x(1, i) = R;
+    x(:, i) = R;
 end
 
-R = x(1, end);
+R = x(:, end);

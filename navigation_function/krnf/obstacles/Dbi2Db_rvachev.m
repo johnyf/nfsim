@@ -1,5 +1,8 @@
 function [Db] = Dbi2Db_rvachev(Dbi, bi, operation, type, a)
-%DBI2DB_RVACHEV    gradient Db of Rvachev function of obstacles bi
+%DBI2DB_RVACHEV    Gradient Db of Rvachev function of obstacles bi.
+%
+% usage
+%   Db = DBI2DB_RVACHEV(Dbi, bi, operation, type, a)
 %
 % input
 %   Dbi = obstacle function gradients at calculation points
@@ -7,10 +10,21 @@ function [Db] = Dbi2Db_rvachev(Dbi, bi, operation, type, a)
 %       = {[#dimensions x #points]; ;;; } (if #obstacles > 1)
 %       OR
 %       = [#dimensions x #points] (if #obstacles == 1)
-%   bi  = [#obstacles x #points]
+%   bi  = values of obstacle functions at calculation points
+%       = [#obstacles x #points]
+%   operation = 'equivalence' |
+%               'not', 'complement' |
+%               'or', 'union', 'disjunction' |
+%               'and', 'intersection', 'conjunction'
+%   type = 'a'| 'm' | 'p'
+%   a = parameter(s) of selected Rvachev operation
+%     \in (-1,1] |
+%     [a, m] (a\in(-1,1] and m = even positive integer) | 
+%       p = even positive integer
 %
 % output
-%   Db = [#dimensions x #points]
+%   Db = Rvachev function gradient
+%      = [#dimensions x #points]
 %
 % See also BI2B_RVACHEV, D2BI2D2B_RVACHEV, BIDBID2BI2BDBD2B_RVACHEV.
 %
@@ -20,6 +34,9 @@ function [Db] = Dbi2Db_rvachev(Dbi, bi, operation, type, a)
 % Language:  MATLAB R2011b
 % Purpose:   calculate Db from individual obstacles' Dbi, bi
 % Copyright: Ioannis Filippidis, 2011-
+
+% dependency
+%   recursive_grad_rvachev
 
 % derivatives Dbi of individual obstacle implicit functions provided ?
 if ~iscell(Dbi)

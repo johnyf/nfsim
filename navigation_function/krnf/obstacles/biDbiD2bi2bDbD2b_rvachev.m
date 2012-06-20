@@ -1,7 +1,7 @@
 function [b, Db, D2b] = biDbiD2bi2bDbD2b_rvachev(bi, Dbi, D2bi, operation)
-%BIDBID2BI2BDBD2B_RVACHEV   Rvachev function and derivatives for obstacles
+%BIDBID2BI2BDBD2B_RVACHEV   Rvachev function and derivatives for obstacles.
 %
-% See also BETA_HETEROGENOUS, BI2B_RVACHEV, DBI2DB_RVACHEV.
+% See also BETA_HETEROGENOUS, BI2B_RVACHEV, DBI2DB_RVACHEV, RVACHEV.
 %
 % File:      biDbiD2bi2bDbD2b_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -11,6 +11,9 @@ function [b, Db, D2b] = biDbiD2bi2bDbD2b_rvachev(bi, Dbi, D2bi, operation)
 %            individual obstacle functions and their derivatives
 % Copyright: Ioannis Filippidis, 2012-
 
+% dependency
+%   bi2b_rvachev, Dbi2Db_rvachev, D2bi2D2b_rvachev
+
 if nargin < 4
     operation = 'and';
 end
@@ -19,10 +22,10 @@ a = 2;
 
 b = bi2b_rvachev(bi, operation, type, a);
 
-if nargout == 2
+if 1 < nargout
     Db = Dbi2Db_rvachev(Dbi, bi, operation, type, a);
 end
 
-if nargout == 3
+if 2 < nargout
     D2b = D2bi2D2b_rvachev(D2bi, Dbi, b, bi, operation, type, a);
 end

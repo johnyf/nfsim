@@ -1,5 +1,29 @@
 function [bi, Dbi, D2bi] = beta_torus(q, qc, r, R, rot)
-%BETA_TORUS     single torus implicit function and gradient.
+%BETA_TORUS     Torus implicit function, gradient and Hessian matrix.
+%
+% usage
+%   [bi, Dbi, D2bi] = BETA_TORUS(q, qc, r, R, rot)
+%
+% input
+%   q = calculation points
+%     = [3 x #points]
+%   qc = torus center
+%      = [3 x 1]
+%   r = torus minor radius
+%     > 0
+%   R = torus major radius
+%     > 0
+%   rot = torus axes orientation (=rotation matrix)
+%       = [3 x 3] \in SO(3)
+%
+% output
+%   bi = implicit function values at calculation points q
+%      = [1 x #points]
+%   Dbi = implicit function gradient at calculation points q
+%       = [3 x #points]
+%   D2bi = implict function Hessian matrices at calculation points q
+%        = {1 x #points}
+%        = {[3 x 3], [3 x 3], ... }
 %
 % See also BETA_TORI, PLOT_TORUS.
 %
@@ -10,8 +34,24 @@ function [bi, Dbi, D2bi] = beta_torus(q, qc, r, R, rot)
 % Purpose:   torus \beta_i implicit function
 % Copyright: Ioannis Filippidis, 2010-
 
-%todo: D2bi
+%% input defaults
+if nargin < 2
+    qc = zeros(3, 1);
+end
 
+if nargin < 3
+    r = 1;
+end
+
+if nargin < 4
+    R = 2 *r;
+end
+
+if nargin < 5
+    rot = eye(3);
+end
+
+%% pep
 npnt = size(q, 2);
 
 qi = rot.' *bsxfun(@minus, q, qc); % homogenous transform
@@ -24,6 +64,7 @@ z = qi(3, :);
 
 nqi2 = vnorm(qi, 1, 2).^2;
 
+%% calc
 bi(1, :) = (nqi2 +R^2 -r^2).^2 -4 *R^2 *(x.^2 +y.^2);
 %bi(bi <= 0) = 0;
 

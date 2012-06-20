@@ -1,6 +1,6 @@
-function [varargout] = plot_halfspace(ax, xp, n, npnt, domain)
-%PLOT_HALFSPACE     ellipsoid or ellipse plot
-%   NPNT = number of points around ellipse (resolution) >0
+function [varargout] = plot_halfspace(ax, xp, n, npnt, domain, varargin)
+%PLOT_HALFSPACE     Halfspace plot.
+%
 %
 % See also PLOT_HALFSPACES, BETA_HALFSPACE.
 %
@@ -21,7 +21,9 @@ if isempty(ax)
 end
 
 if nargin < 4
-    npnt = [10, 10];
+    npnt = [10, 9];
+else
+    npnt = [npnt, npnt -1];
 end
 
 if nargin < 5
@@ -77,7 +79,7 @@ end
 if ndim == 2
     %plot(ax, XY(1,:), XY(2,:) )
 elseif ndim == 3
-    surf(ax, x, y, z)
+    surf(ax, x, y, z, varargin{:} )
 else
     error('ndim ~= 2, 3.')
 end

@@ -1,16 +1,20 @@
-function [] = plot_superellipsoid(ax, qc, a, e, R)
-% ax = axes handle
-% epsilon = exponents
-%         = [3 x #superquadrics]
-%         = [e11, e12, e13, ...;
-%            e21, e22, e23, ...;
-%            e31, e32, e33, ...]
-% a = semi-radii
-%   = [3 x #superqudrics]
-%   = [a11, a12, a13, ...;
-%      a21, a22, a23, ...;
-%      a31, a32, a33, ...]
-% 
+function [] = plot_superellipsoid(ax, qc, a, e, R, varargin)
+% input
+%   ax = axes handle
+%   qc = superellipsoid center
+%   e = exponents
+%     = [3 x #superquadrics]
+%     = [e11, e12, e13, ...;
+%        e21, e22, e23, ...;
+%        e31, e32, e33, ...]
+%   a = semi-radii
+%     = [3 x #superqudrics]
+%     = [a11, a12, a13, ...;
+%        a21, a22, a23, ...;
+%        a31, a32, a33, ...]
+%   e = epsilons
+%   R = major radius
+%   varargin = options passed to surf
 %
 % File:      plot_superellipsoid.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -123,11 +127,11 @@ for i=1:nsuperellipsoids
     end
     
     calculate_plot_single_superquadric(ax, curepsilon, cura, curxc, curR,...
-                                       ce, se, cw, sw)
+                                       ce, se, cw, sw, varargin{:} )
 end
 
 function [] = calculate_plot_single_superquadric(ax, e, a,...
-                                            xc, R, ce, se, cw, sw)
+                                            xc, R, ce, se, cw, sw, varargin)
 x = a(1) .*sign(ce) .*abs(ce).^e(1)...
          .*sign(cw) .*abs(cw).^e(2);
 y = a(2) .*sign(ce) .*abs(ce).^e(1)...
@@ -152,5 +156,4 @@ x = reshape(x, m, n);
 y = reshape(y, m, n);
 z = reshape(z, m, n);
 
-mesh(ax, x, y, z);
-axis(ax, 'equal')
+mesh(ax, x, y, z, varargin{:} )

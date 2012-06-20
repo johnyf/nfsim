@@ -1,5 +1,5 @@
 function [R] = rvachev(operation, R1, R2, type, a)
-% RVACHEV   Boolean operation on two Rvachev functions
+%RVACHEV   Boolean operation on two Rvachev functions
 %   RVACHEV(OPERATION, R1, R2, TYPE, A) is the boolean operation on the
 %   values of the Rvachev functions R1 and R2.
 %
@@ -14,15 +14,19 @@ function [R] = rvachev(operation, R1, R2, type, a)
 %
 %   A is the parameter defining the R-operation.
 %
+% usage
+%   R = RVACHEV(operation, R1, R2, type, a)
+%
 % input
-%   OPERATION = 'equivalence' |
+%   operation = 'equivalence' |
 %               'not', 'complement' |
 %               'or', 'union', 'disjunction' |
-%               'and', 'intersection', 'conjunction' |
+%               'and', 'intersection', 'conjunction'
 %   R1, R2 = matrices of values of R-functions (equal in size)
-%   TYPE = 'a'| 'm' | 'p'
-%   A = a \in (-1,1] |
-%       [a, m] (a\in(-1,1] and m = even positive integer) | 
+%   type = 'a'| 'm' | 'p'
+%   a = parameter(s) of selected Rvachev operation
+%     \in (-1,1] |
+%     [a, m] (a\in(-1,1] and m = even positive integer) | 
 %       p = even positive integer
 %
 % output
@@ -32,15 +36,17 @@ function [R] = rvachev(operation, R1, R2, type, a)
 %   R1 = [1, 2];
 %   R2 = [3, 4];
 % 
-%   Ru = rvachev('union', R1, R2, 'a', 0);
-%   Ru = rvachev('union', R1, R2, 'm', [1, 2]);
-%   Ri = rvachev('intersection', R1, R2, 'p', 4);
-%   Rc = rvachev('complement', R1, R2, [], []);
+%   Ru = RVACHEV('union', R1, R2, 'a', 0);
+%   Ru = RVACHEV('union', R1, R2, 'm', [1, 2]);
+%   Ri = RVACHEV('intersection', R1, R2, 'p', 4);
+%   Rc = RVACHEV('complement', R1, R2, [], []);
 %
 % Note: a is implemented here as a constant and not as an arbitrary 
 %       symmetric function
 %
-% See also GRAD_RVACHEV, RECURSIVE_RVACHEV.
+% See also GRAD_RVACHEV, HESSIAN_RVACHEV, RVACHEVN,
+%          RECURSIVE_RVACHEV, RECURSIVE_GRAD_RVACHEV, RECURSIVE_HESSIAN_RVACHEV
+%          BIDBID2BI2BDBD2B_RVACHEV, BI2B_RVACHEV, DBI2DB_RVACHEV, D2BI2D2B_RVACHEV.
 %
 % File:      rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -48,6 +54,9 @@ function [R] = rvachev(operation, R1, R2, type, a)
 % Language:  MATLAB R2011b
 % Purpose:   Binary Rvachev function operations
 % Copyright: Ioannis Filippidis, 2010-
+
+% dependency
+%   assign_rvachev_operation
 
 %% check args
 if ~isequal(size(R1), size(R2) )

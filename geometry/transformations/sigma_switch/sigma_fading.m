@@ -13,18 +13,20 @@ function [sf, sDf, sD2f] = sigma_fading(f, Df, D2f)
 %   an affine transformation of \beta_i values before feeding them to the
 %   switch.
 %
-% See also SIGMA_SWITCH, DSIGMA_SWITCH, D2SIGMA_SWITCH, PLOT_SIGMA_SWITCH.
+% See also SIGMA_SWITCH, PLOT_SIGMA_SWITCH.
 %
 % File:      sigma_fading.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2012.01.17 - 2012.02.21
-% Language:  MATLAB R2011b
+% Date:      2012.01.17 - 2012.05.21
+% Language:  MATLAB R2012a
 % Purpose:   switch value, gradient, Hessian matrix for C^2 fading switch
 % Copyright: Ioannis Filippidis, 2011-
 
-sf = sigma_switch(f);
-dsf = dsigma_switch(f);
+% depends
+%   sigma_switch
+
+[sf, dsf, d2sf] = sigma_switch(f);
 
 sDf = dsf *Df;
 
-sD2f = d2sigma_switch(f) *(Df *Df.') +dsf *D2f;
+sD2f = d2sf *(Df *Df.') +dsf *D2f;

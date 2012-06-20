@@ -1,15 +1,25 @@
-function [q, X, Y, Z] = plot_ellipsoid(ax, xc, rot, A, npnt)
-%PLOT_ELLIPSOID     ellipsoid or ellipse plot
+function [q, X, Y, Z] = plot_ellipsoid(ax, xc, rot, A, npnt, varargin)
+%PLOT_ELLIPSOID     Ellipsoid or ellipse plot.
 %
 % usage
-%   [q, x, y, z] = PLOT_ELLIPSOID(ax, xc, rot, A, npnt)
-%
+%   [q, x, y, z] = PLOT_ELLIPSOID(ax, xc, rot, A, npnt, varargin)
+% 
+% input
 %   ax = axis handle for plot
 %   xc = ellipsoid center = [#dim x 1]
 %   rot = rotation matrix = [#dim x #dim]
 %   A = ellipsoid definition matrix (positive semi-definite)
 %     = [#dim x #dim]
 %   npnt = number of points around ellipse (resolution) >0
+%   varargin = options passed to plot or surf
+%
+% output
+%   q = points on ellipse
+%   X = matrix of x coordinates of points on ellipsoid
+%   Y = matrix of y coordinates of points on ellipsoid
+%   Z = matrix of z coordinates of points on ellipsoid
+%
+% See also PARAMETRIC_ELLIPSE.
 %
 % File:      plot_ellipsoid.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -17,6 +27,10 @@ function [q, X, Y, Z] = plot_ellipsoid(ax, xc, rot, A, npnt)
 % Language:  MATLAB R2011b
 % Purpose:   plot an ellipsoid
 % Copyright: Ioannis Filippidis, 2011-
+
+% depends
+%   drawEllipse, ellipsoid
+%   check_ellipsoid, meshgrid2vec, vec2meshgrid, plotmd
 
 %% check args
 if isempty(ax)
@@ -60,9 +74,9 @@ end
 
 %% plot
 if ndim == 2
-    plotmd(ax, q)
+    plotmd(ax, q, varargin{:} )
 elseif ndim == 3
-    surf(ax, X, Y, Z)
+    surf(ax, X, Y, Z, varargin{:} )
 else
     error('ndim ~= 2, 3.')
 end
