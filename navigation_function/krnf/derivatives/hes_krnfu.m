@@ -1,8 +1,8 @@
-function [H] = hes_krnf(gd, Dgd, D2gd, b, Db, D2b, k)
-%HES_KRNF   Koditschek-Rimon function Hessian matrix.
+function [H] = hes_krnfu(gd, Dgd, D2gd, b, Db, D2b, k)
+%HES_KRNFU  Un-squashed Koditschek-Rimon Function Hessian matrix.
 %
 % usage
-%   H = HES_KRNF(gd, Dgd, D2gd, b, Db, D2b, k)
+%   H = HES_KRNFU(gd, Dgd, D2gd, b, Db, D2b, k)
 %
 % input
 %   gd = destination function values at points q
@@ -23,28 +23,27 @@ function [H] = hes_krnf(gd, Dgd, D2gd, b, Db, D2b, k)
 %     >= 2
 %
 % output
-%   H = KRNF Hessian at points q
+%   H = unsquashed KRNF Hessian at points q
 %     = {1 x #points}
 %     = {[#dimensions x #dimensions], ..., }
 %
 % See also krnf, grad_krnf, biDbiD2bi2bDbD2b.
 %
-% File:      hes_krnf.m
+% File:      hes_krnfu.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.06.02 - 2011.11.28
-% Language:  MATLAB R2011b
-% Purpose:   Koditschek-Rimon Navigation Function Analytical Hessian matrix
-% Copyright: Ioannis Filippidis, 2011-
+% Date:      2012.07.03
+% Language:  MATLAB R2012a
+% Purpose:   unsquashed KRF Analytical Hessian matrix
+% Copyright: Ioannis Filippidis, 2012-
 
 check_krnf_args(gd, b, k)
 
 coef_D2gd = b .*(gd.^k +b).^(-1/k -1);
 coef_D2b = (-1/k .*gd .*(gd.^k +b).^(-1/k -1) );
-coef_term = - (gd.^k +b).^(-1/k -2);
 
-coef_DgdDgdT = (k +1) .*b .*gd.^(k -1);
-coef_DbDbT = (-1 /k .*(1 /k +1) .*gd);
-coef_DgdDb_2sym = (-gd.^k +b /k);
+coef_DgdDgdT = k .*(k -1) .*b.^(-1) .*gd.^(k -2);
+coef_DbDbT = 2 .*b.^(-3) .*gd.^k;
+coef_DgdDb_2sym = -k .*b.^(-2) .*gd.^(k -1);
 
 npnt = size(gd, 2);
 H = cell(1, npnt);
@@ -63,5 +62,5 @@ for i=1:npnt
 
     H{1, i} = coef_D2gd(1, i) .*D2gd{1, i} ...
             + coef_D2b(1, i)  .*D2b{1, i} ...
-            + coef_term(1, i) .*term;
+            + term;
 end

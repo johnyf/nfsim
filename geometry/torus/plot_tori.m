@@ -4,10 +4,10 @@ function [q, X, Y, Z] = plot_tori(ax, tori, npnt, varargin)
 %
 % See also PLOT_TORUS.
 
-nellipsoids = size(tori, 1);
+ntori = size(tori, 1);
 
 held = takehold(ax, 'local');
-for i=1:nellipsoids
+for i=1:ntori
     torus = tori(i, 1);
     
     qc = torus.qc;

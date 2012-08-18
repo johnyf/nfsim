@@ -1,11 +1,10 @@
 function [nf] = krnfu(gd, bi, k)
-% Parameter k selected either:
-%   1) manually,
-%   2) CALCULATED INDEPENDENTLY according to extension of original proof,
-%   3) CALCULATED INDEPENDENTLY according to simple (but effective)
-%      feedback law.
+%KRNFU  Un-squashed Koditschek-Rimon function.
 %
-% inputs
+% usage
+%   nf = KRNFU(gd, bi, k)
+%
+% input
 %   gd = destination function values @ calculation points
 %      = [1 x #points]
 %   beta = 1) Obstacle product function \beta at calculation points q.
@@ -16,7 +15,13 @@ function [nf] = krnfu(gd, bi, k)
 %   k = tuning parameter of KRNF
 %       (scalar >2 and ># obstacles if unbounded world)
 %
-% outputs
+% Parameter k selected either:
+%   1) manually,
+%   2) CALCULATED INDEPENDENTLY according to extension of original proof,
+%   3) CALCULATED INDEPENDENTLY according to simple (but effective)
+%      feedback law.
+%
+% output
 %   nf = KRNFU values at q
 %      = [1 x #points]
 %
@@ -41,3 +46,5 @@ else
     nf = ones(size(gd) ); % too large a power to compute, so plot is approximately ok
     nf(1, gd < 0.1) = gd(1, gd < 0.1); % avoid 3D singleton aspect ratio
 end
+
+nf(b <= 0) = nan;

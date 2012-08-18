@@ -52,7 +52,7 @@ function [bi, Dbi, D2bi] = beta_supercyclide(q, qc, R, rm, dr, rot, q0)
 %       Eurographics, Vol.23, No.3, pp. 321--330, 2004
 %
 % See also PLOT_ELLIPTIC_SUPERCYCLIDE, PLOT_DUPIN_CYCLIDE_USING_INVERSION,
-%          EXAMPLE_DUPIN_CYCLIDE.
+%          EXAMPLE_DUPIN_CYCLIDE, example_supercyclide.
 %
 % File:      beta_supercyclide.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -97,15 +97,16 @@ y0 = q0(2, 1);
 z0 = q0(3, 1);
 
 nqi2 = vnorm(qi0, 1, 2).^2;
-b = sqrt(a^2 -c^2);
-D = nqi2 -m^2 +b^2;
+%b = sqrt(a^2 -c^2);
+b2 = a^2 -c^2;
+D = nqi2 -m^2 +b2;
 
 %% calculate
-bi(1, :) = D.^2 -4 *(a *x -c *m).^2 -4 *b^2 *y.^2;
+bi(1, :) = D.^2 -4 *(a *x -c *m).^2 -4 *b2 *y.^2;
 %bi(bi <= 0) = 0;
 
 Dbi(:, 1:npnt) = 4 .*[(x /x0^2 .*D -2 *a /x0 .*(a .*x /x0 -c *m) );
-                      (y /y0^2 .*D -2 *b^2 /y0^2 .*y);
+                      (y /y0^2 .*D -2 *b2 /y0^2 .*y);
                       (z /z0^2 .*D) ];
 Dbi = rot *Dbi; % pull it back from the aligned system
 
@@ -113,7 +114,7 @@ a1 = 4 /x0^2 .*D +8 /x0^4 .*x.^2 -8 *a^2 /x0^2;
 a2 = 8 .*x .*y /(x0 *y0)^2;
 a3 = 8 .*x .*z /(x0 *z0)^2;
 a4 = 8 .*x .*y /(x0 *y0)^2;
-a5 = 4 /y0^2 .*D +8 /y0^4 .*y.^2 -8 *b^2 /y0^2;
+a5 = 4 /y0^2 .*D +8 /y0^4 .*y.^2 -8 *b2 /y0^2;
 a6 = 8 .*y .*z /(y0 *z0)^2;
 a7 = 8 .*x .*z /(x0 *z0)^2;
 a8 = 8 .*y .*z /(y0 *z0)^2;

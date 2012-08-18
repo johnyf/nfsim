@@ -2,7 +2,7 @@ function [] = example_dupin_cyclide
 %EXAMPLE_DUPIN_CYCLIDE  Plot a sample Dupin cyclide.
 %
 % See also PLOT_ELLIPTIC_SUPERCYCLIDE, PLOT_DUPIN_CYCLIDE_USING_INVERSION,
-%          BETA_SUPERCYCLIDE, EXAMPLE_SUPERCYCLIDE.
+%          BETA_SUPERCYCLIDE, example_supercyclide.
 %
 % File:      plot_dupin_cyclide.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

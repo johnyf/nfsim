@@ -1,4 +1,6 @@
-function [] = plot_path(ax, x0, xtraj, xd, x0str, xdstr, zoff, zonsurf, Rs)
+function [] = plot_path(ax, x0, xtraj, xd, x0str, xdstr, zoff, zonsurf,...
+                        Rs, xtraj_style, x0_style, xd_style,...
+                        xtraj_onsurf_style)
 %PLOT_PATH  Plot trajectory on function surface.
 %
 % usage
@@ -54,6 +56,30 @@ if nargin < 5
     x0str = '';
 end
 
+if nargin < 10
+    xtraj_style = {'Linewidth', 2, 'Color', 'r', 'Linestyle', '-'};
+elseif isempty(xtraj_style)
+    xtraj_style = {'Linewidth', 2, 'Color', 'r', 'Linestyle', '-'};
+end
+
+if nargin < 11
+    x0_style = {'Color', 'r', 'Marker', 's'};
+elseif isempty(x0_style)
+    x0_style = {'Color', 'r', 'Marker', 's'};
+end
+
+if nargin < 12
+    xd_style = {'Color', 'g', 'Marker', 'o'};
+elseif isempty(xd_style)
+    xd_style = {'Color', 'g', 'Marker', 'o'};
+end
+
+if nargin < 13
+    xtraj_onsurf_style = {'Linewidth', 3, 'Color', 'm', 'Linestyle', '-'};
+elseif isempty(xtraj_onsurf_style)
+    xtraj_onsurf_style = {'Linewidth', 3, 'Color', 'm', 'Linestyle', '-'};
+end
+
 ndim = size(x0, 1);
 
 %% plot
@@ -70,12 +96,11 @@ if ndim == 2
     % 3D path (imagined on field surface)
     if ~isempty(zonsurf)
         xonsurf = zoffset(xtraj, zonsurf);
-        plotmd(ax, xonsurf, 'Linewidth', 3, 'Color', 'm', 'Linestyle', '-')
+        plotmd(ax, xonsurf, xtraj_onsurf_style{:} )
     end
 end
 
-plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr,...
-                {'Linewidth', 2, 'Color', 'r', 'Linestyle', '-'} )
+plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr,  xtraj_style, x0_style, xd_style)
 
 %% sensing on ?
 if ~isempty(Rs)

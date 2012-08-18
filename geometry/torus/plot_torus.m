@@ -16,10 +16,12 @@ function [q, X, Y, Z] = plot_torus(ax, qc, r, R, rot, npnt, varargin)
 % Purpose:   plot a torus
 % Copyright: Ioannis Filippidis, 2010-
 
+%% input
 if nargin < 6
     npnt = 100;
 end
-    
+
+%% parameterize
 % surface parameterization
 theta = pi *linspace(0, 2, npnt);
 phi = 2 *pi *linspace(0, 1, npnt /2).';
@@ -35,7 +37,8 @@ q = bsxfun(@plus, q, qc);
 
 [X, Y, Z] = vec2meshgrid(q, X);
 
+surf(ax, X, Y, Z, varargin{:} )
+
 if nargout == 0
-    surf(ax, X, Y, Z, varargin{:} )
     clear('X')
 end

@@ -63,4 +63,4 @@ if (0 < opacity) && (opacity < 1)
                         'EdgeColor', col);
 end
 
-restorehold(held)
+restorehold(ax, held)

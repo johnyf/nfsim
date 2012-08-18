@@ -45,16 +45,16 @@ function [] = plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr,...
 %   plotmd, textmd, takehold, restorehold
 
 %% arguments
-if nargin < 9
-    xd_style = {'Color', 'g', 'Marker', 'o'};
+if nargin < 7
+    xtraj_style = {'Color', 'b', 'LineWidth', 2};
 end
 
 if nargin < 8
     x0_style = {'Color', 'r', 'Marker', 's'};
 end
 
-if nargin < 7
-    xtraj_style = {'Color', 'b', 'LineWidth', 2};
+if nargin < 9
+    xd_style = {'Color', 'g', 'Marker', 'o'};
 end
 
 held = takehold(ax);

@@ -25,7 +25,7 @@ function [] = plot_dupin_cyclide_using_inversion(ax, qc, r, q0, r0, varargin)
 % or the direct parameterization using the parameters a, c, \mu.
 %
 % See also PLOT_ELLIPTIC_SUPERCYCLIDE, BETA_SUPERCYCLIDE,
-%          EXAMPLE_DUPIN_CYCLIDE.
+%          EXAMPLE_DUPIN_CYCLIDE, example_supercyclide.
 %
 % File:      plot_dupin_cyclide_using_inversion.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

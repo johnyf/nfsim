@@ -61,11 +61,16 @@ end
 
 if ~ismember(operation, {'or', 'union', 'disjunction', '||',...
         'and', 'intersection', 'conjunction', '&&'} )
-    error('Only AND, OR operations yet supported for Rvachev gradients.')
+    error('Only AND, OR operations yet supported for Rvachev Hessians.')
 end
 
 %% calculate
-[~, k] = assign_rvachev_operation(operation, R1, R2, a);
+[R, k] = assign_rvachev_operation(operation, R1, R2, a);
+
+% xor, not ?
+if ~isempty(R)
+    return
+end
 
 % Note: arg error checking implemented in RVACHEV called above
 switch type
@@ -77,9 +82,9 @@ end
 
 function [D2R] = p_hessian(R1, DR1, D2R1, R2, DR2, D2R2, p, k)
 % coefficients
-c(1, :) = (1 +R1.^(p -1) .*(R1.^p +R2.^p).^(1 /p -1) );
+c(1, :) = (1 +k .*R1.^(p -1) .*(R1.^p +R2.^p).^(1 /p -1) );
         
-c(2, :) = (1 +R2.^(p -1) .*(R1.^p +R2.^p).^(1 /p -1) );
+c(2, :) = (1 +k .*R2.^(p -1) .*(R1.^p +R2.^p).^(1 /p -1) );
 
 c(3, :) = (1 -p) .*R1.^(2*p -2) .*(R1.^p +R2.^p).^(1 /p -2)...
          +(p -1) .*R1.^(p -2)   .*(R1.^p +R2.^p).^(1 /p -1);
@@ -87,10 +92,18 @@ c(3, :) = (1 -p) .*R1.^(2*p -2) .*(R1.^p +R2.^p).^(1 /p -2)...
 c(4, :) = (1 -p) .*R2.^(2*p -2) .*(R1.^p +R2.^p).^(1 /p -2)...
          +(p -1) .*R2.^(p -2)   .*(R1.^p +R2.^p).^(1 /p -1);
 
-c(5, :) = (1 -p) .*(R1.^p +R2.^p).^(1 /p -2) .*R1.^(p -1) .*R2.^(p -1);
+c(5, :) = (1 -p) .*R1.^(p -1) .*R2.^(p -1) .*(R1.^p +R2.^p).^(1 /p -2);
+
+c(3:5, :) = k *c(3:5, :);
+
+% single point ?
+n = size(R1, 2);
+if n == 1
+    D2R = single_hessian(DR1, D2R1, DR2, D2R2, c);
+    return
+end
 
 % compute at each point
-n = size(R1, 2);
 D2R = cell(1, n);
 for i=1:n
     curDR1 = DR1(:, i);

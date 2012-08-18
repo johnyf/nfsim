@@ -45,7 +45,7 @@ function [h] = plot_elliptic_supercyclide(ax, qc, R, rm, dr, rot, q0, varargin)
 %       Eurographics, Vol.23, No.3, pp. 321--330, 2004
 %
 % See also PLOT_DUPIN_CYCLIDE_USING_INVERSION, BETA_SUPERCYCLIDE,
-%          EXAMPLE_DUPIN_CYCLIDE.
+%          EXAMPLE_DUPIN_CYCLIDE, example_supercyclide.
 %
 % File:      plot_elliptic_supercyclide.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

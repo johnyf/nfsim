@@ -1,4 +1,4 @@
-function [Db] = Dbi2Db_rvachev(Dbi, bi, operation, type, a)
+function [Db] = Dbi2Db_rvachev(bi, Dbi, operation, type, a)
 %DBI2DB_RVACHEV    Gradient Db of Rvachev function of obstacles bi.
 %
 % usage
@@ -53,12 +53,14 @@ nobst = size(Dbi, 1);
 Db = nan(ndim, npnt);
 
 for j=1:npnt
-    curbi = bi(:, j).';
+    curbi = bi(:, j);
     
     curDbi = nan(ndim, nobst);
     for i=1:nobst
         curDbi(:, i) = Dbi{i, 1}(:, j);
     end
+
+    [~, curDb] = recursive_grad_rvachev(operation, curbi.', curDbi, type, a);
     
-    [~, Db(:, j) ] = recursive_grad_rvachev(operation, curbi, curDbi, type, a);
+    Db(:, j) = curDb;
 end

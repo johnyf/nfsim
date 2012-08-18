@@ -1,5 +1,10 @@
 function [grad] = grad_krnfu(gd, Dgd, b, Db, k)
-% inputs
+%GRAD_KRNFU     Un-squashed Koditschek-Rimon function gradient.
+%
+% usage
+%   grad = GRAD_KRNFU(gd, Dgd, b, Db, k)
+%
+% input
 %   q = calculation points
 %     = [#dimensions x #points]
 %   qd = destination point
@@ -12,11 +17,11 @@ function [grad] = grad_krnfu(gd, Dgd, b, Db, k)
 %   k = NF tuning parameter
 %     >= 2
 %
-% outputs
+% output
 %   grad = KRNFU gradient at poitns q
 %        = [#dim x #points]
 %
-% See also KRNFU, GRAD_SPLINE_KRNFU, GRAD_KRNF.
+% See also KRNFU, GRAD_SPLINE_KRNFU, GRAD_KRNF, GRAD_SPLINE_KRNF.
 %
 % File:      grad_krnfu.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -29,6 +34,6 @@ function [grad] = grad_krnfu(gd, Dgd, b, Db, k)
 check_krnf_args(gd, b, k)
 
 c = gd.^k .*b.^(-2);
-v = bsxfun(@times, Dgd, k .*b .*gd^(-1) ) -Db;
+v = bsxfun(@times, Dgd, k .*b .*gd.^(-1) ) -Db;
 
 grad = bsxfun(@times, v, c);

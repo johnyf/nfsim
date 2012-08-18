@@ -83,7 +83,7 @@ end
 nf = gi /(gi^k +G)^(1/k);
 
 function [gi] = follower_gd(qi, q, Ni)
-qconnect = q(:, find(Ni == 1) ); % configurations of agents with which to maintain
+qconnect = q(:, Ni == 1); % configurations of agents with which to maintain
                      % connectivity
 
 %[gd, ~] = gamma_d(qconnect, qi); % self-distance = 0 and does not matter

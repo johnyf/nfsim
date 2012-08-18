@@ -59,11 +59,19 @@ for i=2:n
     DR1 = Dx(:, i-1);
     DR2 = Dx(:, i);
     
-    [R, DR] = hessian_rvachev(operation, R1, DR1, R2, DR2, type, a);
+    D2R1 = D2x{1, i-1};
+    D2R2 = D2x{1, i};
+    
+    R = rvachev(operation, R1, R2, type, a);
+    DR = grad_rvachev(operation, R1, DR1, R2, DR2, type, a);
+    D2R = hessian_rvachev(operation, R1, DR1, D2R1,...
+                                     R2, DR2, D2R2, type, a);
     
     x(1, i) = R;
     Dx(:, i) = DR;
+    D2x{1, i} = D2R;
 end
 
 R = x(1, end);
 DR = Dx(:, end);
+D2R = D2x{1, end};

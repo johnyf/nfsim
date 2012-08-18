@@ -1,7 +1,7 @@
 % File:      installnfsim.m
 % Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
 % Date:      2010.12.29
-% Language:  MATLAB, program version: 7.11 (2010b)
+% Language:  MATLAB R2010b
 % Purpose:   install Navigation Function Simulation Toolbox & Launch GUI
 % Copyright: Ioannis Filippidis, 2010-
 

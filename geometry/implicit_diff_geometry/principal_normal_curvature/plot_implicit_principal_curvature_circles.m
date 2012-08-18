@@ -30,7 +30,7 @@ for i=1:npnts
     plotmd(ax, curx, 'r*')
     plot_subspace_circles(ax, curqc, curR, curV, curg);
 end
-givehold(ax, held)
+restorehold(ax, held)
 
 function [] = plot_subspace_circles(ax, qc, R, V, g)
 ncircles = size(qc, 2);

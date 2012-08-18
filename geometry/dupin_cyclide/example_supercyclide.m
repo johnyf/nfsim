@@ -27,7 +27,7 @@ cmap1 = jet(64);
 
 %% plot function level sets and gradient over a plane
 dom = [0, 16, 0, 0, -4, 4];
-res = [20, 1, 20];
+res = [40, 1, 40];
 
 [q, X, Y, Z] = domain2vec(dom, res);
 [bi, Dbi, ~] = beta_supercyclide(q, qc, R, rm, dr, rot, q0);
