@@ -1,15 +1,49 @@
-function [bi, Dbi, D2bi] = beta_cylinder(q, qc, n, r)
+function [bi, Dbi, D2bi] = beta_cylinder(q, qc, r, rot)
+%BETA_CYLINDER  Single cylinder obstacle function and derivatives.
+%
+% input
+%   q = caluclation points
+%     = [3 x #pnts]
+%   qc = center of circle at one end of the cylinder
+%      = [3 x 1]
+%   r = cylinder radius
+%     > 0
+%   rot = rotation matrix around point qc
+%       = [3 x 3] \in SO(3)
+%
+% output
+%   bi = obstacle function
+%      = [1 x #pnts]
+%   Dbi = gradient of obstacle function
+%       = [3 x #pnts]
+%   D2bi = Hessian matrix of obstacle function
+%        = {1 x #pnts} = {[3 x 3], ... }
+%
+% See also beta_cylinders, plot_cylinder, create_cylinder.
+%
+% File:      beta_cylinder.m
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
+% Date:      2012.01.02
+% Language:  MATLAB R2012a
+% Purpose:   plot cylinders
+% Copyright: Ioannis Filippidis, 2012-
 
 npnt = size(q, 2);
 
-q_qc = bsxfun(@minus, q, qc);
-norm_qaxial = dot(q_qc, repmat(n, 1, npnt) );
-qaxial = n *norm_qaxial;
-qnormal = q_qc -qaxial;
+qi = global2local_cart(q, qc, rot);
 
-R = vnorm(qnormal, 1, 2);
+% projection on (x, y) plane
+P = eye(3);
+P(3, 3) = 0;
+
+qi = P *qi;
+
+R = vnorm(qi, 1, 2);
 bi = R.^2 -r^2;
-Dbi = 2 *qnormal;
+
+Dbi = 2 *qi;
+Dbi = rot *Dbi;
+
 D2bi = 2 *[1, 0, 0; 0, 1, 0; 0, 0, 0];
-D2bi = {D2bi};
+D2bi = {rot *D2bi *rot.'};
 D2bi = repmat(D2bi, 1, npnt);

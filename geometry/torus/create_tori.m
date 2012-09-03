@@ -18,14 +18,12 @@ if size(r, 2) ~= nobs
     error('r not equal in number with obstacles.')
 end
 
-tori = [];
+%tori = [];
 for i=1:nobs
     curqc = qc(:, i);
     curr = r(1, i);
     curR = R(1, i);
     currot = rot{1, i};
     
-    torus = create_torus(curqc, curr, curR, currot);
-    
-    tori = add_torus(torus, tori);
+    tori(i, 1) = create_torus(curqc, curr, curR, currot);
 end

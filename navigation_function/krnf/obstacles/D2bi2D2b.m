@@ -42,6 +42,13 @@ if ~iscell(Dbi)
     return
 end
 
+% check single obstacle with cell
+if size(Dbi, 1) == 1
+    warning('Dbi:cell', 'Single obstacle for which Dbi is a cell array.')
+    %D2b = D2bi;
+    %return
+end
+
 curDbi = Dbi{1, 1}(:, 1);
 
 ndim = size(curDbi, 1);
@@ -53,18 +60,20 @@ D2b = cell(1, npnt);
 % at each calculation point
 for j=1:npnt
     s = zeros(ndim);
+    
+    % for each obstacle
     for i=1:nobst
         curbi = bi(i, j);
         curDbi = Dbi{i, 1}(:, j);
         curD2bi = D2bi{i, j};
-        s = s +curDbi *curDbi.' ./curbi^2 ...
-              -curD2bi ./curbi^2;
+        
+        s = s +curDbi *curDbi.' ./(curbi^2) ...
+              -curD2bi ./curbi;
     end
     
     curb = b(1, j);
     curDb = Db(:, j);
-    curD2b = curDb *curDb.' ./curb ...
-             -curb *s;
+    curD2b = curDb *curDb.' ./curb -curb *s;
     
     D2b{1, j} = curD2b;
 end

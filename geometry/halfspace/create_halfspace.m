@@ -1,5 +1,5 @@
 function [halfspace] = create_halfspace(qp, n, domain)
-%CREATE_HALFSPACE   initialize halfspace structure
+%CREATE_HALFSPACE   Initialize halfspace structure
 %
 % inputs
 %   qp = point on separating (hyper)plane
@@ -11,7 +11,7 @@ function [halfspace] = create_halfspace(qp, n, domain)
 % output
 %   halfspace = structure of half-space parameters
 %
-% See also CREATE_HALFSPACES, CREATE_QUADRIC, CREATE_TORUS.
+% See also create_halfspaces, add_halfspace.
 %
 % File:      create_halfspace.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -20,6 +20,4 @@ function [halfspace] = create_halfspace(qp, n, domain)
 % Purpose:   initializes a half-space, given its geometric parameters
 % Copyright: Ioannis Filippidis, 2011-
 
-halfspace.qp = qp;
-halfspace.n = n;
-halfspace.domain = domain;
+halfspace = struct('qp', qp, 'n', n, 'domain', domain);

@@ -1,8 +1,23 @@
-function [q, X, Y, Z] = plot_tori(ax, tori, npnt, varargin)
-% Note: returns the last torus X, Y, Z matrices (if only one, then its
-% matrices).
+function [] = plot_tori(ax, tori, npnt, varargin)
+%PLOT_TORI  Plot multiple tori.
 %
-% See also PLOT_TORUS.
+% usage
+%   PLOT_TORI(ax, tori, npnt, varargin)
+%
+% input
+%   ax = axes object handle
+%   tori = struct array of tori
+%   npnt = number of points for torus surface plot
+%   varargin = additional arguments for surf function
+%
+% See also plot_torus, beta_tori, create_tori.
+%
+% File:      plot_tori.m
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
+% Date:      2011.09.12
+% Language:  MATLAB R2011b
+% Purpose:   plot multiple tori
+% Copyright: Ioannis Filippidis, 2011-
 
 ntori = size(tori, 1);
 
@@ -14,10 +29,6 @@ for i=1:ntori
     r = torus.r;
     R = torus.R;
     rot = torus.rot;
-    [q, X, Y, Z] = plot_torus(ax, qc, r, R, rot, npnt, varargin{:} );
+    plot_torus(ax, qc, r, R, rot, npnt, varargin{:} );
 end
 restorehold(ax, held)
-
-if nargout == 0
-    clear('q')
-end

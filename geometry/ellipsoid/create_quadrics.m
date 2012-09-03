@@ -16,11 +16,11 @@ function [quadrics] = create_quadrics(qc, rot, r)
 %
 % output
 %   quadrics = structure array of ellipsoids
-%            = [1 x #ellipsoids]
+%            = [#ellipsoids x 1]
 %       with fields:
-%           quadrics(1, i).qc = center
-%           quadrics(1, i).rot = rotation matrix
-%           quadrics(1, i).A = definition matrix
+%           quadrics(i, 1).qc = center
+%           quadrics(i, 1).rot = rotation matrix
+%           quadrics(i, 1).A = definition matrix
 %
 % See also CREATE_ELLIPSOID, ADD_QUADRIC, CREATE_TORI.
 %
@@ -49,13 +49,11 @@ if size(r, 2) ~= nobs
     error('r not equal in number with obstacles.')
 end
 
-quadrics = [];
+%quadrics = [];
 for i=1:nobs
     curqc = qc(:, i);
     currot = rot{1, i};
     curr = r{1, i};
     
-    quadric = create_ellipsoid(curqc, currot, curr);
-    
-    quadrics = add_quadric(quadric, quadrics);
+    quadrics(i, 1) = create_ellipsoid(curqc, currot, curr);
 end

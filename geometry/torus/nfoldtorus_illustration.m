@@ -1,5 +1,4 @@
-function nfoldtorus()
-% illustration of a triple torus
+% illustration of a triple torus (from wikipedia)
 
 % torus radii
 r = 1;

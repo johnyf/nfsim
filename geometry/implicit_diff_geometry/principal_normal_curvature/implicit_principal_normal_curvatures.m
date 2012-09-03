@@ -1,7 +1,32 @@
 function [K, R, V] = implicit_principal_normal_curvatures(grad, Hessian)
-% K = normal curvature of implicitly defined surface
+%IMPLICIT_PRINCIPAL_NORMAL_CURVATURES   Principal curvatures.
+%   Computes the principal curvatures of the level set surface given the
+%   gradient and Hessian matrix of the implicit function.
 %
-% See also IMPLICIT_PRINCIPAL_CURVATURE_SPHERES.
+% usage
+%   [K, R, V] = IMPLICIT_PRINCIPAL_NORMAL_CURVATURES(grad, Hessian)
+%
+% input
+%   grad = implicit function gradient
+%        = [#dim x #pnt]
+%   Hessian = implicit function Hessian matrices
+%           = {1 x #pnt} = {[#dim x #dim], ... }
+%
+% output
+%   K = principal curvatures of implicitly defined surface (sorted)
+%     = [(#dim -1) x #pnt]
+%   R = principal radii of curvature of implicitly defined surface (sorted)
+%     = [(#dim -1) x #pnt]
+%   V = principal directions of implicitly defined surface
+%     = {1 x #pnt} = {[#dim x (#dim -1) ], ... }
+%       (in ambient space coordinates)
+%
+% reference
+%   do Carmo, M.P.
+%   Differential Geometry of Curves and Surfaces
+%   Prentice Hall, 1976
+%
+% See also implicit_principal_curvature_spheres.
 %
 % File:      implicit_principal_normal_curvatures.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -11,21 +36,24 @@ function [K, R, V] = implicit_principal_normal_curvatures(grad, Hessian)
 %            together with associated principal radii of normal curvature
 % Copyright: Ioannis Filippidis, 2012-
 
+% depends
+%   normvec, reduced_orthogonal_projector
+
 g = grad;
 H = Hessian;
 
-[ndim, ng] = size(g);
-K = nan(ndim -1, ng);
-R = nan(ndim -1, ng);
-V = cell(1, ng);
+[ndim, npnt] = size(g);
+K = nan(ndim -1, npnt);
+R = nan(ndim -1, npnt);
+V = cell(1, npnt);
 if iscell(H)
     nH = size(H, 2);
     
-    if nH ~= ng
+    if nH ~= npnt
         error('Gradients and Hessian matrices for different # points.')
     end
     
-    for i=1:ng
+    for i=1:npnt
         curH = H{1, i};
         curg = g(:, i);
         
