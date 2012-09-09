@@ -59,8 +59,8 @@ if m ~= mD
            'different numbers.'] )
 end
 
-if ~ismember(operation, {'or', 'union', 'disjunction', '||',...
-        'and', 'intersection', 'conjunction', '&&'} )
+if ~ismember(operation, {'or', 'union', 'disjunction', '||', '|',...
+        'and', 'intersection', 'conjunction', '&&', '&'} )
     error('Only AND, OR operations yet supported for Rvachev Hessians.')
 end
 

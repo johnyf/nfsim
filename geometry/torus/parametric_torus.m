@@ -43,7 +43,7 @@ end
 
 %% parameterize
 n = npnt;
-m = npnt /2;
+m = ceil(npnt /2);
 res = [n, m];
 
 % surface parameterization

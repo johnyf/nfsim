@@ -1,8 +1,8 @@
-function [quadric] = create_ellipsoid(qc, rot, r)
-%CREATE_ELLIPSOID   initialize ellipsoid structure
+function [ellipsoid] = create_ellipsoid(qc, rot, r, pred)
+%CREATE_ELLIPSOID   Initialize ellipsoid structure.
 %
 % usage
-%   quadric = CREATE_ELLIPSOID(qc, rot, r)
+%   ellipsoid = CREATE_ELLIPSOID(qc, rot, r)
 %
 % inputs
 %   qc = ellipsoid center
@@ -13,12 +13,12 @@ function [quadric] = create_ellipsoid(qc, rot, r)
 %     = [1 x #dim]
 %
 % output
-%   quadric = structure of quadric parameters, with fields:
-%       quadric.qc = center
-%       quadric.rot = rotation matrix
-%       quadric.A = ellipsoid definition matrix
+%   ellipsoid = structure of quadric parameters, with fields:
+%       ellipsoid.qc = center
+%       ellipsoid.rot = rotation matrix
+%       ellipsoid.A = ellipsoid definition matrix
 %
-% See also CREATE_QUADRICS, CREATE_TORUS, CREATE_QUADRIC_INWARD.
+% See also create_ellipsoids, beta_ellipsoid, plot_ellipsoid.
 %
 % File:      create_ellipsoid.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
@@ -27,6 +27,29 @@ function [quadric] = create_ellipsoid(qc, rot, r)
 % Purpose:   initializes an ellipsoid, given its geometric parameters
 % Copyright: Ioannis Filippidis, 2011-
 
-quadric.qc = qc;
-quadric.rot = rot;
-quadric.A = radii2ellipsoid(r);
+%% input
+if nargin < 2
+    rot = [];
+end
+
+if isempty(rot)
+    ndim = size(qc, 1);
+    rot = eye(ndim);
+end
+
+if nargin < 3
+    r = [];
+end
+
+if isempty(r)
+    ndim = size(qc, 1);
+    r = ones(1, ndim);
+end
+
+if nargin < 4
+    pred = '';
+end
+
+%% output
+A = radii2ellipsoid(r);
+ellipsoid = struct('qc', qc, 'rot', rot, 'A', A, 'predicate', pred);

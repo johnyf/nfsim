@@ -19,9 +19,9 @@ function [R] = rvachev(operation, R1, R2, type, a)
 %
 % input
 %   operation = 'equivalence' |
-%               'not', 'complement' |
-%               'or', 'union', 'disjunction' |
-%               'and', 'intersection', 'conjunction'
+%               'not' | 'complement' | 'negation' | '!' | '~'
+%               'or' | 'union' | 'disjunction' | '||' | '|' |
+%               'and' | 'intersection' | 'conjunction' | '&&' | '&'
 %   R1, R2 = matrices of values of R-functions (equal in size)
 %   type = 'a'| 'm' | 'p'
 %   a = parameter(s) of selected Rvachev operation

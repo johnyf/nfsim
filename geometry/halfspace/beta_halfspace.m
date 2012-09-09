@@ -1,6 +1,9 @@
 function [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
 % [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
 %
+% usage
+%   [bi, Dbi, D2bi] = BETA_HALFSPACE(x, xp, n)
+%
 % input
 %   x = calculation points
 %     = [#dimensions x #points]
@@ -10,29 +13,40 @@ function [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
 %
 % output
 %   bi = scalar obstacle function
-%      = [1 x 1]
+%      = [1 x #pnts]
 %   Dbi = obstacle function gradient at calculation points
-%      = [#dimensions x #points]
+%      = [#dimensions x #pnts]
 %   D2bi = obstacle function Hessian matrices at calculation points
-%      = {1 x #points}
+%      = {1 x #pnts}
 %
-% See also BETA_HALFSPACES, PLOT_HALFSPACE.
+% See also beta_halfspaces, plot_halfspace, create_halfspace.
 %
 % File:      beta_halfspace.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.12.25
-% Language:  MATLAB R2011b
-% Purpose:   implicit \beta_i, \nabla\beta_i, D^2\beta_i for half-space
+% Date:      2011.12.25 - 2012.09.08
+% Language:  MATLAB R2012a
+% Purpose:   implicit obstacle function and derivatives for half-space
 % Copyright: Ioannis Filippidis, 2011-
 
 x_xp = bsxfun(@minus, x, xp);
 
 normal_projection = n.' *x_xp;
-bi = sign(normal_projection) .*normal_projection.^2;
-Dbi = 2 *bsxfun(@times, abs(normal_projection), n);
+sgn = sign(normal_projection);
+Lproj = abs(normal_projection);
+
+bi = sgn .*Lproj.^2;
+Dbi = 2 *bsxfun(@times, Lproj, n);
 
 npnt = size(x, 2);
 
-% caution: fix curvature
-D2bi = {eye(3) };
+%% Hessian
+B = null(n.');
+rot = [n, B].';
+
+ndim = size(n, 1);
+
+e = [2, ones(1, ndim-1) ];
+D2bi = rot.' *diag(e) *rot;
+
+D2bi = {D2bi};
 D2bi = repmat(D2bi, 1, npnt);

@@ -1,5 +1,9 @@
-function [] = plot_quadrics_inward(ax, ellipsoids, npnt)
-% add opacity for 3D case (i.e. as wireframe)
+function [] = plot_not_ellipsoids(ax, ellipsoids, npnt)
+%
+% See also beta_not_ellipsoids, create_not_ellipsoids.
+
+% todo
+%   % add opacity for 3D case (i.e. as wireframe)
 
 nellipsoids = size(ellipsoids, 1);
 

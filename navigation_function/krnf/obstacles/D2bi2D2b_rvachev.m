@@ -1,4 +1,5 @@
 function [D2b] = D2bi2D2b_rvachev(bi, Dbi, D2bi, operation, type, a)
+%D2BI2D2B_RVACHEV   Rvachev operation between Hessian matrices.
 %
 % See also BI2B_RVACHEV, DBI2DB_RVACHEV, BIDBID2BI2BDBD2B_RVACHEV.
 

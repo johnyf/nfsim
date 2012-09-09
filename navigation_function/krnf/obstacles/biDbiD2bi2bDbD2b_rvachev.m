@@ -15,9 +15,9 @@ function [b, Db, D2b] = biDbiD2bi2bDbD2b_rvachev(bi, Dbi, D2bi, operation)
 %        = {[#dim x #dim] ,,, ;;; }
 %   operation = desired Rvachev operation
 %             = 'equivalence' |
-%               'not', 'complement' |
-%               'or', 'union', 'disjunction' |
-%               'and', 'intersection', 'conjunction'
+%               'not'| 'complement' | '!' | '~' |
+%               'or' | 'union' | 'disjunction' | '||' | '|' |
+%               'and' | 'intersection' | 'conjunction' | '&&' | '&'
 %
 % output
 %   b = values of aggregate obstacle function at calculation points

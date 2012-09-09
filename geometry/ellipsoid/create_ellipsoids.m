@@ -1,8 +1,8 @@
-function [quadrics] = create_quadrics(qc, rot, r)
-%CREATE_QUADRICS    create array of quadric structures
+function [ellipsoids] = create_ellipsoids(qc, rot, r, pred)
+%CREATE_ELLIPSOIDS    create array of quadric structures
 %
 % usage
-%   quadrics = CREATE_QUADRICS(qc, rot, r)
+%   quadrics = CREATE_ELLIPSOIDS(qc, rot, r, pred)
 %
 % input
 %   qc = ellipsoid centers
@@ -24,7 +24,7 @@ function [quadrics] = create_quadrics(qc, rot, r)
 %
 % See also CREATE_ELLIPSOID, ADD_QUADRIC, CREATE_TORI.
 %
-% File:      create_quadrics.m
+% File:      create_ellipsoids.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2011.11.29 - 
 % Language:  MATLAB R2011b
@@ -49,11 +49,16 @@ if size(r, 2) ~= nobs
     error('r not equal in number with obstacles.')
 end
 
+if nargin < 4
+    pred = repmat({''}, 1, nobs);
+end
+
 %quadrics = [];
 for i=1:nobs
     curqc = qc(:, i);
     currot = rot{1, i};
     curr = r{1, i};
+    curpred = pred{1, i};
     
-    quadrics(i, 1) = create_ellipsoid(curqc, currot, curr);
+    ellipsoids(i, 1) = create_ellipsoid(curqc, currot, curr, curpred);
 end

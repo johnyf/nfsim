@@ -36,4 +36,4 @@ q(3, :) = h *q(3, :); % shorten to height h
 
 % transform & plot
 q = local2global_cart(q, qc, rot);
-vsurf(ax, q, [], res, varargin{:} )
+vsurf(ax, q, 'scaled', res, varargin{:} )

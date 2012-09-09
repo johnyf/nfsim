@@ -1,14 +1,14 @@
 function [] = img_on_hyperboloid
 % File:      img_on_hyperboloid.m
-% Author:    Ioannis Filippidis, Mechanical Engineer, jfilippidis@gmail.com
+% Author:    Ioannis Filippidis, jfilippidis@gmail.com
 % Date:      2011.05.03 - 
 % Language:  MATLAB R2010b
 % Purpose:   embed an image in a one-sheet hyperboloid
 % Copyright: Ioannis Filippidis, 2011-
 
 %% Load the image
-C = imread('DSC04159.JPG');
-C = double(C)/255;
+C = imread('img.jpg');
+C = double(C) /100;
 
 %% Parameterize the surface
 theta = linspace(0,2*pi,size(C,2)+1);

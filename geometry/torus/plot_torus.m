@@ -27,4 +27,4 @@ function [] = plot_torus(ax, qc, r, R, rot, npnt, varargin)
 % Copyright: Ioannis Filippidis, 2010-
 
 [q, res] = parametric_torus(qc, r, R, rot, npnt);
-vsurf(ax, q, [], res, varargin{:} )
+vsurf(ax, q, 'scaled', res, varargin{:} )

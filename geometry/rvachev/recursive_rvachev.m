@@ -36,13 +36,13 @@ function [R] = recursive_rvachev(operation, x, type, a)
 %   rvachev
 
 [n, m] = size(x);
-
+%{
 if n ~= 1
     warning('rvachev:rows', ['Multiple rows. Operating along columns ',...
             'to return a column vector. The Rvachev operator acts ',...
             'among predicates on the same row.'] )
 end
-
+%}
 for i=2:m
     R1 = x(:, i-1);
     R2 = x(:, i);

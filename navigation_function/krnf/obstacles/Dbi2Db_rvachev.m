@@ -38,6 +38,9 @@ function [Db] = Dbi2Db_rvachev(bi, Dbi, operation, type, a)
 % dependency
 %   recursive_grad_rvachev
 
+% todo
+%   change from per point to vectorized
+
 % derivatives Dbi of individual obstacle implicit functions provided ?
 if ~iscell(Dbi)
     Db = Dbi;
