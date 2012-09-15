@@ -34,8 +34,10 @@ normal_projection = n.' *x_xp;
 sgn = sign(normal_projection);
 Lproj = abs(normal_projection);
 
-bi = sgn .*Lproj.^2;
-Dbi = 2 *bsxfun(@times, Lproj, n);
+%bi = sgn .*Lproj.^2;
+bi = sgn .*Lproj;
+%Dbi = 2 *bsxfun(@times, Lproj, n);
+Dbi = bsxfun(@times, Lproj, n);
 
 npnt = size(x, 2);
 
@@ -45,7 +47,8 @@ rot = [n, B].';
 
 ndim = size(n, 1);
 
-e = [2, ones(1, ndim-1) ];
+%e = [2, zeros(1, ndim-1) ];
+e = zeros(1, ndim);
 D2bi = rot.' *diag(e) *rot;
 
 D2bi = {D2bi};

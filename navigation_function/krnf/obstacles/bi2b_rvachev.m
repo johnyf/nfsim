@@ -33,4 +33,8 @@ function [b] = bi2b_rvachev(bi, operation, type, a)
 % dependency
 %   recursive_rvachev
 
-b = recursive_rvachev(operation, bi.', type, a).';
+% todo
+%   replace with tree evaluation (depth N = log2(M) )
+
+%b = recursive_rvachev_bdd(operation, bi, type, a);
+b = recursive_rvachev(operation, bi, type, a);

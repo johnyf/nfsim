@@ -2,7 +2,8 @@ function [ellipsoids] = create_ellipsoids(qc, rot, r, pred)
 %CREATE_ELLIPSOIDS    create array of quadric structures
 %
 % usage
-%   quadrics = CREATE_ELLIPSOIDS(qc, rot, r, pred)
+%   ellipsoids = CREATE_ELLIPSOIDS(qc, rot, r)
+%   ellipsoids = CREATE_ELLIPSOIDS(qc, rot, r, pred)
 %
 % input
 %   qc = ellipsoid centers
@@ -13,6 +14,8 @@ function [ellipsoids] = create_ellipsoids(qc, rot, r, pred)
 %   r = radii matrices
 %     = {1 x #ellipsoids}
 %     = {[1 x #dim], ... }
+%   pred = names of predicates
+%        = {1 x #ellipsoids}
 %
 % output
 %   quadrics = structure array of ellipsoids
@@ -53,7 +56,7 @@ if nargin < 4
     pred = repmat({''}, 1, nobs);
 end
 
-%quadrics = [];
+%ellipsoids = [];
 for i=1:nobs
     curqc = qc(:, i);
     currot = rot{1, i};

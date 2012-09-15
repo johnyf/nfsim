@@ -3,6 +3,7 @@ function [halfspaces] = create_halfspaces(qp, n, domains, pred)
 %
 % usage
 %   hafspaces = CREATE_HALFSPACES(qp, n, domains)
+%   hafspaces = CREATE_HALFSPACES(qp, n, domains, pred)
 %
 % input
 %   qp = point in plane separating the two half-spaces
@@ -38,7 +39,7 @@ if nargin < 4
     pred = repmat({''}, 1, nobs);
 end
 
-halfspaces = struct('qp', zeros(0, nobs), 'n', [], 'domain', [], 'predicate', '' );
+halfspaces = struct('qp', zeros(0, nobs), 'n', [], 'domain', [], 'predicate', '' ).';
 for i=1:nobs
     curqp = qp(:, i);
     curn = n(:, i);

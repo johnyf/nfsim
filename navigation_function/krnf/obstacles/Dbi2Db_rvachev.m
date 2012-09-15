@@ -39,7 +39,7 @@ function [Db] = Dbi2Db_rvachev(bi, Dbi, operation, type, a)
 %   recursive_grad_rvachev
 
 % todo
-%   change from per point to vectorized
+%   replace with tree evaluation (depth N = log2(M) )
 
 % derivatives Dbi of individual obstacle implicit functions provided ?
 if ~iscell(Dbi)
@@ -47,14 +47,17 @@ if ~iscell(Dbi)
     return
 end
 
-curDbi = Dbi{1, 1}(:, 1);
+%curDbi = Dbi{1, 1}(:, 1);
 
-ndim = size(curDbi, 1);
-npnt = size(bi, 2);
-nobst = size(Dbi, 1);
+%ndim = size(curDbi, 1);
+%npnt = size(bi, 2);
+%nobst = size(Dbi, 1);
 
-Db = nan(ndim, npnt);
+%Db = nan(ndim, npnt);
 
+[~, Db] = recursive_grad_rvachev(operation, bi, Dbi, type, a);
+
+%{
 for j=1:npnt
     curbi = bi(:, j);
     
@@ -67,3 +70,4 @@ for j=1:npnt
     
     Db(:, j) = curDb;
 end
+%}

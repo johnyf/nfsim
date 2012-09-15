@@ -29,8 +29,8 @@ function [b, Db, D2b] = biDbiD2bi2bDbD2b(bi, Dbi, D2bi)
 %        = {1 x #points}
 %        = {[#dim x #dim] ,,, }
 %
-% See also BETA_HETEROGENOUS, BI2B, DBI2DB, D2BI2D2B,
-%          biDbiD2bi2bDbD2b_rvachev.
+% See also beta_heterogenous, bi2b, Dbi2Db, D2bi2D2b,
+%          biDbiD2bi2bDbD2b_rvachev, biDbiD2bi2bDbD2b_csg.
 %
 % File:      biDbiD2bi2bDbD2b.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

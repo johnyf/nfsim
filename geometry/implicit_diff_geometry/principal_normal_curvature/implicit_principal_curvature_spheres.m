@@ -1,4 +1,4 @@
-function [qc, R, V] = implicit_principal_curvature_spheres(x, grad, Hessian)
+function [qc, R, V] = implicit_principal_curvature_spheres(x, grad, Hessian, sorted)
 %IMPLICIT_PRINCIPAL_CURVATURE_SPHERES   Principal curvature spheres.
 %   Note that the principal curvature spheres have center half between the
 %   point and the center of principal curvature and radius equal to half
@@ -23,7 +23,8 @@ function [qc, R, V] = implicit_principal_curvature_spheres(x, grad, Hessian)
 %   R = principal radii of curvature (sorted)
 %     = [(#dim -1) x #pnts]
 %   V = principal directions (sorted)
-%     = [(#dim -1) x #pnts]
+%     = {1 x #pnt} = {[#dim x (#dim -1) ], ... }
+%       (in ambient space coordinates)
 %
 % reference
 %   Filippidis, I.; Kyriakopoulos K.J.
@@ -48,10 +49,14 @@ function [qc, R, V] = implicit_principal_curvature_spheres(x, grad, Hessian)
 % depends
 %   implicit_principal_normal_curvatures, normvec
 
+if nargin < 4
+    sorted = 'sorted';
+end
+
 g = grad;
 H = Hessian;
 
-[K, R, V] = implicit_principal_normal_curvatures(g, H);
+[K, R, V] = implicit_principal_normal_curvatures(g, H, sorted);
 
 n = size(K, 2);
 qc = cell(1, n);

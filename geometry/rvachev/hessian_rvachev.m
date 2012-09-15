@@ -12,9 +12,9 @@ function [D2R] = hessian_rvachev(operation, R1, DR1, D2R1,...
 %   operation = 'or', 'union', 'disjunction' |
 %               'and', 'intersection', 'conjunction' |
 %   R1, R2 = arrays of values of R-functions (equal in size)
-%          = [1 x #predicates]
+%          = [1 x #pnts]
 %   DR1, DR2 = gradients of continuous predicate functions R1, R2
-%            = [#dimensions x #predicates]   
+%            = [#dimensions x #pnts]   
 %   type = 'a'| 'm' | 'p'
 %   a = a \in (-1,1] |
 %       [a, m] (a\in(-1,1] and m = even positive integer) | 
@@ -34,8 +34,6 @@ function [D2R] = hessian_rvachev(operation, R1, DR1, D2R1,...
 
 % dependency
 %   assign_rvachev_operation
-
-%todo!!!: incorporate k
 
 %% check args
 n1 = size(R1, 1);
@@ -98,7 +96,7 @@ c(3:5, :) = k *c(3:5, :);
 
 % single point ?
 n = size(R1, 2);
-if n == 1
+if (n == 1) && ~iscell(D2R1)
     D2R = single_hessian(DR1, D2R1, DR2, D2R2, c);
     return
 end

@@ -11,7 +11,8 @@ function [] = plot_cylinder(ax, qc, r, h, rot, npnt, varargin)
 %     > 0
 %   rot = rotation matrix around point qc
 %       = [3 x 3] \in SO(3)
-%   npnt = number of points around circumference for surface plot
+%   npnt = number of points of surface plot
+%        = #pnts /circumference | [#pnts /circumference, #pnts /height]
 %   varargin = additional arguments for function surf.
 %
 % See also PLOT_CYLINDERS, BETA_CYLINDER, CREATE_CYLINDER.
@@ -23,11 +24,19 @@ function [] = plot_cylinder(ax, qc, r, h, rot, npnt, varargin)
 % Purpose:   plot cylinders
 % Copyright: Ioannis Filippidis, 2012-
 
-% check input
+%% check input
 if ~isequal(size(qc), [3, 1] )
     error('Cylinder circle center qc is not [3 x 1].')
 end
 
+if size(npnt, 2) == 2
+    mpnt = npnt(1, 2); % #pnts /height
+    npnt = npnt(1, 1);
+else
+    mpnt = 15; % default
+end
+
+r = r *ones(1, mpnt);
 [X, Y, Z] = cylinder(r, npnt);
 res = size(Z.');
 

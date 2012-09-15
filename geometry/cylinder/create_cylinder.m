@@ -1,5 +1,9 @@
-function [cylinder] = create_cylinder(qc, r, h, axisv)
+function [cylinder] = create_cylinder(qc, r, h, axisv, pred)
 %CREATE_CYLINDER    Initialize cylinder struct.
+%
+% usage
+%   cylinder = CREATE_CYLINDER(qc, r, h, axisv)
+%   cylinder = CREATE_CYLINDER(qc, r, h, axisv, pred)
 %
 % input
 %   qc = center of circle at one end of the cylinder
@@ -27,6 +31,10 @@ if norm(axisv) == 0
     error('Axis vector is zero.')
 end
 
+if nargin < 5
+    pred = '';
+end
+
 zaxis = [0, 0, 1].';
 rotvec = cross(zaxis, axisv);
 
@@ -34,4 +42,4 @@ costheta = dot(zaxis, axisv) /vnorm(axisv, 1, 2);
 theta = acos(costheta);
 rot = angvec2r(theta, rotvec);
 
-cylinder = struct('qc', qc, 'r', r, 'h', h, 'rot', rot);
+cylinder = struct('qc', qc, 'r', r, 'h', h, 'rot', rot, 'predicate', pred);

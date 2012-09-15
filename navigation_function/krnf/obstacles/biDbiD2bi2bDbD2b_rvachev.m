@@ -29,7 +29,8 @@ function [b, Db, D2b] = biDbiD2bi2bDbD2b_rvachev(bi, Dbi, D2bi, operation)
 %        = {1 x #points}
 %        = {[#dim x #dim] ,,, }
 %
-% See also BETA_HETEROGENOUS, BI2B_RVACHEV, DBI2DB_RVACHEV, RVACHEV.
+% See also beta_heterogenous, bi2b_rvachev, dbi2db_rvachev, rvachev,
+%          biDbiD2bi2bDbD2b, biDbiD2bi2bDbD2b_csg.
 %
 % File:      biDbiD2bi2bDbD2b_rvachev.m
 % Author:    Ioannis Filippidis, jfilippidis@gmail.com

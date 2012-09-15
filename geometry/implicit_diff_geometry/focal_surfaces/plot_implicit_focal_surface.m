@@ -1,4 +1,4 @@
-function [] = plot_implicit_focal_surface(ax, x, res, grad, Hessian, focal_no)
+function [xfocal] = plot_implicit_focal_surface(ax, x, res, grad, Hessian, focal_no, sorted)
 %PLOT_IMPLICIT_FOCAL_SURFACE    Plot focal surface of implicit surface.
 %
 % usage
@@ -17,6 +17,10 @@ function [] = plot_implicit_focal_surface(ax, x, res, grad, Hessian, focal_no)
 %   focal_no = number of selected focal surface (ordering by principal
 %              curvatures)
 %
+% output
+%   x = points on the focal surface
+%       [#dim x #pnts]
+%
 % See also PLOT_BETA_FOCAL_SURFACE, PLOT_IMPLICIT_FOCAL_SURFACES,
 %          IMPLICIT_FOCAL_SURFACE.
 %
@@ -27,6 +31,10 @@ function [] = plot_implicit_focal_surface(ax, x, res, grad, Hessian, focal_no)
 % Purpose:   plot focal surface sheet of implicit surface
 % Copyright: Ioannis Filippidis, 2012-
 
-[x, res] = implicit_focal_surface(x, res, grad, Hessian, focal_no);
-vsurf(ax, x, [], res)
+if nargin < 7
+    sorted = 'sorted';
+end
+
+xfocal = implicit_focal_surface(x, grad, Hessian, focal_no, sorted);
+vsurf(ax, xfocal, 'scaled', res)
 %plot3(ax, X(:).', Y(:).', Z(:).', 'o')

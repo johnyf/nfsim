@@ -27,5 +27,5 @@ function [] = plot_implicit_focal_surfaces(ax, x, res, grad, Hessian)
 ndim = size(x, 1);
 n = ndim -1;
 for focal_no=1:n
-    plot_implicit_focal_surface(ax, x, res, grad, Hessian, focal_no)
+    plot_implicit_focal_surface(ax, x, res, grad, Hessian, focal_no, 'sorted');
 end

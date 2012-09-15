@@ -1,12 +1,12 @@
-function [R, DR, D2R] = recursive_hessian_rvachev(operation, x, Dx, D2x, type, a)
-%RECURSIVE_HESSIAN_RVACHEV   Gradient of Boolean operation on two predicates.
-%   [R, DR, D2R] = RECURSIVE_HESSIAN_RVACHEV(operation, x, Dx, D2x, type, a) is the
+function [R, DR, D2R] = recursive_hessian_rvachev_row(operation, x, Dx, D2x, type, a)
+%RECURSIVE_HESSIAN_RVACHEV_ROW   Gradient of Boolean operation on two predicates.
+%   [R, DR, D2R] = RECURSIVE_HESSIAN_RVACHEV_ROW(operation, x, Dx, D2x, type, a) is the
 %   gradient of operation Boolean Rvachev function specified by type,
 %   acting on array x of continuous predicate function values and matrix
 %   Dx of their gradients.
 %
 % usage
-%   [R, DR, D2R] = RECURSIVE_HESSIAN_RVACHEV(operation, x, Dx, D2x, type, a)
+%   [R, DR, D2R] = RECURSIVE_HESSIAN_RVACHEV_ROW(operation, x, Dx, D2x, type, a)
 %
 % input
 %   operation = string defining Boolean operation
@@ -15,13 +15,9 @@ function [R, DR, D2R] = recursive_hessian_rvachev(operation, x, Dx, D2x, type, a
 %               'or', 'union', 'disjunction' |
 %               'and', 'intersection', 'conjunction'
 %   x = predicate values
-%     = [n x #pnts]
-%   Dx = predicate gradients
-%      = {n x 1}
-%      = {[#dim x #pnts], ... }
-%   D2x = predicate Hessian matrices
-%       = {n x #pnts}
-%       = {[#dim x #dim], ... }
+%     = [1 x #predicates]
+%   Dx = predicate derivatives (in gradient form)
+%      = [#dim x #predicates]
 %   type = 'a' | 'm' | 'p'
 %   a \in (-1,1] |
 %       [a, m] (a\in(-1,1] and m = even positive integer) | 
@@ -45,54 +41,37 @@ function [R, DR, D2R] = recursive_hessian_rvachev(operation, x, Dx, D2x, type, a
 %   hessian_rvachev
 
 %% check args
-[n, m] = size(x);
-[nd, md] = size(Dx);
-
-if n ~= nd
-    error('Matrix x should have same number of rows with (column) cell array Dx.')
+if size(x, 1) ~= 1
+    error('Operating only on row vectors.')
 end
 
-if md ~= 1
-    error('Cell array of matrices with gradients as columns Dx should have 1 column.')
-end
-
-md = size(Dx{1, 1}, 2);
-
-if md ~= m
-    error('Matrix x should have same number of columns with gradients (as columns) in matrix Dx.')
-end
-
-[nd2, md2] = size(D2x);
-
-if n ~= nd2
-    error('Matrix x and cell array of Hessian matrices D2x should have same number of rows.')
-end
-
-if m ~= md2
-    error('Matrix x and cell array of Hessian matrices D2x should have same number of columns.')
+n = size(x, 2);
+if size(Dx, 2) ~= n
+    error(['Gradient matrix DX size does not correspond',...
+           'to number of predicates X.'] )
 end
 
 %% calculations
 for i=2:n
-    R1 = x(i-1, :);
-    R2 = x(i, :);
+    R1 = x(1, i-1);
+    R2 = x(1, i);
     
-    DR1 = Dx{i-1, 1};
-    DR2 = Dx{i, 1};
+    DR1 = Dx(:, i-1);
+    DR2 = Dx(:, i);
     
-    D2R1 = D2x(i-1, :);
-    D2R2 = D2x(i, :);
+    D2R1 = D2x{1, i-1};
+    D2R2 = D2x{1, i};
     
     R = rvachev(operation, R1, R2, type, a);
     DR = grad_rvachev(operation, R1, DR1, R2, DR2, type, a);
     D2R = hessian_rvachev(operation, R1, DR1, D2R1,...
                                      R2, DR2, D2R2, type, a);
     
-    x(i, :) = R;
-    Dx{i, 1} = DR;
-    D2x(i, :) = D2R;
+    x(1, i) = R;
+    Dx(:, i) = DR;
+    D2x{1, i} = D2R;
 end
 
-R = x(end, :);
-DR = Dx(end, 1);
-D2R = D2x(end, :);
+R = x(1, end);
+DR = Dx(:, end);
+D2R = D2x{1, end};

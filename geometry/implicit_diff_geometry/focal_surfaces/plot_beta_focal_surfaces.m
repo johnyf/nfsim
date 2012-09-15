@@ -1,5 +1,8 @@
 function [] = plot_beta_focal_surfaces(ax, x, res, obstacles)
 %
+% usage
+%   PLOT_BETA_FOCAL_SURFACES(ax, x, res, obstacles)
+%
 % See also PLOT_BETA_FOCAL_SURFACE, PLOT_IMPLICIT_FOCAL_SURFACES.
 %
 % File:      plot_beta_focal_surfaces.m

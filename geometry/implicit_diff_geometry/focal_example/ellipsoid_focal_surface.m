@@ -9,7 +9,7 @@ axis(ax, 'on')
 cla(ax)
 hold(ax, 'on')
 
-npnt = 50;
+npnt = 25;
 [q, X, ~, ~] = plot_ellipsoids(ax, ellipsoid, npnt);
 res = size(X);
 

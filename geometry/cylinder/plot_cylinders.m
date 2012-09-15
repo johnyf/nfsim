@@ -11,7 +11,7 @@ function [] = plot_cylinders(ax, cylinders, npnt)
 % Copyright: Ioannis Filippidis, 2012-
 
 if nargin < 3
-    npnt = 10;
+    npnt = 6;
 end
 
 ncylinders = size(cylinders, 1);

@@ -6,20 +6,25 @@ function [D2b] = D2bi2D2b_rvachev(bi, Dbi, D2bi, operation, type, a)
 % dependency
 %   recursive_hessian_rvachev
 
+% todo
+%   replace with tree evaluation (depth N = log2(M) )
+
 % single obstacle only?
 if ~iscell(Dbi)
     D2b = D2bi;
     return
 end
 
-curDbi = Dbi{1, 1}(:, 1);
+%curDbi = Dbi{1, 1}(:, 1);
 
-ndim = size(curDbi, 1);
-npnt = size(bi, 2);
-nobst = size(Dbi, 1);
+%ndim = size(curDbi, 1);
+%npnt = size(bi, 2);
+%nobst = size(Dbi, 1);
 
-D2b = cell(1, npnt);
+%D2b = cell(1, npnt);
 
+[~, ~, D2b] = recursive_hessian_rvachev(operation, bi, Dbi, D2bi, type, a);
+%{
 % at each calculation point
 for j=1:npnt
     curbi = bi(:, j);
@@ -35,3 +40,4 @@ for j=1:npnt
     
     D2b{1, j} = curD2b;
 end
+%}

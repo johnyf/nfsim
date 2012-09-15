@@ -1,4 +1,4 @@
-function [K, R, V] = implicit_principal_normal_curvatures(grad, Hessian)
+function [K, R, V] = implicit_principal_normal_curvatures(grad, Hessian, sorted)
 %IMPLICIT_PRINCIPAL_NORMAL_CURVATURES   Principal curvatures.
 %   Computes the principal curvatures of the level set surface given the
 %   gradient and Hessian matrix of the implicit function.
@@ -39,6 +39,10 @@ function [K, R, V] = implicit_principal_normal_curvatures(grad, Hessian)
 % depends
 %   normvec, reduced_orthogonal_projector
 
+if nargin < 3
+    sorted = 'sorted';
+end
+
 g = grad;
 H = Hessian;
 
@@ -57,17 +61,17 @@ if iscell(H)
         curH = H{1, i};
         curg = g(:, i);
         
-        [curK, curR, curV] = calc_curvature(curg, curH);
+        [curK, curR, curV] = calc_curvature(curg, curH, sorted);
         
         K(:, i) = curK;
         R(:, i) = curR;
         V(1, i) = curV;
     end
 else
-    [K, R, V] = calc_curvature(g, H);
+    [K, R, V] = calc_curvature(g, H, sorted);
 end
 
-function [K, R, V] = calc_curvature(g, H)
+function [K, R, V] = calc_curvature(g, H, sorted)
 % tangent plane well-defined ?
 if norm(g) == 0
     K = nan;
@@ -91,8 +95,10 @@ R = 1 ./K; % principal radii of normal curvature
 V = Pg *V; % surface tangent space in ambient space coordinates
 
 %% sort output
-[K, I] = sort(K, 1);
-R = R(I);
-V = V(:, I);
+if ~strcmp(sorted, 'none')
+    [K, I] = sort(K, 1);
+    R = R(I);
+    V = V(:, I);
+end
 
 V = {V};

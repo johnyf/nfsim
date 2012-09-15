@@ -3,6 +3,7 @@ function [ellipsoid] = create_ellipsoid(qc, rot, r, pred)
 %
 % usage
 %   ellipsoid = CREATE_ELLIPSOID(qc, rot, r)
+%   ellipsoid = CREATE_ELLIPSOID(qc, rot, r, pred)
 %
 % inputs
 %   qc = ellipsoid center
@@ -11,6 +12,8 @@ function [ellipsoid] = create_ellipsoid(qc, rot, r, pred)
 %       = [#dim x #dim]
 %   r = ellipsoid radii
 %     = [1 x #dim]
+%   pred = names of predicate
+%        = string
 %
 % output
 %   ellipsoid = structure of quadric parameters, with fields:

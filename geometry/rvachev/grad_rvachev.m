@@ -19,9 +19,9 @@ function [DR] = grad_rvachev(operation, R1, DR1, R2, DR2, type, a)
 %   OPERATION = 'or', 'union', 'disjunction' |
 %               'and', 'intersection', 'conjunction' |
 %   R1, R2 = arrays of values of R-functions (equal in size)
-%          = [1 x #predicates]
+%          = [1 x m]
 %   DR1, DR2 = gradients of continuous predicate functions R1, R2
-%            = [#dimensions x #predicates]   
+%            = [#dimensions x m]
 %   TYPE = 'a'| 'm' | 'p'
 %   A = a \in (-1,1] |
 %       [a, m] (a\in(-1,1] and m = even positive integer) | 
@@ -43,25 +43,31 @@ function [DR] = grad_rvachev(operation, R1, DR1, R2, DR2, type, a)
 %   assign_rvachev_operation
 
 %% check args
-n1 = size(R1, 1);
-n2 = size(R2, 1);
+[n1, m1] = size(R1);
+[n2, m2] = size(R2);
 
 if (n1 ~= 1) || (n2 ~= 1)
-    error(['Predicate matrices R1, R2 should be ',...
-           'row vectors [1 x #predicates] '] )
+    error('Predicates R1, R2 should be row vectors.')
 end
 
-if ~isequal(size(DR1), size(DR2) )
-    error(['Predicate gradient vectors DR1, DR2 should be ',...
-           'of same dimension (# of rows).'] )
+if m1 ~= m2
+    error('Row vectors R1, R2 should have same number of columns.')
 end
 
-m = size(R1, 2);
-mD = size(DR1, 2);
+[dim1, md1] = size(DR1);
+[dim2, md2] = size(DR2);
 
-if m ~= mD
-    error(['Predicates and their gradients are of ',...
-           'different numbers.'] )
+if dim1 ~= dim2
+    error('dim(DR1) ~= dim(DR2) for predicate gradients.')
+end
+
+if md1 ~= md2
+    error('Matrices DR1, DR2 should have same number of gradients as columns.')
+end
+
+if m1 ~= md2
+    error(['Row vector R1 should have same number of columns with ',...
+           'the gradients (as columns) of matrix DR1.'] )
 end
 
 if ~ismember(operation, {'or', 'union', 'disjunction', '||', '|',...
@@ -76,10 +82,14 @@ end
 switch type
     case 'p'
         p = a;
-        DR = DR1 +DR2...
-            +k .*(R1.^p +R2.^p).^(1/p -1)...
-             .*(R1.^(p-1) .*DR1...
-               +R2.^(p-1) .*DR2);
+        
+        c1 = 1 +k .*(R1.^p +R2.^p).^(1/p -1) .*R1.^(p-1);
+        c2 = 1 +k .*(R1.^p +R2.^p).^(1/p -1) .*R2.^(p-1);
+        
+        t1 = bsxfun(@times, c1, DR1);
+        t2 = bsxfun(@times, c2, DR2);
+        
+        DR = t1 +t2;
     otherwise
         error('Unsupported Rvachev TYPE for gradients.')
 end
