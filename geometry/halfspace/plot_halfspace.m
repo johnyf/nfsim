@@ -36,9 +36,17 @@ if isempty(ax)
 end
 
 if nargin < 4
-    res = [10, 9];
+    if ndim == 2
+        res = [10];
+    elseif ndim == 3
+        res = [10, 9];
+    end
 else
-    res = [npnt, npnt -1];
+    if ndim == 2
+        res = [npnt];
+    elseif ndim == 3
+        res = [npnt, npnt+1];
+    end
 end
 
 if nargin < 5
@@ -98,8 +106,10 @@ q2 = n2 *sy;
 
 npnt = prod(res);
 q = nan(ndim, npnt);
+k = 1;
 for i=1:res(1, 1)
     for j=1:res(1, 2)
-        q = q1(:, i) +q2(:, j) +xp;
+        q(:, k) = q1(:, i) +q2(:, j) +xp;
+        k = k +1;
     end
 end

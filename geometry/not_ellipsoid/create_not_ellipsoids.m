@@ -17,6 +17,10 @@ function [not_ellispoids] = create_not_ellipsoids(qc, rot, r, pred)
 % Purpose:   initializes structure array of inward ellipsoids
 % Copyright: Ioannis Filippidis, 2011-
 
+% note
+%   although logical negation can yield this, a special obstacle type can
+%   accelerate execution
+
 if nargin < 4
     not_ellispoids = create_ellipsoids(qc, rot, r);
 else

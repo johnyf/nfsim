@@ -69,6 +69,7 @@ if ndim == 3
     q = meshgrid2vec(X, Y, Z);
     q = rot *V *q;
     q = bsxfun(@plus, q, xc);
+    res = size(X);
     [X, Y, Z] = vec2meshgrid(q, X);
 end
 
@@ -76,7 +77,7 @@ end
 if ndim == 2
     plotmd(ax, q, varargin{:} )
 elseif ndim == 3
-    surf(ax, X, Y, Z, varargin{:} )
+    vsurf(ax, q, 'scaled', res, varargin{:} )
 else
     error('ndim ~= 2, 3.')
 end

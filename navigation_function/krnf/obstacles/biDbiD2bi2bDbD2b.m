@@ -40,6 +40,10 @@ function [b, Db, D2b] = biDbiD2bi2bDbD2b(bi, Dbi, D2bi)
 %            individual obstacle functions and their derivatives
 % Copyright: Ioannis Filippidis, 2011-
 
+%% input
+%check_biDbiD2bi(bi, Dbi, D2bi)
+
+%% calc
 b = bi2b(bi);
 
 if nargout >= 2

@@ -38,8 +38,8 @@ while stop == 0
     
     %% unary operator ?
     if maxchildren == 1
-        %disp('Unary operator')
         operator = curnode.predicate;
+        ddisp(['Unary operator: ', operator] )
         if strcmp(operator, '!') == 0
             error('Unary propositional operand is not negation (=!).')
         end
@@ -50,7 +50,7 @@ while stop == 0
         % operand down there not evaluated ?
         if isempty(v)
             curnodeid = childid;
-            %disp('Operand not evaluated.')
+            ddisp('Operand not evaluated.')
             continue
         end
         
@@ -67,8 +67,8 @@ while stop == 0
     
     %% binary operator ?
     if maxchildren == 2
-        %disp('Binary operator')
         operator = curnode.predicate;
+        ddisp(['Binary operator:', operator] )
         if ~ismember(operator, {'&', '|'} )
             error('Binary propositional operand is not & or |.')
         end
@@ -79,7 +79,7 @@ while stop == 0
         % operand down there not evaluated ?
         if isempty(v1)
             curnodeid = childid(1, 1);
-            %disp('First operand not evaluated.')
+            ddisp('First operand not evaluated.')
             continue
         end
         
@@ -88,7 +88,7 @@ while stop == 0
         % operand down there not evaluated ?
         if isempty(v2)
             curnodeid = childid(1, 2);
-            %disp('Second operand not evaluated.')
+            ddisp('Second operand not evaluated.')
             continue
         end
         

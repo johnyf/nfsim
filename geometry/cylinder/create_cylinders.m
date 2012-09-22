@@ -33,7 +33,6 @@ function [cylinders] = create_cylinders(qc, r, h, axisv, pred)
 % Copyright: Ioannis Filippidis, 2012-
 
 % todo
-%   change rot to vector
 %   extend to multi-dim cylinder
 
 %% check input
@@ -49,7 +48,7 @@ if nobs ~= n_axisv
 end
 
 if nargin < 5
-    pred = repmat({''}, nobs, 1);
+    pred = repmat({''}, 1, nobs);
 end
 
 %% init

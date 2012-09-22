@@ -1,9 +1,9 @@
-function [qtraj] = int_traj_krnf_csg(q0, qd, obstacles, k, step, niter, econv)
-%INT_TRAJ_KRNF_CSG     Integrate KRNF trajectory for CSG obstacles.
+function [qtraj] = mint_traj_krnf_csg(q0, qd, obstacles, k, step, niter, econv)
+%INT_TRAJ_KRNF_CSG     Simultaneously integrate multiple KRNF trajectories.
 %
 % usage
-%   qtraj = INT_TRAJ_KRNF_CSG(q0, qd, obstacles, step)
-%   qtraj = INT_TRAJ_KRNF_CSG(q0, qd, obstacles, step, niter, econv)
+%   qtraj = MINT_TRAJ_KRNF_CSG(q0, qd, obstacles, step)
+%   qtraj = MINT_TRAJ_KRNF_CSG(q0, qd, obstacles, step, niter, econv)
 %
 % input
 %   q0 = initial condition(s)
@@ -30,17 +30,15 @@ function [qtraj] = int_traj_krnf_csg(q0, qd, obstacles, k, step, niter, econv)
 % Copyright: Ioannis Filippidis, 2012-
 
 %% input
-[ndim, nq0] = size(q0);
+[ndim, ntraj] = size(q0);
 [ndimd, nqd] = size(qd);
 
 if ndim ~= ndimd
     error('Different dimension of initial coditions and destinations.')
 end
 
-if (nqd ~= 1) && (nq0 ~= nqd)
-    error('Different number of initial conditions and destinations.')
-elseif (nqd == 1)
-    qd = repmat(qd, 1, nq0);
+if nqd ~= 1
+    error('Multiple destinations not implemented yet - not needed, its easy.')
 end
 
 if nargin < 6
@@ -53,33 +51,12 @@ if nargin < 7
 end
 
 %% integrate
-
-% for each trajectory
-qtraj = cell(nq0, 1);
-for i=1:nq0
-    disp(['Integrating trajectory: ', num2str(i) ] )
-    
-    curq0 = q0(:, i);
-    curqd = qd(:, i);
-    
-    curqtraj = single_traj_solver(curq0, curqd, obstacles, step, niter, k, econv);
-    
-    qtraj{1, i} = curqtraj;
-end
-
-% single trajectory ? => return matrix
-if size(qtraj, 2) == 1
-    qtraj = qtraj{1, 1};
-end
-
-function [qtraj] = single_traj_solver(q0, qd, obstacles, step, niter, k, econv)
+qtraj = nan(ndim, niter, ntraj);
 q = q0;
-ndim = size(q, 1);
-qtraj = nan(ndim, niter);
 for i=1:niter
     disp(['  Iteration: ', num2str(i) ] )
     
-    qtraj(:, i) = q;
+    qtraj(:, i, :) = q;
     
     [bi, Dbi, D2bi] = beta_heterogenous(q, obstacles);
     
@@ -93,10 +70,17 @@ for i=1:niter
     q = q -normvec(gradnf) *step;
     
     % convergence test
-    if norm(q -qd, 2) < econv
-        qtraj(:, i+1) = q;
-        break
-    end
+    %if norm(q -q_d, 2) < econv
+    %    qtraj(:, i+1) = q;
+    %    break
+    %end
 end
 
-qtraj = vremnan(qtraj, 1);
+qtraj = qtraj_mat2cell(qtraj);
+
+%qtraj = vremnan(qtraj, 1);
+
+% single trajectory ? => return matrix
+if size(qtraj, 2) == 1
+    qtraj = qtraj{1, 1};
+end

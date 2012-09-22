@@ -19,6 +19,16 @@ function [] = plot_halfspaces(ax, halfspaces, npnt)
 % Purpose:   plot multiple half-spaces
 % Copyright: Ioannis Filippidis, 2011-
 
+%% input
+if isempty(ax)
+    ax = gca;
+end
+
+if nargin < 3
+    npnt = 4;
+end
+
+%% plot
 nhalfspaces = size(halfspaces, 1);
 
 held = takehold(ax, 'local');

@@ -28,18 +28,18 @@ function [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
 % Purpose:   implicit obstacle function and derivatives for half-space
 % Copyright: Ioannis Filippidis, 2011-
 
+npnt = size(x, 2);
+
 x_xp = bsxfun(@minus, x, xp);
 
 normal_projection = n.' *x_xp;
-sgn = sign(normal_projection);
-Lproj = abs(normal_projection);
+%sgn = sign(normal_projection);
+%Lproj = abs(normal_projection);
 
 %bi = sgn .*Lproj.^2;
-bi = sgn .*Lproj;
+bi = normal_projection;
 %Dbi = 2 *bsxfun(@times, Lproj, n);
-Dbi = bsxfun(@times, Lproj, n);
-
-npnt = size(x, 2);
+Dbi = repmat(n, 1, npnt);
 
 %% Hessian
 B = null(n.');

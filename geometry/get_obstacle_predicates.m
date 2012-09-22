@@ -18,3 +18,12 @@ for i=1:ntypes
     
     predicates = [predicates; curpredicates];
 end
+
+unique_pred = uniquecell(predicates);
+npred = size(predicates, 1);
+n_unique = size(unique_pred, 1);
+if n_unique ~= npred
+    n_duplicate = npred - n_unique;
+    msg = ['There are ', num2str(n_duplicate), ' duplicate predicates.'];
+    error(msg)
+end
