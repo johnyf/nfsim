@@ -9,7 +9,7 @@
     <name>Navigation Function</name>
     <type>toolbox</type>
     <icon>$toolbox/matlab/icons/matlabicon.gif</icon>
-    <help_location>./htmldoc</help_location>
+    <help_location>./doc/htmldoc</help_location>
     <help_contents_icon>$toolbox/matlab/icons/bookicon.gif</help_contents_icon>
     
     <!-- - - - - - - - - - - - -  Start menu - - - - - - - - - - - - - - - -->
@@ -37,7 +37,7 @@
         
         <listitem>
             <label>Product Page (Web)</label>
-            <callback>web http://www.controlsystemslab.gr/jfilippidis -browser;</callback>
+            <callback>web http://www.caltech.edu/~ifilippi -browser;</callback>
             <icon>$toolbox/matlab/icons/webicon.gif</icon>
         </listitem>
         

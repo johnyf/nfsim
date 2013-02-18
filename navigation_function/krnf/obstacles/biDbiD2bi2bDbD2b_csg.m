@@ -1,5 +1,6 @@
 function [b, Db, D2b] = biDbiD2bi2bDbD2b_csg(bi, Dbi, D2bi, formula_tree)
-%BIDBID2BI2BDBD2B_CSG   Constructive Solid Geometry between obstacles.
+%BIDBID2BI2BDBD2B_CSG   Constructive Solid Geometry between obstacles
+%                       (implicitly defined).
 %
 % usage
 %   [b, Db, D2b] = BIDBID2BI2BDBD2B_CSG(bi, Dbi, D2bi, formula_tree)
@@ -26,16 +27,10 @@ function [b, Db, D2b] = biDbiD2bi2bDbD2b_csg(bi, Dbi, D2bi, formula_tree)
 %        = {1 x #points}
 %        = {[#dim x #dim] ,,, }
 %
+% 2012.09.08 (c) Ioannis Filippidis, jfilippidis@gmail.com
+%
 % See also add_csg_info, beta_heterogenous, insert_values2tree, csg,
 %          biDbiD2bi2bDbD2b, biDbiD2bi2bDbD2b_rvachev.
-%
-% File:      biDbiD2bi2bDbD2b_csg.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2012.09.08
-% Language:  MATLAB R2012a
-% Purpose:   implicit obstacle function aggregation using Constructive
-%            Solid Geometry
-% Copyright: Ioannis Filippidis, 2012-
 
 % depends
 %   insert_values2tree, csg

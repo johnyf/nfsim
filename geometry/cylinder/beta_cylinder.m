@@ -1,6 +1,9 @@
 function [bi, Dbi, D2bi] = beta_cylinder(q, qc, r, rot)
 %BETA_CYLINDER  Single cylinder obstacle function and derivatives.
 %
+% usage
+%   [bi, Dbi, D2bi] = BETA_CYLINDER(q, qc, r, rot)
+%
 % input
 %   q = caluclation points
 %     = [3 x #pnts]
@@ -19,15 +22,16 @@ function [bi, Dbi, D2bi] = beta_cylinder(q, qc, r, rot)
 %   D2bi = Hessian matrix of obstacle function
 %        = {1 x #pnts} = {[3 x 3], ... }
 %
-% See also beta_cylinders, plot_cylinder, create_cylinder.
+% 2012.01.02 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      beta_cylinder.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2012.01.02
-% Language:  MATLAB R2012a
-% Purpose:   plot cylinders
-% Copyright: Ioannis Filippidis, 2012-
+% See also beta_cylinders, plot_cylinder, create_cylinder.
 
+%% input
+if nargin < 4
+    rot = eye(3);
+end
+
+%% calc
 npnt = size(q, 2);
 
 qi = global2local_cart(q, qc, rot);

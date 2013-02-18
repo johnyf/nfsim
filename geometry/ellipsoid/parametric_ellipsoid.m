@@ -1,14 +1,45 @@
 function [q] = parametric_ellipsoid(u, qc, rot, r)
+%PARAMETRIC_ELLIPSOID   Parametric equation of ellipsoid.
+%
+% usage
+%   q = parametric_ellipsoid
+%   q = parametric_ellipsoid(u, qc, rot, r)
+%
+% input (optional)
+%   u = vector in parameter space (2d for 2-ellipsoid, 3d for 3-ellipsoid)
+%     = angles in rad, e.g. (0-2*pi, 0-pi) for 2-ellipsoid
+%     = [2 x #pnts] | [3 x #pnts]
+%   qc = ellipsoid center
+%      = [#dim x 1]
+%   rot = rotation matrix
+%       \in SO(2) | \in SO(3)
+%   r = ellipsoid semi-radii
+%     > 0
+%
+% output
+%   q = vector of Cartesian coordinates in ambient space
+%     = [#dim x #pnts]
+%
+% 2012.09.10 (c) Ioannis Filippidis, jfilippidis@gmail.com
+%
+% See also parametric_ellipse.
+
+% todo
+%   defaults for parameter vectors
+
+% depends
+%   local2global_cart
+
 %% input
-if nargin < 1
+if nargin < 2
     qc = zeros(3, 1);
 end
 
-if nargin < 2
+if nargin < 3
     rot = eye(3);
 end
 
-if nargin < 3
+if nargin < 4
     r = ones(1, 3);
 end
 
@@ -46,7 +77,7 @@ a = r(1, 1);
 b = r(1, 2);
 c = r(1, 3);
 
-t = domain2vec(dom, res);
+%t = domain2vec(dom, res);
 
 u = t(1, :);
 v = t(2, :);

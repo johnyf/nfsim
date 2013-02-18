@@ -1,9 +1,11 @@
 function [q, b, Db, varargout] = domain2beta(domain, resolution, obstacles)
-%DOMAIN2BETA    obstacle function and derivatives in 2/3D domain
+%DOMAIN2BETA    obstacle function, derivatives in 2/3D rectangular domain
 %
 % usage
-%  2D: [q, b, Db, X, Y, B, Dbx, Dby] = DOMAIN2BETA(domain, resolution, obstacles)
-%  3D: [q, b, Db, X, Y, Z, B, Dbx, Dby, Dbz] = DOMAIN2BETA(domain, resolution, obstacles)
+%  2D: [q, b, Db, X, Y, B, Dbx, Dby] = ...
+%           DOMAIN2BETA(domain, resolution, obstacles)
+%  3D: [q, b, Db, X, Y, Z, B, Dbx, Dby, Dbz] = ...
+%           DOMAIN2BETA(domain, resolution, obstacles)
 %  ND: [q, b, Db] = DOMAIN2BETA(domain, resolution, obstacles)
 %
 % input
@@ -34,15 +36,9 @@ function [q, b, Db, varargout] = domain2beta(domain, resolution, obstacles)
 %   Dbz = obstacle function gradient z components on meshgrid points q
 %       = [ny x nx x nz]
 %
-% See also DOMAIN2KRNF, BETA_HETEROGENOUS.
+% 2012.01.24 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      domain2beta.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2012.01.24 - 
-% Language:  MATLAB R2011b
-% Purpose:   calculate obstacle function and derivatives in rectangular
-%            2D or 3D domain
-% Copyright: Ioannis Filippidis, 2010-
+% See also DOMAIN2KRF, BETA_HETEROGENOUS.
 
 ndim = size(domain, 2) /2;
 

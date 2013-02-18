@@ -1,4 +1,10 @@
 function [predicates] = define_predicate_array(letter, m)
+%
+% input
+%   letter = string which will be combined with numbers to produce the
+%            names of the predicates
+%   m = number of predicates to produce, or array of values
+%     = scalar | [i1, i2, ... ]
 
 if isscalar(m)
     pred = 1:m;

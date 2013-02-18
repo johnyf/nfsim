@@ -100,7 +100,7 @@ if ndim == 2
     end
 end
 
-plot_trajectory(ax, x0, xtraj, xd, x0str, xdstr,  xtraj_style, x0_style, xd_style)
+plot_trajectory(ax, xtraj, x0, xd, x0str, xdstr, xtraj_style, x0_style, xd_style)
 
 %% sensing on ?
 if ~isempty(Rs)

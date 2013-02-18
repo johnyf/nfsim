@@ -6,9 +6,9 @@ function [agent, world, known_world, sensed_world] =...
 % Language:  MATLAB R2010b
 % Purpose:   navigation main loop
 % Copyright: Ioannis Filippidis, 2010-
-
+%
 % usegraphics = 'on' for graphics output
-
+%
 % structure fields needed
 %   agent.x
 %   agent.xcur

@@ -53,15 +53,3 @@ q_dupin = geometric_inversion(q_torus, q0, r0);
 [X, Y, Z] = vec2meshgrid(q_dupin, U);
 
 surf(ax, X, Y, Z, varargin{:} )
-
-function [q] = geometric_inversion(q, q0, r0)
-% q0 = inversion sphere center
-% r0 = inversion sphere radius
-
-q = bsxfun(@minus, q, q0);
-normq = vnorm(q, 1, 2);
-unitq = normvec(q, 'p', 2);
-
-q = bsxfun(@rdivide, unitq, normq);
-q = r0^2 .*q;
-q = bsxfun(@plus, q, q0);

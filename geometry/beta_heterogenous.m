@@ -1,6 +1,9 @@
 function [bi, Dbi, D2bi] = beta_heterogenous(q, obstacles)
 %BETA_HETEROGENOUS  Implicit functions and derivatives for mixed obstacles.
 %
+% usage
+%   [bi, Dbi, D2bi] = BETA_HETEROGENOUS(q, obstacles)
+%
 % input
 %   q = calculation point(s)
 %   obstacles = obstacle definitions by type
@@ -37,17 +40,12 @@ function [bi, Dbi, D2bi] = beta_heterogenous(q, obstacles)
 %        = {#obstacles x #points}
 %        = {[#dim x #dim], ...; ... }
 % 
+% 2011.09.10 - 2012.05.25 (c) Ioannis Filippidis, jfilippidis@gmail.com
+%
 % See also BETA_SPHERES, BETA_ELLIPSOIDS, BETA_INWARD_ELLIPSOIDS, BETA_TORI,
 %          BETA_CYLINDERS, BETA_HALFSPACES, BETA_HYPERBOLOIDS,
 %          BETA_SUPERELLIPSOIDS, BETA_SUPERTOROIDS,
 %          PLOT_HETEROGENOUS_OBSTACLES.
-%
-% File:      beta_heterogenous.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.09.10 - 2012.05.25
-% Language:  MATLAB R2012a
-% Purpose:   implicit functions and derivatives for mixed obstacles
-% Copyright: Ioannis Filippidis, 2011-
 
 nobstacle_types = size(obstacles, 2);
 nobstacles = 0;

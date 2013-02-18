@@ -1,5 +1,8 @@
-function [bi, Dbi, D2bi] = beta_quadric(x, xc, rot, A)
-% [bi, Dbi, D2bi] = beta_quadric(x, xc, rot, A)
+function [bi, Dbi, D2bi] = beta_ellipsoid(x, xc, rot, A)
+% Quadratic obstacle function for single ellipsoid.
+%
+% usage
+%   [bi, Dbi, D2bi] = BETA_ELLIPSOID(x, xc, rot, A)
 %
 % input
 %   x = calculation points
@@ -20,15 +23,30 @@ function [bi, Dbi, D2bi] = beta_quadric(x, xc, rot, A)
 %   D2bi = obstacle function Hessian matrices at calculation points
 %      = {1 x #points}
 %
-% See also beta_ellipsoids, plot_ellipsoid, create_ellipsoid.
+% 2011.09.10 - 2011.11.26 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      beta_quadric_inward.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.09.10 - 2011.11.26
-% Language:  MATLAB R2011b
-% Purpose:   implicit \beta_i, \nabla\beta_i, D^2\beta_i for
-%            ellipsoid, one-sheet hyperboloid, cylinder
-% Copyright: Ioannis Filippidis, 2011-
+% See also beta_ellipsoids, plot_ellipsoid, create_ellipsoid.
+
+%% input
+if nargin < 2
+    disp('No ellipsoid center provided: using origin.')
+    ndim = size(x, 1);
+    xc = zeros(ndim, 1);
+end
+
+if nargin < 3
+    disp('No rotation matrix provided: using identity.')
+    ndim = size(x, 1);
+    rot = eye(ndim);
+end
+
+if nargin < 4
+    disp('No ellipsoid defining matrix A provided: using identity.')
+    ndim = size(x, 1);
+    A = eye(ndim);
+end
+
+%% calc
 
 x = rot.' *bsxfun(@minus, x, xc);
 

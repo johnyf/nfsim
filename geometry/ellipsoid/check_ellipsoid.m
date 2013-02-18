@@ -1,19 +1,17 @@
 function [] = check_ellipsoid(A)
-if ndims(A) ~= 2
-    error('An ellipsoid is defined by a 2-dimensional matrix A.')
-end
+% checks if matrix A defines a quadratic form (whose level set at value 1
+% is the ellipsoid boundary we are interested in).
+%
+% input
+%   A = matrix to be checked
+%
+% 2011.09.10-2012.02.14 (c) Ioannis Filippidis, jfilippidis@gmail.com
 
-n = size(A, 1);
-m = size(A, 2);
-
-if n ~= m
-    error('An ellipsoid is defined by a square matrix A.')
-end
-
-if ~isequal(A, A')
+if ~issymmetric(A)
     error('An ellipsoid is defined by a symmetric matrix A.')
 end
 
-if ~all(eig(A) > 0)
+% includes ismatrix, issquare checks
+if ~ispsd(A)
     error('An ellipsoid is defined by a positive definite matrix A.')
 end

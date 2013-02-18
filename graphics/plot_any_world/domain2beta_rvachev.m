@@ -1,9 +1,12 @@
-function [q, b, Db, varargout] = domain2beta_rvachev(domain, resolution, obstacles)
+function [q, b, Db, varargout] = ...
+    domain2beta_rvachev(domain, resolution, obstacles)
 %DOMAIN2BETA_RVACHEV    Obstacle function and derivatives in 2/3D domain
 %
 % usage
-%  2D: [q, b, Db, X, Y, B, Dbx, Dby] = DOMAIN2BETA_RVACHEV(domain, resolution, obstacles)
-%  3D: [q, b, Db, X, Y, Z, B, Dbx, Dby, Dbz] = DOMAIN2BETA_RVACHEV(domain, resolution, obstacles)
+%  2D: [q, b, Db, X, Y, B, Dbx, Dby] = ...
+%           DOMAIN2BETA_RVACHEV(domain, resolution, obstacles)
+%  3D: [q, b, Db, X, Y, Z, B, Dbx, Dby, Dbz] = ...
+%           DOMAIN2BETA_RVACHEV(domain, resolution, obstacles)
 %  ND: [q, b, Db] = DOMAIN2BETA_RVACHEV(domain, resolution, obstacles)
 %
 % input
@@ -34,15 +37,9 @@ function [q, b, Db, varargout] = domain2beta_rvachev(domain, resolution, obstacl
 %   Dbz = obstacle function gradient z components on meshgrid points q
 %       = [ny x nx x nz]
 %
-% See also DOMAIN2BETA, DOMAIN2KRNF, BETA_HETEROGENOUS.
+% 2012.08.18 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      domain2beta_rvachev.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2012.08.18 - 
-% Language:  MATLAB R2012a
-% Purpose:   calculate obstacle function and derivatives in rectangular
-%            2D or 3D domain
-% Copyright: Ioannis Filippidis, 2012-
+% See also DOMAIN2BETA, DOMAIN2KRF, BETA_HETEROGENOUS.
 
 ndim = size(domain, 2) /2;
 

@@ -29,7 +29,7 @@ for i=1:n
         q(:, 1) = [(xmax -xmin)*i/n+xmin, (ymax -ymin)*j/m+ymin].';
         
         y(1, j) = j/m *(ymax -ymin) +ymin;
-        z(j, i) = krnfd(q, r, cur_agent, qd1, dc1, k, lambda, h);
+        z(j, i) = krfd(q, r, cur_agent, qd1, dc1, k, lambda, h);
     end
 end
 

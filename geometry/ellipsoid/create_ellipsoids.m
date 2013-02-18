@@ -1,5 +1,5 @@
 function [ellipsoids] = create_ellipsoids(qc, rot, r, pred)
-%CREATE_ELLIPSOIDS    create array of quadric structures
+%CREATE_ELLIPSOIDS    Initializes struct array of ellipsoids.
 %
 % usage
 %   ellipsoids = CREATE_ELLIPSOIDS(qc, rot, r)
@@ -25,14 +25,9 @@ function [ellipsoids] = create_ellipsoids(qc, rot, r, pred)
 %           quadrics(i, 1).rot = rotation matrix
 %           quadrics(i, 1).A = definition matrix
 %
-% See also CREATE_ELLIPSOID, ADD_QUADRIC, CREATE_TORI.
+% 2011.11.29 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      create_ellipsoids.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.11.29 - 
-% Language:  MATLAB R2011b
-% Purpose:   initializes structure array of ellipsoids
-% Copyright: Ioannis Filippidis, 2011-
+% See also CREATE_ELLIPSOID, CREATE_TORI.
 
 nobs = size(qc, 2);
 

@@ -1,4 +1,4 @@
-function [q, X, Y, Z] = plot_ellipsoid(ax, xc, rot, A, npnt, varargin)
+function [varargout] = plot_ellipsoid(ax, xc, rot, A, npnt, varargin)
 %PLOT_ELLIPSOID     Ellipsoid or ellipse plot.
 %
 % usage
@@ -57,9 +57,9 @@ if ndim == 2
     q = rot *V *[X; Y];
     q = bsxfun(@plus, q, xc);
     
-    X = q(1, :);
-    Y = q(2, :);
-    Z = zeros(1, size(q, 2) );
+    %X = q(1, :);
+    %Y = q(2, :);
+    %Z = zeros(1, size(q, 2) );
 end
 
 % 3D case
@@ -70,19 +70,19 @@ if ndim == 3
     q = rot *V *q;
     q = bsxfun(@plus, q, xc);
     res = size(X);
-    [X, Y, Z] = vec2meshgrid(q, X);
+    %[X, Y, Z] = vec2meshgrid(q, X);
 end
 
 %% plot
 if ndim == 2
-    plotmd(ax, q, varargin{:} )
+    h = plotmd(ax, q, varargin{:} );
 elseif ndim == 3
-    vsurf(ax, q, 'scaled', res, varargin{:} )
+    h = vsurf(ax, q, 'scaled', res, varargin{:} );
 else
     error('ndim ~= 2, 3.')
 end
 
 %% output wanted?
-if nargout == 0
-    clear('q')
+if nargout > 0
+    varargout{1} = h;
 end

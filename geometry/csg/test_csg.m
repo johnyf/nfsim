@@ -1,11 +1,7 @@
 %function [] = test_csg
+%test the implicit constructive solid geometry module
 %
-% File:      test_csg.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2012.09.08
-% Language:  MATLAB R2012a
-% Purpose:   test the implicit constructive solid geometry module
-% Copyright: Ioannis Filippidis, 2012-
+% 2012.09.08 (c) Ioannis Filippidis, jfilippidis@gmail.com
 
 cls
 
@@ -15,13 +11,10 @@ obstacles = init_rooms;
 %% domain
 dom = [-11, 6, -4, 4];
 res = [100, 101];
-q = domain2vec(dom, res);
+q = dom2vec(dom, res);
 
 %% evaluate
-[bi, Dbi, D2bi] = beta_heterogenous(q, obstacles);
-
-formula_tree = obstacles.formula_tree;
-[b, Db, D2b] = biDbiD2bi2bDbD2b_csg(bi, Dbi, D2bi, formula_tree);
+[b, Db, D2b] = beta_csg(q, obstacles, 0);
 
 %% plot
 ax = gca;

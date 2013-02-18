@@ -83,5 +83,6 @@ syntax: glob
 *.css
 *.php
 *doc/*
+*.DS_Store
 *factory/*
 *examples/*

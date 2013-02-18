@@ -37,6 +37,10 @@ function [] = plot_heterogenous_obstacles(ax, obstacles, npnt, varargin)
 
 %% input
 
+if (nargin >= 1) && any(~ishandle(ax) )
+    error('ax is not an axes object handle.')
+end
+
 % obstacles ?
 if nargin < 2
     warning('nfsim:plot:NoObstacles', 'No obstacles provided.')

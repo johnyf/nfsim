@@ -1,9 +1,14 @@
-function [bi, Dbi, D2bi] = beta_ellipsoids(q, quadrics)
+function [bi, Dbi, D2bi] = beta_ellipsoids(q, ellipsoids)
+% Quadratic obstacle function for multiple ellipsoids.
+%
+% usage
+%   [bi, Dbi, D2bi] = beta_ellipsoids(q, ellipsoids)
+%
 % input
 %   q = calculation points
-%     = [#dimensions x #points]
-%   quadrics = structure array
-%            = [#obstacles x 1]
+%     = [#dim x #pnts]
+%   ellipsoids = structure array
+%            = [#ellipsoids x 1]
 %       quadrics(i, 1).qc = ellipsoid center
 %                         = [#dim x 1]
 %       quadrics(i, 1).A = ellipsoid definition matrix
@@ -22,30 +27,23 @@ function [bi, Dbi, D2bi] = beta_ellipsoids(q, quadrics)
 %
 % See also beta_quadric, beta_heterogenous, bidbid2bi2bdbd2b.
 %
-% File:      beta_ellipsoids.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.09.10 - 2012.01.22
-% Language:  MATLAB R2011b
-% Purpose:   beta for multiple quadrics
-% Copyright: Ioannis Filippidis, 2011-
-
-% todo: add second derivative (Hessian matrix)
+% 2011.09.10 - 2012.01.22 (c) Ioannis Filippidis, jfilippidis@gmail.com
 
 [~, npnt] = size(q);
-no = size(quadrics, 1);
+no = size(ellipsoids, 1);
 
 bi = nan(no, npnt);
 D2bi = cell(no, npnt);
 
-%% single quadric
+%% single ellipsoid
 if no == 1
     %Dbi = nan(ndim, npnt);
     
-    curquadric = quadrics(1, 1);
+    curellipsoid = ellipsoids(1, 1);
     
-    qc = curquadric.qc;
-    A = curquadric.A;
-    rot = curquadric.rot;
+    qc = curellipsoid.qc;
+    A = curellipsoid.A;
+    rot = curellipsoid.rot;
     
     [b1, Db1, D2b1] = beta_ellipsoid(q, qc, rot, A);
     %[b1, Db1, D2b1] = beta_quadric_normalized(q, qc, rot, A);
@@ -56,15 +54,15 @@ if no == 1
     return
 end
 
-%% multiple quadrics
+%% multiple ellipsoids
 Dbi = cell(no, 1);
 
 for i=1:no
-    curquadric = quadrics(i, 1);
+    curellipsoid = ellipsoids(i, 1);
     
-    qc = curquadric.qc;
-    A = curquadric.A;
-    rot = curquadric.rot;
+    qc = curellipsoid.qc;
+    A = curellipsoid.A;
+    rot = curellipsoid.rot;
     
     [b1, Db1, D2b1] = beta_ellipsoid(q, qc, rot, A);
     %[b1, Db1, D2b1] = beta_quadric_normalized(q, qc, rot, A);

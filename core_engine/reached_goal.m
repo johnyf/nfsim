@@ -1,10 +1,7 @@
 function [flag, I] = reached_goal(x, xd, convergence_error)
-% File:      reached_goal.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2010.12.14 - 2012.05.13
-% Language:  MATLAB R2012a
-% Purpose:   navigation loop termination criteria checking
-% Copyright: Ioannis Filippidis, 2010-
+% navigation loop termination criteria checking
+%
+% 2010.12.14 - 2012.05.13 (c) Ioannis Filippidis, jfilippidis@gmail.com
 
 %% input
 ndimx = size(x, 1);

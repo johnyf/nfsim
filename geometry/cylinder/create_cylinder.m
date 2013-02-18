@@ -36,7 +36,7 @@ if nargin < 5
 end
 
 zaxis = [0, 0, 1].';
-rotvec = cross(zaxis, axisv);
+rotvec = normvec(cross(zaxis, axisv) );
 
 costheta = dot(zaxis, axisv) /vnorm(axisv, 1, 2);
 theta = acos(costheta);

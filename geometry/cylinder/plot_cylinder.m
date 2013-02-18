@@ -24,6 +24,27 @@ function [] = plot_cylinder(ax, qc, r, h, rot, npnt, varargin)
 % Purpose:   plot cylinders
 % Copyright: Ioannis Filippidis, 2012-
 
+%% input
+if nargin < 2
+    warning('args:few', 'Cylinder center not provided, using origin.')
+end
+
+if nargin < 3
+    warning('args:few', 'Cylinder radius not provided, using r=1.')
+end
+
+if nargin < 4
+    h = 2*r;
+end
+
+if nargin < 5
+    rot = eye(3);
+end
+
+if nargin < 6
+    npnt = 31;
+end
+
 %% check input
 if ~isequal(size(qc), [3, 1] )
     error('Cylinder circle center qc is not [3 x 1].')
