@@ -61,12 +61,12 @@ bi = nan(1, npnt);
 x = qi(1, :);
 y = qi(2, :);
 
-nqi2 = vnorm(qi, 1, 2).^2;
+nqi = vnorm(qi, 1, 2);
 
 c = e *b^2;
-bi(1, :) = nqi2.^2 -a^2 *x.^2 -c *y.^2;
+bi(1, :) = nqi.^4 -a^2 *x.^2 -c *y.^2;
 
-Dbi = 'not yet implemented';
+Dbi = 4 *bsxfun(@times, nqi.^2, qi) -diag([2*a^2, 2*c] ) *qi;
 
 D2bi = 'not yet implemented';
 

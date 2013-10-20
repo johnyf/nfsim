@@ -1,10 +1,12 @@
 function [] = plot_halfspace(ax, xp, n, npnt, domain, varargin)
 %PLOT_HALFSPACE     Plot hyperplane (finite rectangular region).
 %
-% usage
+%usage
+%-----
 %   PLOT_HALFSPACE(ax, xp, n, npnt, domain, varargin)
 %
-% input
+%input
+%-----
 %   ax = axes object handle
 %   xp = point in half-space boundary (=hyperplane)
 %      = [#dim x 1]
@@ -17,14 +19,11 @@ function [] = plot_halfspace(ax, xp, n, npnt, domain, varargin)
 %          = [ximn, xmax, ymin, ymax] %(for 3D)
 %   varargin = additional arguments passed to surf
 %
-% See also plot_halfspaces, beta_halfspace, create_halfspace.
+%about
+%-----
+%2011.12.25 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      plot_halfspace.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.12.25 - 
-% Language:  MATLAB R2011b
-% Purpose:   plot a half-space
-% Copyright: Ioannis Filippidis, 2011-
+%See also plot_halfspaces, beta_halfspace, create_halfspace.
 
 % todo: implement 2D half-plane plotting
 

@@ -5,7 +5,7 @@
 cla
 
 % ellipsoid def
-r = [3, 0.3, 0.5];
+r = [3, 0.3, 0.5].';
 
 % parametric ellipsoid surf
 dom = [0, 2*pi, 0, pi];

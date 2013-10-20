@@ -38,7 +38,7 @@ if isempty(ax)
 end
 
 if nargin < 5
-    npnt = 100;
+    npnt = 30;
 end
 
 check_ellipsoid(A)

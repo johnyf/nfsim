@@ -1,10 +1,12 @@
 function [D2b] = D2bi2D2b(b, bi, Db, Dbi, D2bi)
-%D2BI2D2B   Hessian matrix for product of obstacle functions
+%D2BI2D2B   Hessian matrix for product of obstacle functions.
 %
-% usage
+%usage
+%-----
 %   [D2b] = D2BI2D2B(D2bi, Db, Dbi, b, bi)
 %
-% input
+%input
+%-----
 %   b = product obstacle function at calculation points
 %     = [1 x #points]
 %     = bi2b(bi)
@@ -21,20 +23,17 @@ function [D2b] = D2bi2D2b(b, bi, Db, Dbi, D2bi)
 %          at calculation points
 %        = {#obstacles x #points}
 %
-% output
+%output
+%------
 %   D2b = obstacle product function Hessian matrices at calculation points
 %       = {1 x #points}
 %       = {[#dimensions x #dimensions], ...}
 %
-% See also DBI2DB, BI2B, BIDBID2BI2BDBD2B.
+%about
+%-----
+% 2011.11.26 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      D2bi2D2b.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.11.26
-% Language:  MATLAB R2011b
-% Purpose:   calculate D2b from individual obstacles' D2bi, Dbi, bi and
-%            product obstacle function Db, b
-% Copyright: Ioannis Filippidis, 2011-
+% See also DBI2DB, BI2B, BIDBID2BI2BDBD2B.
 
 % single obstacle only?
 if ~iscell(Dbi)

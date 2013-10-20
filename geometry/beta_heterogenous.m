@@ -59,7 +59,7 @@ npnt = size(q, 2);
 
 types_only_fun = {'booth_lemniscates', 'inward_booth_lemniscates', 'visibility_lemniscates'};
 types_only_derivative = {'superellipsoids', 'supertoroids'};
-types_full = {'ellipsoids', 'not_ellipsoids', 'tori', 'halfspaces', 'cylinders'};
+types_full = {'ellipsoids', 'not_ellipsoids', 'tori', 'halfspaces', 'cylinders', 'supercyclides'};
 
 bi = nan(nobstacles, npnt);
 Dbi = cell(nobstacles, 1);

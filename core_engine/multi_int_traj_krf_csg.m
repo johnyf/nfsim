@@ -55,11 +55,11 @@ for i=1:niter
     
     qtraj(:, i, :) = q;
     
-    [bi, Dbi, D2bi] = beta_heterogenous(q, obstacles);
+    %[bi, Dbi, D2bi] = beta_heterogenous(q, obstacles);
+    %formula_tree = obstacles.formula_tree;
+    %[b, Db] = biDbiD2bi2bDbD2b_csg(bi, Dbi, D2bi, formula_tree);
     
-    formula_tree = obstacles.formula_tree;
-    [b, Db] = biDbiD2bi2bDbD2b_csg(bi, Dbi, D2bi, formula_tree);
-    
+    [b, Db] = beta_csg(q, obstacles, 0);
     [gd, Dgd] = gamma_d(q, qd);
     
     gradnf = grad_krf(gd, Dgd, b, Db, k);

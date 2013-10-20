@@ -1,17 +1,20 @@
 function [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
-% [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
+%implicit obstacle function and derivatives for half-space
 %
-% usage
+%usage
+%-----
 %   [bi, Dbi, D2bi] = BETA_HALFSPACE(x, xp, n)
 %
-% input
+%input
+%-----
 %   x = calculation points
 %     = [#dimensions x #points]
 %   xp = point on dividing (hyper)plane
 %     = [#dimensions x 1]
 %   n = normal vectors to dividing (hyper)plane
 %
-% output
+%output
+%------
 %   bi = scalar obstacle function
 %      = [1 x #pnts]
 %   Dbi = obstacle function gradient at calculation points
@@ -19,14 +22,11 @@ function [bi, Dbi, D2bi] = beta_halfspace(x, xp, n)
 %   D2bi = obstacle function Hessian matrices at calculation points
 %      = {1 x #pnts}
 %
-% See also beta_halfspaces, plot_halfspace, create_halfspace.
+%about
+%-----
+%2011.12.25 - 2012.09.08 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      beta_halfspace.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.12.25 - 2012.09.08
-% Language:  MATLAB R2012a
-% Purpose:   implicit obstacle function and derivatives for half-space
-% Copyright: Ioannis Filippidis, 2011-
+%See also beta_halfspaces, plot_halfspace, create_halfspace.
 
 npnt = size(x, 2);
 

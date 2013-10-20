@@ -1,4 +1,4 @@
-function [] = plot_tori(ax, tori, npnt, varargin)
+function [h] = plot_tori(ax, tori, npnt, varargin)
 %PLOT_TORI  Plot multiple tori.
 %
 % usage
@@ -19,6 +19,10 @@ function [] = plot_tori(ax, tori, npnt, varargin)
 % Purpose:   plot multiple tori
 % Copyright: Ioannis Filippidis, 2011-
 
+if nargin < 3
+    npnt = 30;
+end
+
 ntori = size(tori, 1);
 
 held = takehold(ax, 'local');
@@ -29,6 +33,6 @@ for i=1:ntori
     r = torus.r;
     R = torus.R;
     rot = torus.rot;
-    plot_torus(ax, qc, r, R, rot, npnt, varargin{:} );
+    h(1, i) = plot_torus(ax, qc, r, R, rot, npnt, varargin{:} );
 end
 restorehold(ax, held)

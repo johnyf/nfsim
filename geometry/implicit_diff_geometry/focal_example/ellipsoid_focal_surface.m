@@ -1,25 +1,36 @@
 function [] = ellipsoid_focal_surface
+%
+% used in
+%   Filippidis I.; Kyriakopoulos K.J.
+%   Navigation Functions for Focally Admissible Surfaces
+%   ACC 2013
+%
+%about
+%-----
+% 2012.01.29 (c) Ioannis Filippidis, jfilippidis@gmail.com
+%
 % See also TORUS_FOCAL_SURFACE, PLOT_BETA_FOCAL_SURFACES.
 
-obstacles = init_complicated_obstacles_3d(gca, 10);
-ellipsoid = obstacles(1).data(1);
+qc = [2, -3].';
+rot = eye(3);
+r = [2, 1.1].';
+
+ellipsoid = create_ellipsoids(qc, {rot}, r);
 
 ax = gca;
-axis(ax, 'on')
-cla(ax)
-hold(ax, 'on')
+    %cla(ax)
+    hold(ax, 'on')
 
-npnt = 25;
-[q, X, ~, ~] = plot_ellipsoids(ax, ellipsoid, npnt);
-res = size(X);
+npnt = 30;
+[q, res] = parametric_ellipsoid2(ellipsoid, npnt);
+vsurf(ax, q, 'scaled', res)
 
-obstacles = [];
 obstacles.type = 'ellipsoids';
 obstacles.data = ellipsoid;
 
 % caution
 %   focal surfaces for one obstacle on its surface are ok
-
 plot_beta_focal_surfaces(ax, q, res, obstacles)
-grid(ax, 'on')
+plotidy(ax)
 axis(ax, 'image')
+axis(ax, 'off')

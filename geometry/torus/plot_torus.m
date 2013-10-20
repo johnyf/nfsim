@@ -1,8 +1,8 @@
-function [] = plot_torus(ax, qc, r, R, rot, npnt, varargin)
+function [h] = plot_torus(ax, qc, r, R, rot, npnt, varargin)
 %PLOT_TORUS  Plot a torus.
 %
 % usage
-%   PLOT_TORUS(ax, qc, r, R, rot, npnt, varargin)
+%   H = PLOT_TORUS(ax, qc, r, R, rot, npnt, varargin)
 %
 % input
 %   ax = axes object handle
@@ -27,4 +27,4 @@ function [] = plot_torus(ax, qc, r, R, rot, npnt, varargin)
 % Copyright: Ioannis Filippidis, 2010-
 
 [q, res] = parametric_torus(qc, r, R, rot, npnt);
-vsurf(ax, q, 'scaled', res, varargin{:} )
+h = vsurf(ax, q, 'scaled', res, varargin{:} )

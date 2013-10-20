@@ -48,7 +48,7 @@ for i=1:length(styles)
     end
 end
 
-N = size(r, 2);
+Ncircles = size(r, 2);
 
 %% plot
 held = takehold(ax, 'local');
@@ -58,8 +58,8 @@ npnt = 30;
 unit_circle = unitcircle(npnt);
 
 % show perimeters and return them
-h1 = nan(1, N);
-for i=1:N
+h1 = nan(1, Ncircles);
+for i=1:Ncircles
     % scale +translate
     circle = bsxfun(@plus, r(1,i) .*unit_circle, qc(:,i) );
     if strcmp(fillcolor, 'none')

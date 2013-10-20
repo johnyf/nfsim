@@ -1,10 +1,12 @@
 function [grad] = grad_krf(gd, Dgd, b, Db, k)
 %GRAD_KRF   Koditschek-Rimon function gradient (analytical)
 %
-% usage
+%usage
+%-----
 %   grad = GRAD_KRF(gd, Dgd, b, Db, k)
 %
-% inputs
+%input
+%-----
 %   gd = destination function values @ calculation points
 %     = [#dimensions x #points]
 %   Dgd = destination function gradients @ calculation points
@@ -16,10 +18,13 @@ function [grad] = grad_krf(gd, Dgd, b, Db, k)
 %   k = KRf tuning parameter
 %     >= 2
 %
-% outputs
+%output
+%------
 %   grad = KRf gradients @ calculation points
 %        = [#dim x #points]
 %
+%about
+%-----
 % 2011.06.03 - 2011.11.27 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
 % See also krf, grad_krfu, grad_spline_krf.

@@ -68,6 +68,11 @@ for i=1:ncircles
 end
 
 function [] = plot_subspace_circle(ax, qc, R, t, r)
+% if you want the actual circles which are in 2nd order contact
+% along the principal tangent directions
+%qc = qc -r*R;
+%R = 2*R;
+
 % unit circle
 npnt = 30;
 unit_circle = unitcircle(npnt);

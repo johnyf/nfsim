@@ -1,7 +1,13 @@
 function [bi, Dbi] = beta_supertoroid(q, qc, a, e, r, rot)
+% Supertoroid implicit obstacle function and its gradient.
+%
+% usage
+%   [bi, Dbi] = beta_supertoroid(q, qc, a, e, r, rot)
+%
 % input
-%   q = calculation point
-%   qC = center point (origin of translation)
+%   q = calculation points
+%     = [3 x #pnts]
+%   qc = center point (origin of translation)
 %   a = radii
 %     = [3 x 1]
 %   e = exponents (epsilons in Barr, Alan H.)
@@ -9,6 +15,12 @@ function [bi, Dbi] = beta_supertoroid(q, qc, a, e, r, rot)
 %   r = torus major radius
 %   R = rotation matrix
 %     = [3 x 3]
+%
+% output
+%   bi = obstacle function at calculation points
+%      = [1 x #pnts]
+%   Dbi = obstacle gradients at calculation points (column vectors)
+%       = [3 x #pnts]
 %
 % See also BETA_SUPERTOROIDS, BETA_SUPERELLIPSOIDS, BETA_HETEROGENOUS.
 

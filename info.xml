@@ -2,10 +2,10 @@
              xsi:noNamespaceSchemaLocation="optional">
     <?xml-stylesheet type="text/xsl"href="optional"?>
     <!-- info.xml file for the Navigation Function toolbox -->
-    <!-- Version 0.2 -->
-    <!-- Copyright 2010-2012 Ioannis Filippidis.-->
+    <!-- Version 0.5 -->
+    <!-- Copyright 2010-2013 Ioannis Filippidis.-->
 
-    <matlabrelease>2010b</matlabrelease>
+    <matlabrelease>2012a</matlabrelease>
     <name>Navigation Function</name>
     <type>toolbox</type>
     <icon>$toolbox/matlab/icons/matlabicon.gif</icon>

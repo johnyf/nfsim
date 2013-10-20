@@ -91,8 +91,8 @@ z0 = q0(3, 1);
 b = sqrt(a^2 -c^2);
 
 %% calc
-domain = [0, pi, 0, 2*pi]; % \theta, \psi
-resolution = [35, 100];
+domain = [0, 2*pi, 0, 2*pi]; % \theta, \psi
+resolution = [30, 35];
 
 [uv, U, ~] = domain2vec(domain, resolution);
 

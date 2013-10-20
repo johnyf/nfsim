@@ -12,8 +12,7 @@ function [ellipsoids] = create_ellipsoids(qc, rot, r, pred)
 %       = {1 x #ellipsoids}
 %       = {[#dim x #dim], ... }
 %   r = radii matrices
-%     = {1 x #ellipsoids}
-%     = {[1 x #dim], ... }
+%     = [#dim x #ellipsoids]
 %   pred = names of predicates
 %        = {1 x #ellipsoids}
 %
@@ -39,8 +38,8 @@ if size(rot, 2) ~= nobs
     error('R not equal in number with obstacles.')
 end
 
-if ~iscell(r)
-    error('r is not cell array.')
+if iscell(r)
+    error('iscell(r), syntax has changed, make it [#dim x #ellipsoids].')
 end
 
 if size(r, 2) ~= nobs
@@ -55,7 +54,7 @@ end
 for i=1:nobs
     curqc = qc(:, i);
     currot = rot{1, i};
-    curr = r{1, i};
+    curr = r(:, i).';
     curpred = pred{1, i};
     
     ellipsoids(i, 1) = create_ellipsoid(curqc, currot, curr, curpred);

@@ -1,10 +1,12 @@
 function [bi, Dbi, D2bi] = beta_halfspaces(q, halfspaces)
 %BETA_HALFSPACES    Obstacle functions of half-spaces.
 %
-% usage
+%usage
+%-----
 %   [bi, Dbi, D2bi] = BETA_HALFSPACES(q, halfspaces)
 %
-% inputs
+%inputs
+%------
 %   q = calculation points
 %     = [#dimensions x #points]
 %   halfspaces = [#obstacles x 1]
@@ -13,7 +15,8 @@ function [bi, Dbi, D2bi] = beta_halfspaces(q, halfspaces)
 %       halfspaces(i, 1).n = {#obstacles, 1}
 %                           = half-space normal vectors to dividing planes
 %
-% output
+%output
+%------
 %   bi = scalar obstacle function
 %      = [#halfspaces x #pnts]
 %   Dbi = obstacle function gradient at calculation points
@@ -22,14 +25,11 @@ function [bi, Dbi, D2bi] = beta_halfspaces(q, halfspaces)
 %   D2bi = obstacle function Hessian matrices at calculation points
 %      = {halfspaces x #pnts}
 %
-% See also beta_halfspace, plot_halfspaces, create_halfspaces.
+%about
+%-----
+%2011.12.25 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      beta_halfspaces.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.12.25
-% Language:  MATLAB R2011b
-% Purpose:   beta for multiple half-spaces
-% Copyright: Ioannis Filippidis, 2011-
+%See also beta_halfspace, plot_halfspaces, create_halfspaces.
 
 [ndim, npnt] = size(q);
 no = size(halfspaces, 1);

@@ -1,4 +1,21 @@
 function [tori] = create_tori(qc, r, R, rot)
+%input
+%-----
+%
+%   qc = tori centers
+%      = [#dim x #tori]
+%   r = tori minor radii
+%     = [1 x #tori] > 0
+%   R = tori major diameters
+%     = [1 x #tori] > 0
+%   rot = tori axes rotation matrix
+%       = {1 x #tori} = {rot1, rot2, ..., rot#tori}, where roti\in SO^3
+%
+%about
+%-----
+% (c) Ioannis Filippidis
+%
+% See also create_torus, beta_torus, beta_tori, plot_torus, plot_tori.
 
 nobs = size(qc, 2);
 

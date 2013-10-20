@@ -1,21 +1,23 @@
 function [bi, Dbi, D2bi] = beta_cylinders(q, cylinders)
 %BETA_CYLINDERS     Obstacle and derivatives for multiple cylinders.
 %
-% inputs
+%usage
+%-----
+%   [bi, Dbi, D2bi] = beta_cylinders(q, cylinders)
+%
+%inputs
+%------
 %   q = calculation points
 %     = [#dimensions x #points]
 %   cylinders = structure array of cylinder objects
 %             = [#cylinders x 1], for struct fields see beta_cylinder.
 %
+%about
+%-----
+% 2012.09.01 (c) Ioannis Filippidis, jfilippidis@gmail.com
+%
 % See also beta_cylinder, plot_cylinders, create_cylinders,
 %          beta_heterogenous, biDbiD2bi2bDbD2b.
-%
-% File:      beta_cylinders.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2012.09.01
-% Language:  MATLAB R2012a
-% Purpose:   plot cylinders
-% Copyright: Ioannis Filippidis, 2012-
 
 [ndim, npnt] = size(q);
 no = size(cylinders, 1);

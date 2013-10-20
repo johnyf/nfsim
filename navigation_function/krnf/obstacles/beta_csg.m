@@ -37,6 +37,7 @@ function [b, Db, D2b] = beta_csg(q, obstacles, else_rvachev)
 %% input
 if nargin < 3
     else_rvachev = 0;
+    disp('No Rvachev option: using product.')
 end
 
 %% calc
@@ -48,9 +49,9 @@ if isfield(obstacles, 'formula_tree')
     formula_tree = obstacles.formula_tree;
     [b, Db, D2b] = biDbiD2bi2bDbD2b_csg(bi, Dbi, D2bi, formula_tree);
 elseif else_rvachev == 1
-    disp('No CSG formula parse tree: using Rvachev')
+    disp('No CSG formula parse tree: using Rvachev conjunction.')
     [b, Db, D2b] = biDbiD2bi2bDbD2b_rvachev(bi, Dbi, D2bi);
 elseif else_rvachev == 0
-    disp('No CSG formula parse tree: using product')
+    disp('No CSG formula parse tree: using product.')
     [b, Db, D2b] = biDbiD2bi2bDbD2b(bi, Dbi, D2bi);
 end

@@ -7,29 +7,34 @@ function [nf] = krf(gd, bi, k)
 %   3) CALCULATED INDEPENDENTLY according to simple (but effective)
 %      feedback law.
 %
-% usage
+%usage
+%-----
 %   nf = KRF(gd, bi, k)
 %
-% inputs
-%   gd = destination function values @ calculation points
+%input
+%-----
+%   gd = destination function values at calculation points
 %      = [1 x #points]
-%   beta = 1) Obstacle product function \beta at calculation points q.
+%   beta = 1) Obstacle product function $\beta$ at calculation points q.
 %             = [1 x #points]
-%          2) Function values of all obstacles \beta_i at caluclation
+%          2) Function values of all obstacles $$\beta_i$$ at caluclation
 %             points q.
 %             = [#obstacles x #points]
 %   k = tuning parameter of KRNF
 %       (scalar >2 and ># obstacles if unbounded world, see theory)
 %
-% outputs
+%output
+%------
 %   nf = KRF values at points q
 %      = [1 x #points]
 %
+%about
+%-----
 % 2011.07.29 - 2011.09.11 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
 % See also GRAD_KRF, KRFU, KRFS, SPLINE_KRF.
 
-check_krnf_args(gd, bi, k)
+check_krf_args(gd, bi, k)
 
 b = bi2b(bi);
 %{ experimental, when you want to see things within obstacles

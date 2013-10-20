@@ -1,4 +1,10 @@
 function [lemniscates] = create_booth_lemniscates(qc, a, b, e)
+%
+%
+% (c) Ioannis Filippidis
+%
+% See also beta_lemniscate_booth.
+
 nobs = size(qc, 2);
 
 lemniscates = [];

@@ -1,11 +1,13 @@
 function [halfspaces] = create_halfspaces(qp, n, domains, pred)
 %CREATE_HALFSPACES  Initialize multiple halfspace structures.
 %
-% usage
+%usage
+%-----
 %   hafspaces = CREATE_HALFSPACES(qp, n, domains)
 %   hafspaces = CREATE_HALFSPACES(qp, n, domains, pred)
 %
-% input
+%input
+%-----
 %   qp = point in plane separating the two half-spaces
 %      = [#dim x #halfspaces]
 %   n = vector normal to defining (hyper)plane,
@@ -13,17 +15,15 @@ function [halfspaces] = create_halfspaces(qp, n, domains, pred)
 %     = [#dim x #halfspaces]
 %   domains = extent to which the half-space is plotted
 %
-% output
+%output
+%------
 %   halfspaces = array of halfspace structures
 %
-% See also create_halfspace, beta_halfspaces, plot_halfspaces.
+%about
+%-----
+%2011.12.25 (c) Ioannis Filippidis, jfilippidis@gmail.com
 %
-% File:      create_halfspaces.m
-% Author:    Ioannis Filippidis, jfilippidis@gmail.com
-% Date:      2011.12.25 - 
-% Language:  MATLAB R2011b
-% Purpose:   initializes multiple half-spaces
-% Copyright: Ioannis Filippidis, 2011-
+%See also create_halfspace, beta_halfspaces, plot_halfspaces.
 
 nobs = size(qp, 2);
 
