@@ -1,92 +1,58 @@
-NAVIGATION FUNCTION SIMULATION TOOLBOX FOR MATLAB
--------------------------------------------------
-Version 0.2
-2011 March
+# Navigation Function Toolbox for MATLAB
 
-AUTHOR
-------
-by Ioannis Filippidis
+## Summary
+Compute Navigation Function trajectories among focally admissible obstacles.
+Licensed under the 2-clause BSD.
 
-CONTACT
--------
-jfilippidis@gmail.com | http://users.ntua.gr/mc06009/
-Control Systems Lab, National Technical University of Athens, Greece | http://www.csl.ntua.gr
+## Description
+Motion planning with [Navigation Functions](http://www.sciencedirect.com/science/article/pii/019688589090017S) on [focally admissible worlds](http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6579966). 
 
-ABOUT
------
-This is a MATLAB toolbox for simulating agent navigation using artificial potential fields.
-It offers a library of functions and a GUI.
 
-INSTALL
--------
-The tarball archive contains a directory named "nfsim".
-Extract this directory and place it in a location of your choice in your file system.
-Open MATLAB. At the Command Window issue the command "pathtool".
-A window opens. Choose "Add with subfolders", navigate to where you placed directory "nfsim".
-Select the "nfsim" directory and press OK. Then press SAVE, after that press CLOSE.
+Provides functions implementing:
 
-Alternatively you can add just the "nfsim" directory to your path and
-then run the script "installnfsim" at the MATLAB Command Window.
-This will check whether the toolbox directory structure is correctly added
-to the MATLAB path. If not, it will add all the Toolbox directories to the
-MATLAB path. Then it will open the Navigation Function Simulation GUI.
+- Koditschek-Rimon Navigation Functions (NF) and their analytic gradients, Hessians
+- decentralized Multi-agent NFs
+- polynomial NFs
+- Khatib potential fields
 
-HELP
-----
-1: For detailed instructions on usage of the Software see:
-        Ioannis Filippidis, Adaptive Navigation Functions, BSc Thesis,
-        Department of Mechanical Engineering, National Technical University of Athens, Greece.
-        http://dspace.lib.ntua.gr
-	
-2: At the MATLAB Command Window type:
-        help functionName
-        for any of function named "functionName" to see the help comments within its file "functionName.m".
+and a library of implicit representations for:
 
-3: To access the HTML documentation open the MATLAB Help Browser and
-        go to the "Navigation Function Toolbox" entry in the Contents Pane.
-        Note that after version R2008 MATLAB does not support the doc command for Toolboxes other
-        than those created by The MathWorks. So the command
-	doc functionName
-	will NOT show the provided HTML documentation in the MATLAB Help Browser.
+- halfspaces
+- ellipsoids
+- tori
+- superquadrics
+- cylinders
+- hyperboloids
+- parallelepipeds
+- Dupin cyclides
+- Booth lemniscates
 
-COMPATIBILITY
--------------
-This package requires MATLAB Version R2010b (or higher) to work.
-It uses the following MATLAB Toolboxes
-It runs on any platform supported by MATLAB, no platform-dependent features are included.
-Files from the MathWorks File Exchange are also used and included in the directory
-named "central".
+and:
 
-UNINSTALL
----------
-To remove the Toolbox from your computer, after properly installing it
-issue the following command in the MATLAB Command Window:
-startnfsim(-1)
-which will remove all the toolbox paths from your MATLAB path.
-Then you can delete the "nfsim" directory.
+- principal curvature analysis for some of the above
+- local and global diffeomorphisms for [star worlds](http://www.jstor.org/stable/2001835) and [convex worlds](http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4543782).
+- implicit constructive solid geometry (CSG) by implementing [Rvachev functions](https://en.wikipedia.org/wiki/Rvachev_function).
 
-LICENSE
--------
-For Copyright information see the LICENSE file.
-Personal use for educational use is allowed.
-If the Toolbox is used to publish citation is required.
-For professional use or access to the source code,
-users should contact the author directly.
+Other features include simultaneous integration of multiple trajectories, functions for fast vectorized plotting and a GUI.
 
-The files provided in directory "central" are from the
-MathWorks file exchange and remain under their respective Copyright
-conditions. They are used by the toolbox and are distributed
-with it for convenience.
+If you use this toolbox, please [cite](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=6579966&queryText%3Dfilippidis+kyriakopoulos) as:
 
-MATLAB is a Registered Trademark of The MathWorks, Inc.
+```
+@INPROCEEDINGS{Filippidis13acc,
+author={Filippidis, I. and Kyriakopoulos, K.J.},
+booktitle={American Control Conference (ACC), 2013},
+title={Navigation functions for focally admissible surfaces},
+year={2013},
+pages={994-999},
+ISSN={0743-1619},}
+```
+More details about the theory can be found [here](http://www.cds.caltech.edu/~ifilippi/pubs/2012_filippidis_acc_tr.pdf).
 
-CITATION
---------
-To cite the toolbox
-@THESIS{Filippidis11,
-	AUTHOR             = {Ioannis F. Filippidis},
-	TITLE              = {Adaptive Formulation of Navigation Functions for Unknown Sphere Worlds},
-	SCHOOL             = {Department of Mechanical Engineering, National Technical University of Athens},
-        ADDRESS    =       = {Greece},
-	YEAR               = {2011}
-}
+## Installation
+Add the directory tree of this package to your MATLAB path.
+There are several own and [fex](http://www.mathworks.com/matlabcentral/) dependencies, mostly for fast plotting, which will be released and documented when time permits.
+No dependency is OS-dependent.
+
+## About
+This package is part of the code I developed during my Diploma thesis at the Control Systems Lab, NTUA.
+Currently [I am](http://www.cds.caltech.edu/~ifilippi/) with Caltech and its maintenance will be occassional.
