@@ -50,7 +50,8 @@ More details about the theory can be found [here](http://www.cds.caltech.edu/~if
 
 ## Installation
 Add the directory tree of this package to your MATLAB path.
-There are several own and [fex](http://www.mathworks.com/matlabcentral/) dependencies, mostly for fast plotting, which will be released and documented when time permits.
+There are several dependencies from [fex](http://www.mathworks.com/matlabcentral/), which will be released and documented when time permits.
+Also my [numerical](https://github.com/johnyf/numerical_utils) and [plotting](https://github.com/johnyf/plot_utils) utilities are needed.
 No dependency is OS-dependent.
 
 ## About
