@@ -30,7 +30,7 @@ b0 = 10;
 
 %% elliptical obstacles
 quadrics = khatib_testing_obstacles;
-[bi, ~, ~] = beta_quadrics(q, quadrics);
+[bi, ~, ~] = beta_ellipsoids(q, quadrics);
 
 %% potential field
 [gd, ~] = gamma_d(q, qd);
@@ -53,3 +53,4 @@ hold(ax, 'on')
 plot(ax, qhist(1, :), qhist(2, :) )
 plot(ax, qhist(1, end), qhist(2, end), 'r*')
 plotmd(ax, qd, 'go')
+
