@@ -47,7 +47,7 @@ If you use this toolbox, please [cite](
     https://doi.org/10.1109/ACC.2013.6579966)
 as:
 
-```
+```bibtex
 @INPROCEEDINGS{Filippidis13acc,
 author={Filippidis, I. and Kyriakopoulos, K.J.},
 booktitle={American Control Conference (ACC), 2013},
