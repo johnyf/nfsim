@@ -56,4 +56,3 @@ No dependency is OS-dependent.
 
 ## About
 This package is part of the code I developed during my Diploma thesis at the Control Systems Lab, NTUA.
-Currently [I am](http://www.cds.caltech.edu/~ifilippi/) with Caltech and its maintenance will be occassional.
