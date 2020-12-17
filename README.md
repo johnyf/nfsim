@@ -44,7 +44,7 @@ Other features include simultaneous integration of multiple trajectories,
 functions for fast vectorized plotting and a GUI.
 
 If you use this toolbox, please [cite](
-    http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=6579966&queryText%3Dfilippidis+kyriakopoulos)
+    https://doi.org/10.1109/ACC.2013.6579966)
 as:
 
 ```
@@ -57,7 +57,7 @@ pages={994-999},
 ISSN={0743-1619},}
 ```
 More details about the theory can be found [here](
-    http://www.cds.caltech.edu/~ifilippi/pubs/2012_filippidis_acc_tr.pdf).
+    https://github.com/johnyf/johnyf.github.io/raw/master/pubs/2012_filippidis_acc_tr.pdf).
 
 ## Installation
 Add the directory tree of this package to your MATLAB path.
